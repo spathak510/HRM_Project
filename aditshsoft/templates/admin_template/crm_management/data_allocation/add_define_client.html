@@ -1,0 +1,62 @@
+{% extends "layout/admin_layout.html" %}
+{% load static %}
+{% load staticfiles %}
+{% block content %}
+    
+    <div class="midRight">
+        <div class="rightMid">
+          <form action="" method="post" id="define_client_form_id">
+             {% csrf_token %}
+
+              {% if defineclientid %}
+                <div class="mainHd"> Update Define Client</div>
+              {% else %}
+                <div class="mainHd"> Add Define Client</div>
+              {% endif %}
+              <input type="hidden" name="defineclientid" value="{{defineclientid}}">
+                <div>
+                  <div class="frmOuterBx clr">
+                      <div class="halfBx lft">
+                        <div class="formField">
+                          <span> Client Type :</span>
+                          <input type="text" class="form-control" name="define_client_type" value="{{data.define_client_type}}"  maxlength="100">
+                        </div>
+                      </div>
+                      <div class="halfBx rgt">
+                        <div class="formField">
+                          <span> Client Category :</span>
+                          <input type="text" class="form-control" name="define_Client_category" value="{{data.define_Client_category}}"  maxlength="200">
+                        </div>
+                      </div>
+                    <div class="halfBx lft">
+                        <div class="formField">
+                          <span> Lead Values :</span>
+                          <input type="text" class="form-control" name="define_ead_values" value="{{data.define_ead_values}}"  maxlength="200">
+                        </div>
+                    </div>
+                      <div class="halfBx rgt">
+                          <div class="formField">
+                              <span> Type Of Data :</span>
+                              <input type="text" class="form-control" name="define_type_of_Data" value="{{data.define_type_of_Data}}"  maxlength="200">
+                            </div>
+                      </div>
+
+                  </div>
+                    
+                    <div class="formField">
+                      {% if defineclientid %}
+                        <input name="" type="submit" value="Update" class="formBtn" id="define_client_form_btn"> 
+                      {% else %}
+                        <input name="" type="submit" value="Submit" class="formBtn" id="define_client_form_btn"> 
+                      {% endif %}
+                    </div>
+
+                </div>
+            </form>
+        </div>
+
+        </div>
+       
+    </div>
+
+{% endblock %}

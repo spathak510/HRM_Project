@@ -1,0 +1,153 @@
+{% extends "layout/website_layout.html" %}
+{% load templatetag %}
+{% block content %}
+
+<div class="content-wrapper" style="min-height: 916px;">
+    <section class="content-header">
+      <h1>
+       Update Statutory Deductions 
+        <small></small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="{% url 'admindashboard' %}"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="#"> Update Statutory Deductions  </a></li>
+        <li class="active"></li>
+      </ol>
+    </section>
+
+    <section class="content">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="box">
+            <div class="box-header">
+                  <div class="row">
+                    
+                        {% comment %} <form method="POST" id="allocate_data">
+                            {% csrf_token %}
+                            <div class="col-md-3">
+                                <label> Status </label>
+                                <div class="form-group">
+                                    <select name="status" class="form-control" id="" required="">
+                                     <option value="">Select Status</option>
+                                    {% for user in status %}
+                                        <option value="{{user.0}}">{{user.1}}
+                                        </option>
+                                    {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                            <input type="hidden" name="bul_data" id="bul_data">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                 <input name="" type="submit" value="Update" class="btn btn-primary" id="upload_data"> 
+                                </div>
+                            </div>
+                        </form> {% endcomment %}
+                      
+                  </div>
+                  {% get_permission_data_from 12 15 as permission_menu %}
+                    {% if permission_menu.add %}
+                        <div class="row">
+                            <form action="" method="post" id="upload_bulk_from_id" enctype="multipart/form-data" novalidate="novalidate">
+                              {% csrf_token %}
+                              <div class="col-md-3">
+                                    <div class="form-group">
+                                    <label> File Upload  </label>
+                                      <input type="file" class="form-control upload_bulk_data" name="upload_bulk_data">
+                                    </div>
+                              </div>
+          
+                              <div class="form-group">
+                                <input name="" type="submit" value="Submit" class="btn btn-primary" id="upload_bulk_from_btn"> 
+                              </div>
+                              
+                          </form>
+
+                          <form action="" method="post" id="parent_company_form" enctype="multipart/form-data" novalidate="novalidate">
+               {% for field in form %}
+            
+                <div class="col-md-4">
+                    <div class="form-group">
+                     {% csrf_token %}
+                      <label>{{ field.label }}  </label>
+                        {{ field }}
+                   </div> 
+                     
+                </div>
+                
+            {% endfor %}
+            <div class="form-group">
+                    <input name="" type="submit" value="Submit" class="btn btn-primary" id="upload_bulk_from_btn"> 
+            </div>
+
+            </form>
+            </div>
+                    {% endif %}
+           </div>
+            <div class="box-body">
+            <div class='table-responsive'> <div style="overflow-x:auto;">
+              <table id="example2" class="table table-bordered table-hover">
+                    <thead>
+                        <tr> 
+                         <td> <input type="checkbox" name="select_all" id="select_all"> Select All </th>
+                          <th> Month and Year  </th>
+                          <th> Deduction Type </th>
+                          <th> Employee Id </th>
+                          <th> Employee Name </th>
+                          <th> Employer Contribution   </th>
+                          <th> Employee Contribution  </th>
+                          <th> Others </th>
+                          <th> Total Deduction </th>
+                          <th> Status </th>
+                          <th> Approval Status </th>
+                          <th> Action </th>
+                        </tr>
+                    </thead>
+                <tbody>
+                    {% if responselistquery %}
+                         {% for data in responselistquery %}
+                           <tr>
+
+                            <td>
+                              <input type="checkbox" name="check_box_select[]" class="checkboxes" value="{{data.id}}"></td>
+                            <td>
+                              {{ data.month_and_year|date:'M , Y' }}
+                            </td>
+                            <td> {{ data.deduction_type.deduction_type }}</td>
+                            <td> {{ data.user.id }} </td>
+                            <td> {{ data.user.name }} </td>
+                            <td> {{ data.employer_contribution }} </td>
+                            <td> {{ data.employee_contribution }} </td>
+                            <td> {{ data.others }} </td>
+                             <td> {{ data.total_deduction }} </td>
+                             <td> {{ data.get_status_display }} </td>
+                             <td> {{ data.approval_level.approval_level }} </td>
+                         
+                            <td>
+                              <a href="{% url 'crm_crmemployee_manageemployee_statutorydeductions_update' data.id  %}">Update</a>
+                                {% approval_status_update_policies_circualr request.user.id data.id 14 as get_approval_level %}
+                                  
+                                  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;
+                                  {% if get_approval_level %}
+                                      <a href="{% url 'crm_crmemployee_manageemployee_statutorydeductions_update' data.id  %}" class="approval_level_cls"> {{ get_approval_level.0.approval_level.approval_level }} </a>
+                                  {% endif  %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    {% else %}
+                    <tr><td></td></tr>
+                    {% endif %}
+                </tfoot>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+            {% include "layout/manage_pagination.html" %}
+        </div>
+      </div>
+    </section>
+</div>
+{% include "layout/admin_message.html" %}
+{% endblock %}
+

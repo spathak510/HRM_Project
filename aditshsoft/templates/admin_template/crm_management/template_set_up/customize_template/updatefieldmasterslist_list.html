@@ -1,0 +1,101 @@
+{% extends "layout/admin_layout.html" %}
+{% load static %}
+{% load staticfiles %}
+
+
+{% load templatetag %}
+
+{% block content %}
+
+
+<div class="content-wrapper" style="min-height: 916px;">
+    <section class="content-header">
+      <h1>
+Update  Field Masters     <small></small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="{% url 'admindashboard' %}"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="#">Tables</a></li>
+        <li class="active"></li>
+      </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="box">
+            <div class="box-header">
+                    <!-- <h3 class="box-title"> Financial Year List </h3> -->
+                    <div class="row">
+                        <div class="col-md-6">
+                          <a href="{% url 'updatefieldmastersadd' %}" class="btn btn-primary">Add Details </a>
+                        </div>
+                    </div>
+            </div>
+            <div class="box-body">
+<div class='table-responsive'> <div style="overflow-x:auto;">
+
+              <table id="example2" class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                        <th width="6%">Sr.No</th>
+                        <th width="8">subfield Name </th>
+                         <th width="8">Length Of Field </th>
+                         <th width="8">Field Type</th>
+                         <th width="8">Validation Required</th>
+                         <th width="8">Validation Type</th>
+                         <th width="8">Mandatory</th>
+
+                       
+
+                          <th width="8">Sort Order</th>
+                          <th width="8">Select Model</th>
+                         <th width="8">Actions</th>
+                    
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if responselistquery%}
+                         {% for company_details in responselistquery %}
+                            {% if forloop.counter|divisibleby:2 %}
+                            <tr class="rpFirstRow">
+                            {% else %}
+                            <tr class="rpSecRow">
+                            {% endif %}
+
+                <td><strong>{{forloop.counter}}</strong></td>
+                <td>{{company_details.subfield_name}}</td>
+                <td>{{company_details.length_of_field }}</td>
+                <td>{{company_details.field_type }}</td>
+                <td>{{company_details.validation_required }}</td>
+                <td>{{company_details.validation_type }}</td>
+                <td>{{company_details.mandatory }}</td>
+                <td>{{company_details.sort_order }}</td>
+                <td>{{company_details.select_model }}</td>
+
+                 <td><a href="{% url 'updatefieldmastersedit' company_details.id %}" style="color: green;">Edit</a>
+                   &nbsp;  &nbsp;  &nbsp;  &nbsp; 
+                <a href="{% url 'updatefieldmastersdelete' company_details.id %}" style="color: red;">Delete</a></td>
+                
+              </tr>
+                        {% endfor %}
+                    {% else %}
+                    <tr><td></td></tr>
+                    {% endif %}
+                </tfoot>
+              </table>
+            </div>
+          </div>
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </section>
+    <!-- /.content -->
+  </div>
+
+{% include "layout/admin_message.html" %}
+{% endblock %}
+

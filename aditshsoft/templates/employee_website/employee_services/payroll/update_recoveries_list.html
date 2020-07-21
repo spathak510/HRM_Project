@@ -1,0 +1,136 @@
+{% extends "layout/website_layout.html" %}
+{% load templatetag %}
+{% block content %}
+
+<div class="content-wrapper" style="min-height: 916px;">
+    <section class="content-header">
+      <h1>
+        Update Recoveries
+        <small></small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="{% url 'admindashboard' %}"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="#"> Update Recoveries    </a></li>
+        <li class="active"></li>
+      </ol>
+    </section>
+
+    <section class="content">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="box">
+              <div class="box-header">
+                {% get_permission_data_from 12 9 as permission_menu %}
+
+                {% if permission_menu.add %}
+                      <form action="" method="post" id="parent_company_form" enctype="multipart/form-data" novalidate="novalidate">
+
+                            <div class="row">
+                              {% csrf_token %}
+                              <input type="hidden" name="upload_data_by_csv">
+                                <div class="col-md-4">
+                                      <div class="form-group">
+                                          <label> File Upload(Upload Data By CSV)  </label>
+                                            <input type="file" class="form-control upload_bulk_data" name="upload_bulk_data" required="">
+                                      </div>
+                                  </div>
+                            </div>
+                            <div class="form-group">
+                              <input name="" type="submit" value="Submit" class="btn btn-primary" id="upload_bulk_from_btn"> 
+                            </div>
+                      </form>
+                        <div class="form-group">
+                          <a href = "{% url 'crm_employee_services_payroll_update_recovery_add' %}" class="btn btn-primary">Add Data </a> 
+                        </div>
+                {% endif %}
+
+                {% if permission_menu.edit %}
+                   <form method="POST" id="allocate_data">
+                            {% csrf_token %}
+                            <div class="col-md-3">
+                                <label> Status </label>
+                                <div class="form-group">
+                                    <select name="status" class="form-control" id="">
+                                     <option value="">Select Status</option>
+                                    {% for user in status %}
+                                        <option value="{{user.0}}">{{user.1}}
+                                        </option>
+                                    {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                            <input type="hidden" name="bul_data" id="bul_data">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                 <input type="button" id="upload_data" value="GO" class="btn btn-primary">
+                                </div>
+                            </div>
+                    </form>
+                {% endif %}
+              </div>
+            <div class="box-body">
+            <div class='table-responsive'> <div style="overflow-x:auto;">
+            <table id="example2" class="table table-bordered table-hover">
+              <thead>
+
+                  <tr>
+                      <td> <input type="checkbox" name="select_all" id="select_all"> Select All </th> </td>
+                      <th> Location  </th>
+                      <th> Department </th>
+                      <th> Month and Year  </th>
+                      <th> Employee id </th>
+                      <th> Employee Name </th>
+                      <th> Recovery Period  </th>
+                      <th> Recovery Type </th>
+                      <th> Recovery Amount </th>
+                      <th> Status </th>
+                      <th> Approval Status </th>
+                      <th> Action </th>
+                  </tr>
+              </thead>
+              <tbody>
+                  {% if responselistquery %}
+                       {% for data in responselistquery %}
+                         <tr>
+                           <td>
+                            <input type="checkbox" name="check_box_select[]" class="checkboxes" value="{{data.id}}"></td>
+                          
+                          <td>{{ data.location }}</td>
+                          <td> {{ data.departments }} </td>
+                          <td> {{ data.month_and_year}} </td>
+                          <td> {{ data.employee_id}} </td>
+                          <td> {{ data.employee_names}} </td>
+                          <td> {{ data.recovery_period }} </td>
+                          <td> {{ data.recovery_type }} </td>
+                          <td> {{ data.recovery_amount }} </td>
+                          <td> {{ data.get_status_display }} </td>
+                          <td> {{ data.approval_level.approval_level }} </td>
+                         
+                            <td>
+                              <a href = "{% url 'crm_employee_services_payroll_update_recovery_update' data.id %}">Edit</a>  
+                                {% comment %} {% approval_status_update_policies_circualr request.user.id data.id 17 as get_approval_level %}
+                                  
+                                  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;
+                                  {% if get_approval_level %}
+                                      <a href="{% url 'approval_vacancy_update_status' data.id get_approval_level.0.approval_level.sequence 17 %}" class="approval_level_cls"> {{ get_approval_level.0.approval_level.approval_level }} </a>
+                                  {% endif  %} {% endcomment %}
+                            </td>
+                      </tr>
+                      {% endfor %}
+                  {% else %}
+                  <tr><td></td></tr>
+                  {% endif %}
+              </tfoot>
+            </table>
+            </div>
+          </div>
+        </div>
+                <div class="row">
+            {% include "layout/manage_pagination.html" %}
+        </div>
+      </div>
+    </section>
+</div>
+{% include "layout/admin_message.html" %}
+{% endblock %}
+

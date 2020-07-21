@@ -1,0 +1,102 @@
+{% extends "layout/website_layout.html" %}
+{% load templatetag %}
+{% block content %}
+
+<div class="content-wrapper" style="min-height: 916px;">
+    <section class="content-header">
+      <h1>
+        Update Leaves
+        <small></small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="{% url 'admindashboard' %}"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="#"> AUpdate Leaves  </a></li>
+        <li class="active"></li>
+      </ol>
+    </section>
+
+    <section class="content">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="box">
+            <div class="box-header">
+                {% get_permission_data_from 12 3 as permission_menu %}
+
+                  {% if permission_menu.edit %}
+                    <div class="row">
+                        <form method="POST" id="allocate_data">
+                            {% csrf_token %}
+                            <div class="col-md-3">
+                                <label> Status </label>
+                                <div class="form-group">
+                                    <select name="status" class="form-control" id="">
+                                     <option value="">Select Status</option>
+                                    {% for user in leave_status %}
+                                        <option value="{{user.0}}">{{user.1}}
+                                        </option>
+                                    {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                            <input type="hidden" name="bul_data" id="bul_data">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                 <input type="button" id="upload_data" value="GO" class="btn btn-primary">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                  {% endif %}
+
+            <div class="box-body">
+            <div class='table-responsive'> <div style="overflow-x:auto;">
+              <table id="example2" class="table table-bordered table-hover">
+                  <thead>
+                      <tr>
+                          <td> <input type="checkbox" name="select_all" id="select_all"> Select All </th> </td>
+                          <th> Location  </th>
+                          <th> Department </th>
+                          <th> Month and Year  </th>
+                          <th> Employee id </th>
+                          <th> Employee Name </th>
+                          <th> Type of Leave  </th>
+                          <th> Impact on Salary  </th>
+                          <th> Approval Status  </th>
+                      </tr>
+                  </thead>
+                <tbody>
+                    {% if responselistquery %}
+                         {% for data in responselistquery %}
+                           <tr>
+                             <td>
+                              <input type="checkbox" name="check_box_select[]" class="checkboxes" value="{{data.id}}"></td>
+                            <td>
+                              <li> {{data.location}}</li>
+                            </td>
+                            <td> {{ data.department }} </td>
+                            <td> {% now "F" %} and  {% now "Y" %} </td>
+                            {% get_number_of_days_month as total_days %}
+                            <td> {{ data.employee_id.id }} </td>
+                            <td> {{ data.employee_id.name }} </td>
+                            <td> {{ data.type_of_leave.leave_type }} </td>
+                            <td> {{   data.type_of_leave.get_impact_on_salary_display }} </td>
+                            <td class="ad_more"> {{ data.get_status_display }} </td>
+                        </tr>
+                        {% endfor %}
+                    {% else %}
+                    <tr><td></td></tr>
+                    {% endif %}
+                </tfoot>
+              </table>
+            </div>
+          </div>
+        </div>
+                <div class="row">
+            {% include "layout/manage_pagination.html" %}
+        </div>
+      </div>
+    </section>
+</div>
+{% include "layout/admin_message.html" %}
+{% endblock %}
+

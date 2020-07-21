@@ -1,0 +1,80 @@
+{% extends "layout/admin_layout.html" %}
+{% load static %}
+{% load staticfiles %}
+
+
+{% load templatetag %}
+
+{% block content %}
+
+
+<div class="content-wrapper" style="min-height: 916px;">
+    <section class="content-header">
+      <h1>
+        Update Roles
+        <small></small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="{% url 'admindashboard' %}"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="javascript:;"> Update Roles </a></li>
+        <li class="active"></li>
+      </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="box">
+            <div class="box-header">
+                    <!-- <h3 class="box-title"> Financial Year List </h3> -->
+                    <div class="row">
+                        <div class="col-md-6">
+                          <a href="{% url 'crm_role_edit_add' %}" class="btn btn-primary"> Add Role </a>
+                        </div>
+                    </div>
+            </div>
+            <div class="box-body">
+                <div class='table-responsive'> <div style="overflow-x:auto;">
+
+                <table id="example2" class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th> Sr. No</th>
+                            <th> Role Name </th>
+                            <th> Active/Deactive </th>
+                            <th> Action</th>
+                        </tr>
+                    </thead>
+                <tbody>
+                    {% if responselistquery%}
+                         {% for company_details in responselistquery %}
+                            
+                            <tr class="rpSecRow">
+                                <td><strong>{{ responselistquery.start_index|add:forloop.counter0 }}</strong></td>
+                                <td>{{company_details.name}}</td>
+                                <td>{{ company_details.is_active }}</td>
+                                <td><a href="{% url 'crm_role_edit_add' company_details.id %}" style="color: green;">Edit</a>
+                                <a href="{% url 'crmroledelete' company_details.id %}" style="color: red;">Delete</a></td>
+            </tr>
+                        {% endfor %}
+                    {% else %}
+                    <tr><td></td></tr>
+                    {% endif %}
+                </tfoot>
+              </table>
+            </div>
+          </div>
+          <!-- /.box -->
+        </div>
+        {% include "layout/manage_pagination.html" %}
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </section>
+    <!-- /.content -->
+  </div>
+
+{% include "layout/admin_message.html" %}
+{% endblock %}
+

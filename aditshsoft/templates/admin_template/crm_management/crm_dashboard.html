@@ -1,0 +1,274 @@
+{% extends "layout/admin_layout.html" %}
+{% load static %}
+{% load staticfiles %}
+{% block content %}
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        Human Resources Management System
+        <small>Control panel</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="{% url 'admindashboard' %}"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">CRM Dashboard</li>
+      </ol>
+    </section>
+    <section class="content">
+      <div class="row">
+          {% if 'setupmanagement' in request.path %}
+            <div class="col-lg-3 col-xs-6">
+                <a href="{% url 'crmparentcompanylist' %}">
+                  <div class="small-box bg-aqua">
+                    <div class="inner">
+                      {% comment %} <h3>1</h3> {% endcomment %}
+                      <h3></h3>
+                      <p> Company Setup </p>
+                    </div>
+                    <div class="icon">
+                      <i class="ion ion-bag"></i>
+                    </div>
+                    <span class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></span>
+                  </div>
+                </a>
+            </div>
+
+            <div class="col-lg-3 col-xs-6">
+              <a href="{% url 'crmtypeofcurrencylist' %}">
+                <div class="small-box bg-green">
+                  <div class="inner">
+                    <h3></h3>
+
+                    <p> Currency Management </p>
+                  </div>
+                  <div class="icon">
+                    <i class="ion ion-person-add"></i>
+                  </div>
+                  <span class="small-box-footer"> More info <i class="fa fa-arrow-circle-right"></i></span>
+                </div>
+              </a>
+            </div>
+
+            <div class="col-lg-3 col-xs-6">
+
+              <a href="{% url 'crm_list_financial_year' %}">
+                  <div class="small-box bg-yellow">
+                    <div class="inner">
+                      <h3></h3>
+
+                      <p> Calendar Management </p>
+                    </div>
+                    <div class="icon">
+                      <i class="ion ion-person-add"></i>
+                    </div>
+                    <span class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></span>
+                  </div>
+              </a>
+            </div>
+
+            <div class="col-lg-3 col-xs-6">
+              <a href="{% url 'crmusersetuplist' %}">
+                <div class="small-box bg-green">
+                  <div class="inner">
+                    <h3></h3>
+                    <p> User Management  </p>
+                  </div>
+                  <div class="icon">
+                    <i class="ion ion-stats-bars"></i>
+                  </div>
+                  <span class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></span>
+                </div>
+              </a>
+            </div>
+
+            <div class="col-lg-3 col-xs-6">
+            {% comment %} link pass here  {% endcomment %}
+              <a href="{% url 'leadallocationallocationmatrixslist1' %}">
+                <div class="small-box bg-aqua">
+                  <div class="inner">
+                    <h3></h3>
+
+                    <p> Allocation Management </p>
+                  </div>
+                  <div class="icon">
+                    <i class="ion ion-person-add"></i>
+                  </div>
+                  <span class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></span>
+                </div>
+              </a>
+            </div>
+
+            <div class="col-lg-3 col-xs-6">
+              <a href="{% url 'crm_approval_matrix_define_approval_level_list' %}">
+                  <div class="small-box bg-green">
+                    <div class="inner">
+                      <h3>  </h3>
+
+                      <p> Approval Management </p>
+                    </div>
+                    <div class="icon">
+                      <i class="ion ion-person-add"></i>
+                    </div>
+                    <span class="small-box-footer"> More info <i class="fa fa-arrow-circle-right"></i></span>
+                  </div>
+              </a>
+            </div>
+
+            <div class="col-lg-3 col-xs-6">
+              <a href="{% url 'crmescalationmatrixdefinelevelslist' %}">
+                  <div class="small-box bg-yellow">
+                    <div class="inner">
+                      <h3> </h3>
+                      <p> Escalation Management </p>
+                    </div>
+                    <div class="icon">
+                      <i class="ion ion-person-add"></i>
+                    </div>
+                    <span class="small-box-footer"> More info <i class="fa fa-arrow-circle-right"></i></span>
+                  </div>
+              </a>
+            </div>
+
+            <div class="col-lg-3 col-xs-6">
+              <a href="{% url 'crm_access_user_permission_user_list' %}">
+                <div class="small-box bg-green">
+                  <div class="inner">
+                    <h3></h3>
+                    <p> Access & Permissions </p>
+                  </div>
+                  <div class="icon">
+                    <i class="ion ion-person-add"></i>
+                  </div>
+                  <span class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></span>
+                </div>
+              </a>
+            </div>
+
+
+            <div class="col-lg-3 col-xs-6">
+              <a href="{% url 'unitvaluelist' %}">
+                <div class="small-box bg-green">
+                  <div class="inner">
+                    <h3></h3>
+                    <p> Unit Value Management  </p>
+                  </div>
+                  <div class="icon">
+                    <i class="ion ion-person-add"></i>
+                  </div>
+                  <span class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></span>
+                </div>
+              </a>
+            </div>
+
+
+
+            <div class="col-lg-3 col-xs-6">
+                <a href="{% url 'crmproductsetuplist' %}">
+                  <div class="small-box bg-aqua">
+                    <div class="inner">
+                      <h3></h3>
+                      <p> Product Management  </p>
+                    </div>
+                    <div class="icon">
+                      <i class="ion ion-stats-bars"></i>
+                    </div>
+                    <span class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></span>
+                  </div>
+                </a>
+            </div> 
+
+            <div class="col-lg-3 col-xs-6">
+                <a href="{% url 'managemonthendprocesslist' %}">
+                  <div class="small-box bg-green">
+                    <div class="inner">
+                      <h3></h3>
+                      <p> Month End Management  </p>
+                    </div>
+                    <div class="icon">
+                      <i class="ion ion-stats-bars"></i>
+                    </div>
+                    <span class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></span>
+                  </div>
+                </a>
+            </div>
+
+            <!-- <div class="col-lg-3 col-xs-6">
+              <a href="{% url 'crm_define_notification_subject_list' %}">
+                <div class="small-box bg-yellow">
+                  <div class="inner">
+                    <h3>11</h3>
+                    <p> SMS and Notifications </p>
+                  </div>
+                  <div class="icon">
+                    <i class="ion ion-person-add"></i>
+                  </div>
+                  <span class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></span>
+                </div>
+              </a>
+            </div>
+ -->
+            <!-- <div class="col-lg-3 col-xs-6">
+              <a href="{% url 'crmtemapltesetupclienttypelist' %}">
+                <div class="small-box bg-green">
+                  <div class="inner">
+                    <h3>12</h3>
+                    <p> Template Management </p>
+                  </div>
+                  <div class="icon">
+                    <i class="ion ion-person-add"></i>
+                  </div>
+                  <span class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></span>
+                </div>
+              </a>
+            </div> -->
+
+           <!--  <div class="col-lg-3 col-xs-6">
+              <a href="{% url 'crm_mis_reporting_manage_performance_list' %}">
+                  <div class="small-box bg-green">
+                    <div class="inner">
+                      <h3>13</h3>
+                      <p> MIS & Reporting Management </p>
+                    </div>
+                    <div class="icon">
+                      <i class="ion ion-person-add"></i>
+                    </div>
+                    <span class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></span>
+                  </div>
+              </a>
+            </div> -->
+
+            <!-- <div class="col-lg-3 col-xs-6">
+              <a href="{% url 'crm_gps_audit_trail_list' %}">
+                <div class="small-box bg-yellow">
+                  <div class="inner">
+                    <h3>14</h3>
+                    <p> Audit Trails Management  </p>
+                  </div>
+                  <div class="icon">
+                    <i class="ion ion-person-add"></i>
+                  </div>
+                  <span class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></span>
+                </div>
+              </a>
+            </div> -->
+
+            <!-- <div class="col-lg-3 col-xs-6">
+              <a href="{% url 'crm_administrator_setup_list' %}">
+                  <div class="small-box bg-green">
+                    <div class="inner">
+                      <h3> 15 </h3>
+                      <p>  Create Admin  </p>
+                    </div>
+                    <div class="icon">
+                      <i class="ion ion-bag"></i>
+                    </div>
+                    <span class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></span>
+                  </div>
+              </a>
+            </div> -->
+          {% endif %}
+      </div>
+    </section>
+  </div>
+{% endblock %}

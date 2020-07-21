@@ -1,0 +1,74 @@
+{% extends "layout/admin_layout.html" %}
+{% load templatetag %}
+{% block content %}
+<div class="content-wrapper" style="min-height: 916px;">
+
+    <section class="content-header">
+      <h1>
+        Salary Slip 
+        <small></small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="{% url 'admindashboard' %}"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="#">Salary Slip</a></li>
+        <li class="active"></li>
+      </ol>
+    </section>
+    <!-- Main content -->
+    
+    <div>
+       
+            
+            <div class="container">
+                     
+                    
+                <table class="table table-striped">
+                    <thead>
+                     <tr>
+                        <th>Company Name</th>
+                        <th><img src="/static/admin-static/dist/img/user2-160x160.jpg" ></th>
+                    </tr>
+
+                    <tr>
+                        <th>Pay slip  for the month of -------------------- Month and  Year </th>
+                    </tr>
+                   
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>Employee IdBank</td>
+                        <td> Account No </td>
+                        
+                    </tr>
+                    <tr> 
+                        <td>Grade</td>
+                        <td>PF A/c No</td>
+                    </tr>
+                    <tr>
+                        <td>Designation</td>
+                        <td>Total Days in Month</td>   
+                    </tr>
+ 
+                    <tr>
+                        <td>Department</td>
+                        <td>Working Days  </td>   
+                    </tr>
+
+                    <tr>
+                        <td>Location</td>
+                        <td>Leave Taken </td>   
+                    </tr>
+
+                    <tr>
+                        <td>Pan Card </td>
+                        <td>Leave without Pay </td>   
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+     </div>
+</div>
+{% include "layout/admin_message.html" %}
+{% endblock %}
+

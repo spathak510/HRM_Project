@@ -1,0 +1,39 @@
+{% extends "layout/website_layout.html" %}
+
+{% block content %}
+
+<div class="content-wrapper" style="min-height: 946px;">
+    <section class="content">
+      <div class="box box-default">
+        <div class="box-header with-border">
+          <h3 class="box-title"> Add/Edit Verification Report </h3>
+        </div>
+        <div class="box-body">
+          <form action="" method="post" id="parent_company_form" enctype="multipart/form-data">
+            {% csrf_token %}
+
+              <div class="row">
+                <div class="box-header with-border">
+                  <h3 class="box-title"> Verification Report </h3>
+                </div>
+                  <div id="verification_report">
+                    {% for field in verification_report %}
+                        <div class="col-md-4">
+                            <div class="form-group">
+                              <label>{{ field.label }}  </label>
+                                {{ field }}
+                           </div>   
+                        </div>
+                    {% endfor %}
+                  </div>
+                  <a href="javascript:void(0)" id="add_more_verification_report" class="ad_more" style="color: red" >Add More </a>
+              </div>
+              </div>
+        <div class="form-group">
+        <input type="hidden" name="one_form" value="one_form">
+        <input name="" type="submit" value="Submit" class="btn btn-primary" id="submitbtn"></div>
+      </div>
+          </form>
+  </section>
+</div>
+{% endblock %}

@@ -1,0 +1,59 @@
+{% extends "layout/admin_layout.html" %}
+{% load static %}
+{% load staticfiles %}
+
+{% block content %}
+
+<div class="content-wrapper" style="min-height: 946px;">
+  <section class="content">
+    <div class="box box-default">
+      <div class="box-header with-border">
+
+              {% if defineclientid %}
+                <h3 class="box-title"> Update Client Category</h3>
+              {% else %}
+                <h3 class="box-title"> Add Client Category</h3>
+              {% endif %}
+
+      </div>
+      <div class="box-body">
+      <form action="" method="post" id="define_client_form_id">
+        <div class="row">
+
+          {% csrf_token %}
+
+             <input type="hidden" name="defineclientid" value="{{defineclientid}}">
+            <div class="col-md-4">
+                  <div class="form-group">
+                       <label> Client Category  </label>
+                          <input type="text" class="form-control" name="define_client_category" value="{{data.define_client_category}}"  maxlength="200">
+                  </div>
+
+            </div>
+
+              <div class="col-md-4">
+                  <div class="form-group">
+                        <label> Is Active  </label>
+                        {% if data.is_active %}
+                            <input type="checkbox"   name="is_active" checked="">
+                        {% else %}
+                            <input type="checkbox"   name="is_active" >
+                        {% endif %}
+                  </div>
+              </div>
+
+        </div>
+        <div class="form-group">
+              {% if defineclientid %}
+                <input name="" type="submit" value="Update" class="btn btn-primary" id="define_client_form_btn"> 
+              {% else %}
+                <input name="" type="submit" value="Update" class="btn btn-primary" id="define_client_form_btn"> 
+              {% endif %}
+
+              </div>
+          </form>
+      </div>
+  </section>
+</div>
+
+{% endblock %}

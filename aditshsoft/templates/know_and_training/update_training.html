@@ -1,0 +1,43 @@
+{% extends "layout/website_layout.html" %}
+{% load templatetag %}
+
+{% block content %}
+
+  <div class="content-wrapper" style="min-height: 946px;">
+    <section class="content">
+      <div class="box box-default">
+        <div class="box-header with-border">
+          <h3 class="box-title"> Update Training  </h3>
+        </div>
+        <div class="box-body">
+          <form action="" method="post" id="parent_company_form" enctype="multipart/form-data">
+        <div class="row">
+          
+          {% csrf_token %}
+            
+            {% for field in form %}
+
+                  <div class="col-md-4">
+                      <div class="form-group">
+                        <label> {{ field.label }}  </label>
+                          {{ field }}
+                     </div>   
+                  </div>
+    
+            {% endfor %}
+       
+            
+        </div>
+
+        {% get_permission_data_from 14 2 as permission_menu %}
+
+        {% if permission_menu.add %}
+            <div class="form-group">     
+            <input name="" type="submit" value="Submit" class="btn btn-primary" id="submitbtn"></div>
+        {% endif %}
+      </div>
+          </form>
+  </section>
+</div>
+
+{% endblock %}

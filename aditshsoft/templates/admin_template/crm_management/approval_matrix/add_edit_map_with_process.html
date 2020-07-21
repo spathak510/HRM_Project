@@ -1,0 +1,193 @@
+{% extends "layout/admin_layout.html" %}
+{% load static %}
+{% load staticfiles %}
+
+{% block content %}
+
+  <div class="content-wrapper" style="min-height: 946px;">
+    <section class="content">
+      <div class="box box-default">
+        <div class="box-header with-border">
+          <h3 class="box-title"> Add/Edit Map Users </h3>
+        </div>
+        <div class="box-body">
+          <form action="" method="post" id="parent_company_form" enctype="multipart/form-data">
+        <div class="row">
+          
+          {% csrf_token %}
+            
+            {% for field in form %}
+                {% if field.label == 'Description' %}
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                          <label> Location </label>
+                            <select name="location" class="form-control multiselect" multiple="">
+                              {% for p in location %}
+                                <option value="{{p.id}}"  
+                                {% for u_id  in user_location %}
+                                    {% if u_id.location_id == p.id %}
+                                        selected=""
+                                    {% endif %} 
+                                {% endfor %}
+                                >{{p.branch_id}}</option>
+                              {% endfor %}
+                            </select>
+                       </div>   
+                    </div>
+                    
+                    <div class="col-md-4">
+                        <div class="form-group">
+                          <label> Product Category  </label>
+                            <select name="product_category" class="form-control multiselect" multiple="">
+                              {% for p in product_category %}
+                                <option value="{{p.id}}" 
+
+                                {% for u_id  in user_product_category %}
+                                    {% if u_id.product_category_id == p.id %}
+                                        selected=""
+                                    {% endif %} 
+                                {% endfor %}
+
+                                >{{p.product_category}}</option>
+                              {% endfor %}
+                            </select>
+                       </div>   
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                          <label> Product Type  </label>
+                            <select name="product_type" class="form-control multiselect" multiple="">
+                              {% for p in product_type %}
+                                <option value="{{p.id}}"
+
+                                {% for u_id  in user_product_type %}
+                                    {% if u_id.product_type_id == p.id %}
+                                        selected=""
+                                    {% endif %} 
+                                {% endfor %}
+
+                                >{{p.product_type}}</option>
+                              {% endfor %}
+                            </select>
+                       </div>   
+                    </div>
+
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                          <label> Product Name  </label>
+                            <select name="product_name" class="form-control multiselect" multiple="">
+                              {% for p in product_name %}
+                                <option value="{{p.id}}" 
+
+                                {% for u_id  in user_product_name %}
+                                    {% if u_id.product_name_id == p.id %}
+                                        selected=""
+                                    {% endif %} 
+                                {% endfor %}
+
+                                >{{p.product_name}}</option>
+                              {% endfor %}
+                            </select>
+                       </div>   
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                          <label> Client  Type  </label>
+                            <select name="client_type" class="form-control multiselect" multiple="">
+                              {% for p in client_type %}
+                                <option value="{{p.id}}"    
+                                  {% for u_id  in user_client_type %}
+                                    {% if u_id.client_type_id == p.id %}
+                                        selected=""
+                                    {% endif %} 
+                                {% endfor %}
+                                >{{p.client_type}}</option>
+                              {% endfor %}
+                            </select>
+                       </div>   
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                          <label> Client  Category  </label>
+                            <select name="client_category" class="form-control multiselect" multiple="">
+                              {% for p in client_category %}
+                                <option value="{{p.id}}" 
+                                  {% for u_id  in user_client_category %}
+                                      {% if u_id.client_category_id == p.id %}
+                                          selected=""
+                                      {% endif %} 
+                                  {% endfor %}
+                                >{{p.client_category}}</option>
+                              {% endfor %}
+                            </select>
+                       </div>   
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                          <label> Process Name  </label>
+                            <select name="process_name" class="form-control multiselect" multiple="">
+                              {% for p in process_name %}
+                                <option value="{{p.id}}" 
+                                  {% for u_id  in user_process_name %}
+                                      {% if u_id.process_id == p.id %}
+                                          selected=""
+                                      {% endif %} 
+                                  {% endfor %}
+                                >{{p.process_level}}</option>
+                              {% endfor %}
+                            </select>
+                       </div>   
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                          <label> Approval Level  </label>
+                            <select name="process_level" class="form-control multiselect" multiple="">
+                              {% for p in approval_level %}
+                                <option value="{{p.id}}" 
+                                  {% for u_id  in user_approval_level %}
+                                      {% if u_id.approval_level_id == p.id %}
+                                          selected=""
+                                      {% endif %} 
+                                  {% endfor %}
+                                >{{p.approval_level}}</option>
+                              {% endfor %}
+                            </select>
+                       </div>   
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                          <label>{{ field.label }}  </label>
+                            {{ field }}
+                       </div>   
+                    </div>
+
+                {% else %}
+                    <div class="col-md-4">
+                        <div class="form-group">
+                          <label>{{ field.label }}  </label>
+                            {{ field }}
+                       </div>   
+                    </div>
+                {% endif %}
+            {% endfor %}
+       
+            
+        </div>
+        <div class="form-group">
+                  
+        <input name="" type="submit" value="Submit" class="btn btn-primary" id="submitbtn"></div>
+      </div>
+          </form>
+  </section>
+</div>
+<style type="text/css">
+.fs-wrap {height: 60px;}
+</style>
+{% endblock %}

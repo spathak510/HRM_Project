@@ -1,0 +1,101 @@
+{% extends "layout/admin_layout.html" %}
+{% load static %}
+{% load staticfiles %}
+
+
+{% load templatetag %}
+
+{% block content %}
+
+  <div class="content-wrapper form-pd" style="min-height: 946px;">
+    <section class="content">
+ <ol class="breadcrumb">
+        <li><a href="{% url 'admindashboard' %}"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="#">Setup Management</a></li>
+        <li class="active">Approval Level with Joint Users </li>
+      </ol>
+      <div class="box box-default">
+        <div class="box-header with-border">
+          <h3 class="box-title"> Add/Edit Level </h3>
+        </div>
+        <div class="box-body">
+          <form action="" method="post" id="map_approval_level_joint_form" enctype="multipart/form-data">
+        <div class="row">
+          
+          {% csrf_token %}
+            
+            {% for field in form %}
+                <div class="col-md-4">
+                    <div class="form-group">
+                      {% if field.label == 'Work Flow Process' %}
+                        <span>{{field.label}} </span><span class="error"> *</span>
+                        <select name="process_name" class="multiselect form-control" id="id_work_flow_process" multiple="" required="">
+                            {% for im in process_name %}
+                                {% get_sub_process_of_approval im.process_name as  sub_process_data %}
+                                <optgroup label="{{im.process_name}}">
+                                {% for data in sub_process_data %}
+                                    <option value="{{data.id}}"
+                                    {% for p in user_process_name  %}
+                                      {% if p.process_name_id == data.id %} selected="" 
+                                    {% endif %}
+                                    {% endfor %}
+                                    > {{data.sub_process_name}}  > {{data.child_process_name}}</option>
+                                {% endfor %}
+                                
+                            {% endfor %}
+                        </select> 
+
+                      {% elif field.label == 'Approval Level' %}
+                        <span>{{field.label}} </span><span class="error"> *</span>
+                        <select name="process_level" class="form-control multiselect" multiple="">
+                              {% for p in approval_level %}
+                                <option value="{{p.id}}" 
+                                  {% for u_id  in user_approval_level %}
+                                      {% if u_id.approval_level_id == p.id %}
+                                          selected=""
+                                      {% endif %} 
+                                  {% endfor %}
+                                >{{p.approval_level}}</option>
+                              {% endfor %}
+                            </select>
+
+
+                      {% elif field.label == 'User Name' %}
+                        <span>{{field.label}} </span><span class="error"> *</span>
+                        <select name="user_name" class="form-control multiselect" multiple="">
+                              {% for p in user %}
+                                <option value="{{p.id}}" 
+                                  {% for u_id  in user_joint_applicant %}
+                                      {% if u_id.users_id == p.id %}
+                                          selected=""
+                                      {% endif %} 
+                                  {% endfor %}
+                                >{{p.name}}</option>
+                              {% endfor %}
+                            </select>
+
+
+
+
+                      {% else %}
+                       <span>{{field.label}} 
+                          {% if field.field.required %}
+                                <span class="error"> *</span>
+                          {% endif %}
+                       </span> 
+                        {{ field }}
+                      {% endif %}
+                   </div>   
+                </div>
+            {% endfor %}
+        </div>
+        <div class="form-group tlc">
+                  
+        <input name="" type="submit" value="Submit" class="btn btn-primary bl-btn-sm" id="submitbtn"></div>
+      </div>
+          </form>
+  </section>
+</div>
+
+{% endblock %}
+

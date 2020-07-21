@@ -1,0 +1,128 @@
+{% extends "layout/admin_layout.html" %}
+{% load static %}
+{% load staticfiles %}
+{% load templatetag %}
+
+{% block content %}
+
+
+<div class="content-wrapper" style="min-height: 916px;">
+    <section class="content-header">
+      <h1>
+        Map Approval Level with Users
+        <small></small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="{% url 'admindashboard' %}"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="#"> Map Approval Level with Users </a></li>
+        <li class="active"></li>
+      </ol>
+    </section>
+    <!-- Main content -->
+    <section class="content">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="box">
+            <div class="box-header">
+                    <div class="row">
+                        <div class="col-md-6">
+                          <a href="{% url 'crm_approval_matrix_mapwithprocess_add' %}" class="btn btn-primary"> Map Approval Level </a>
+                        </div>
+                    </div>
+            </div>
+            <div class="box-body" style="overflow-x:auto;">
+              
+              <table id="example2" class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                    <th> Sr. No</th>
+                    <th> User id   </th>
+                    <th> User Name   </th>
+                    <th> Location  </th>
+                    <th> Product Category  </th>
+                    <th> Product Type  </th>
+                    <th> Product Name  </th>
+                    <th> Client Type  </th>
+                    <th> Client Category  </th>
+                    <th> Process  </th>
+                    <th> Approval Level  </th>
+                    <th> Description </th>
+                    <th> Active/Deactive </th>
+                    <th> Action </th>
+                </tr>
+                </thead>
+                <tbody>
+                    {% for data in  responselistquery %}
+                        <tr class="rpFirstRow">
+                        <td><strong>{{ responselistquery.start_index|add:forloop.counter0 }}</strong></td>
+                        <td>{{ data.user_id }}</td>
+                        <td>{{ data.user.name }}</td>
+                        <td>
+                            {% for p in data.approvalmatrixmapapprovallevelwithuserslocation_set.all %}
+                            <li>{{p.location.branch_id}}</li>
+                            {% endfor %}
+                        </td>
+                        <td>
+                            {% for p in data.mapapprovalmatrixwithusersproductcategory_set.all %}
+                           <li>{{p.product_category.product_category}}</li>
+                            {% endfor %}
+                        </td>
+                        <td>
+                            {% for p in data.mapapprovalmatrixwithusersproducttype_set.all %}
+                            <li>{{p.product_type.product_type}}</li>
+                            {% endfor %}
+                        </td>
+                        <td>
+                            {% for p in data.mapapprovalmatrixwithusersproductname_set.all %}
+                            <li>{{p.product_name.product_name}}</li>
+                            {% endfor %}
+                        </td>
+                        <td>
+                            {% for p in data.approvalmatrixmapapprovallevelwithusersclienttype_set.all %}
+                            <li>{{p.client_type.client_type}}</li>
+                            {% endfor %}
+                        </td>
+                        <td>
+                            {% for p in data.approvalmatrixmapapprovallevelwithusersclientcategory_set.all %}
+                                <li>{{p.client_category.client_category}}</li>
+                            {% endfor %}
+                        </td>
+                        <td>
+                            {% for p in data.mapapprovalmatrixwithusersprocessname_set.all %}
+                                <li>{{p.process.process_level}}</li>
+                            {% endfor %}
+
+                        </td>
+                        <td>
+                            {% for p in data.approvalmatrixmapapprovallevelwithusersprocesslevel_set.all %}
+                                <li>{{p.approval_level.approval_level}}</li>
+                            {% endfor %}
+
+                        </td>
+                        <td>{{ data.description }}</td>
+                        <td>{{ data.is_active }}</td>
+                        <td><a href="{% url 'crm_approval_matrix_define_mapwithprocess_edit' data.id %}" style="color: green;">Edit</a>
+                        &nbsp;  &nbsp;  &nbsp;  &nbsp;
+
+                        <a href="{% url 'crm_approval_matrix_define_mapwithprocess_delete' data.id %}" style="color: red;">Delete</a>
+                        </td>
+                        
+                        </tr>
+                    {% endfor %}
+                </tfoot>
+              </table>
+            </div>
+          </div>
+           {% include "layout/manage_pagination.html" %}
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </section>
+    <!-- /.content -->
+  </div>
+
+{% include "layout/admin_message.html" %}
+{% endblock %}
+

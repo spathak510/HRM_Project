@@ -1,0 +1,101 @@
+{% extends "layout/website_layout.html" %}
+{% load templatetag %}
+
+{% block content %}
+
+
+<div class="content-wrapper" style="min-height: 916px;">
+    <section class="content-header">
+      <h1>
+        Publish Vacancies 
+        <small></small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="{% url 'admindashboard' %}"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="#"> Publish Vacancies  </a></li>
+        <li class="active"></li>
+      </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="box">
+            <div class="box-header">
+            </div>
+            <div class="box-body">
+            <div class='table-responsive'> <div style="overflow-x:auto;">
+              <table id="example2" class="table table-bordered table-hover">
+                <thead>
+                  <tr>
+                      <th> Sr.No </th>
+                      <th> Location  </th>
+                      <th> Department </th>
+                      <th> Designation </th>
+                      <th> Position Available   </th>
+                      <th> Position  Published   </th>
+                      <th> Mode of Publishing </th>
+                      <th> Place of Job Posting  </th>
+                      <th> Type of Job  </th>
+                      <th> Payroll of Job  </th>
+                      <th> Position Valid upto </th>
+                      <th> Job Description </th>
+                      <th> Job Link </th>
+                      <th> Response Mode </th>
+                      <th> Status </th>
+                      <th> Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    {% if responselistquery %}
+                         {% for data in responselistquery %}
+                           <tr>
+                            <td><strong>{{ responselistquery.start_index|add:forloop.counter0 }}</strong></td>
+                            <td>{{ data.location }}</td>
+                            <td>{{ data.department.department }}</td>
+                            <td>{{ data.designation.designation }}</td>
+                            <td>{{ data.position_available }}</td>
+                            <td>{{ data.position_publish }}</td>
+                            <td>
+                              {{ data.mode_of_publishing }}
+                            </td>
+                            <td>{{ data.place_of_job_posting }}</td>
+                            <td>{{ data.type_of_job }}</td>
+                            <td>{{ data.pay_roll_job }}</td>
+                            <td>{{ data.valid_upto }}</td>
+                            <td>{{ data.job_description }}</td>
+                            <td>
+                           <a href="{{ data.job_link }}" target="_balnk">{{ data.job_link }}</a></td>
+                            <td>{{ data.response_mode }}</td>
+                            {% comment %} <td> {{ data.approval_level.approval_level }} </td> {% endcomment %}
+                            <td> {{ data.action_required }} </td>
+                            <td>
+                              {% get_permission_data_from 1 4 as permission_menu %}
+
+                              {% if permission_menu.edit %}
+                                  <a href="{% url 'crm_website_employeeservices_recruitement_publishvacancies_update' data.id %}" style="color: green;"> Published</a>  
+                              {% endif %}
+                        </tr>
+                        {% endfor %}
+                    {% else %}
+                    <tr><td></td></tr>
+                    {% endif %}
+                </tfoot>
+              </table>
+            </div>
+          </div>
+          <!-- /.box -->
+        </div>
+                <div class="row">
+            {% include "layout/manage_pagination.html" %}
+        </div>
+      </div>
+      <!-- /.row -->
+    </section>
+    <!-- /.content -->
+  </div>
+
+{% include "layout/admin_message.html" %}
+{% endblock %}
+

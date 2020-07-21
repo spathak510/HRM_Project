@@ -1,0 +1,131 @@
+{% extends "layout/admin_layout.html" %}
+{% load static %}
+{% load staticfiles %}
+
+
+{% load templatetag %}
+
+{% block content %}
+
+
+<div class="content-wrapper" style="min-height: 916px;">
+    <section class="content-header">
+      <h1>
+        Manage Parent Company
+        <small></small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="{% url 'admindashboard' %}"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="javascript:;">Manage Parent Company</a></li>
+        <li class="active"></li>
+      </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="box">
+            <div class="box-header">
+                    <!-- <h3 class="box-title"> Financial Year List </h3> -->
+                    <div class="row">
+                        <div class="col-md-6">
+                          <a href="{% url 'addcrmparentcompany' %}" class="btn btn-primary"> Add Parent Company </a>
+                        </div>
+                    </div>
+            </div>
+            <div class="box-body">
+                    <div class='table-responsive'> <div style="overflow-x:auto;">
+
+              <table id="example2" class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                <th width="6%">Sr. No</th>
+                        <th> Company Id</th>
+                        <th >Name</th>
+                        <th >Building</th>
+                        <th >Block Number</th>
+                        <th >Sector</th>
+                        <th >Country</th>
+                        <th >City</th>
+                        <th >District</th>
+                        <th >State</th>
+                        <th >Pincode</th>
+                        <th >CIN Number</th>
+                        <th >Pan Card</th>
+                        <th >GST Number</th>
+                        <th >TAN Number</th>
+                        <th >Website</th>
+                        <th >Email</th>
+                        <th >Contact</th>
+                        <th >Local Currency</th>
+                        <th >Reporting Currency</th>
+                        <th >Start Date</th>
+                        <th > Active/Deactive </th>
+                        <th >Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                    {% if responselistquery%}
+                         {% for company_details in responselistquery %}
+                            {% if forloop.counter|divisibleby:2 %}
+                            <tr class="rpFirstRow">
+                            {% else %}
+                            <tr class="rpSecRow">
+                            {% endif %}
+                            <td><strong>{{forloop.counter}}</strong></td>
+                <td>{{company_details.company_id}}</td>
+                <td>{{ company_details.name }}</td>
+                <td>{{company_details.building}}</td>
+                <td>{{ company_details.block_no }}</td>
+                <td>{{ company_details.sector }}</td>
+                <td>{{ company_details.country }}</td>
+                <td>{{company_details.city}}</td>
+                <td>{{ company_details.district }}</td>
+                <td>{{company_details.state}}</td>
+                
+                <td>{{company_details.pincode}}</td>
+                <td>{{ company_details.cin_no }}</td>
+                <td>{{company_details.pan_card}}</td>
+                <td>{{ company_details.gst_no }}</td>
+                <td>{{company_details.tan_no}}</td>
+                <td>{{ company_details.website }}</td>
+                <td>{{company_details.email_id}}</td>
+                <td>{{ company_details.contact_no }}</td>
+                <td>
+                    {% for data in company_details.companylocalcurrency_set.all %}
+                    <li>{{ data.local_currency }}</li>
+                    {% endfor %}
+
+                </td>
+                <td>
+                    {% for data in company_details.companyreportingcurrency_set.all %}
+                    <li>{{ data.reporting_currency }}</li>
+                    {% endfor %}
+                </td>
+                <td>{{ company_details.start_date }}</td>
+                 <td>{{ company_details.is_active }}</td>
+                <td><a href="{% url 'editcrmparentcompany' company_details.id %}" style="color: green;">Edit</a>
+                <a href="{% url 'crmaparentcompanydelete' company_details.id %}" style="color: red;">Delete</a></td>
+                            </tr>
+                        {% endfor %}
+                    {% else %}
+                    <tr><td></td></tr>
+                    {% endif %}
+                </tfoot>
+              </table>
+            </div>
+          </div>
+          <!-- /.box -->
+        </div>
+        {% include "layout/manage_pagination.html" %}
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </section>
+    <!-- /.content -->
+  </div>
+
+{% include "layout/admin_message.html" %}
+{% endblock %}
+

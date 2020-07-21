@@ -1,0 +1,130 @@
+{% extends "layout/admin_layout.html" %}
+
+
+{% block content %}
+
+<div class="content-wrapper" style="min-height: 946px;">
+  <section class="content">
+    <div class="box box-default">
+      <div class="box-header with-border">
+
+              {% if workingdaysid %}
+                <h3 class="box-title"> Update Working Days</h3>
+              {% else %}
+                <h3 class="box-title"> Add Working Days</h3>
+              {% endif %}
+        
+      </div>
+      <div class="box-body">
+        <form action="" method="post" id="working_days_form">
+            <div class="row">
+              
+              {% csrf_token %}
+              <input type="hidden" name="workingdaysid" value="{{workingdaysid}}">
+
+              <div class="col-md-4">
+                <div class="form-group">
+                    <label> Weekly Working Days</label>
+                      
+                       <select name="weekly_working_days" class="form-control multiselect" multiple="" id="weekly_working_days">
+                              <option value="" > Select Weekly Working Days</option>
+                              {% for working_days in working_days_name %}
+                                  <option value="{{working_days.0}}" 
+
+                                    {% for app in weekly_workin_days %}
+                                      {% if working_days.0 == app %} selected="" {% endif %}
+                                    {% endfor %}
+
+                                  >{{working_days.0}}</option>
+                              {% endfor %}
+                        </select>
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <div class="form-group">
+                    <label> Weekly offs </label>
+                         <select name="weekly_off_working_days" class="form-control multiselect" multiple="" id="weekly_off_working_days">
+                                <option value="">Select Working days</option>
+                                {% for working_days in working_days_name %}
+                                    <option value="{{working_days.0}}" 
+
+                                   {% for app in weekly_off_days %}
+                                        {% if working_days.0 == app %} selected="" {% endif %}
+                                      {% endfor %}
+
+                                    >{{working_days.0}}</option>
+                                {% endfor %}
+                          </select>
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <div class="form-group">
+                    <label> Half Days </label>
+                         <select name="half_days" class="form-control multiselect" multiple="" id="half_days">
+                                <option value="">Select Half Days </option>
+                                {% for half_days1 in working_days_name %}
+                                    <option value="{{half_days1.0}}" 
+
+                                      {% for app in half_days %}
+                                        {% if half_days1.0 == app %} selected="" {% endif %}
+                                      {% endfor %}
+
+                                    >{{half_days1.0}}</option>
+                                {% endfor %}
+                          </select>
+                </div>
+              </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                          <label>Alternate Week</label>
+                          <select name="alternate_week" class="form-control" id="alternate_week">
+                            <option value="" >Select Week</option>
+                                <option value="1"  {% if data.alternate_week == 1 %} selected="" {% endif %}>First Week</option>
+                                <option value="2"  {% if data.alternate_week == 2 %} selected="" {% endif %}>Second Week</option>
+                                <option value="3"  {% if data.alternate_week == 3 %} selected="" {% endif %}>Third Week</option>
+                                <option value="4"  {% if data.alternate_week == 4 %} selected="" {% endif %}>Fourth Week</option>
+                                <option value="5"  {% if data.alternate_week == 5 %} selected="" {% endif %}>Five Week</option>
+                          </select>
+                          <select name="alternate_week_days" class="form-control multiselect" id="alternate_week_days" multiple="">
+                            <option value="" >Select Week</option>
+                                <option value="Staturday" 
+                                {% for app in alternate_week_days %}  
+                                        {% if app == 'Staturday' %} selected="" {% endif %}
+                                {% endfor %}>Staturday</option>
+                                <option value="Sunday" 
+                                {% for app in alternate_week_days %}
+                                        {% if app == 'Sunday' %} selected="" {% endif %}
+                                {% endfor %}">Sunday</option>
+                          </select> 
+                    </div>
+                </div>
+
+              <div class="col-md-4">
+                  <div class="form-group">
+                        <label> Is Active </label>
+                        {% if workingdaysid %}
+                            <input type="checkbox"   name="is_active" {% if data.is_active %} checked="" {% endif %}>
+                        {% else %}
+                            <input type="checkbox"   name="is_active" checked="">
+                        {% endif %}
+                  </div>
+              </div>
+
+            </div>
+                <div class="form-group">
+                      {% if workingdaysid %}
+                        <input name="" type="submit" value="Update" class="btn btn-primary" id="working_days_btn"> 
+                      {% else %}
+                        <input name="" type="submit" value="Submit" class="btn btn-primary" id="working_days_btn"> 
+                      {% endif %}
+
+                </div>
+          </form>
+      </div>
+  </section>
+</div>
+
+{% endblock %}

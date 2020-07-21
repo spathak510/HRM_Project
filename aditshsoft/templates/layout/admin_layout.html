@@ -1,0 +1,1860 @@
+{% load static %}
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title> Admin| Dashboard </title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <!-- Bootstrap 3.3.7 -->
+  <link rel="stylesheet" href="{% static 'admin-static/bower_components/bootstrap/dist/css/bootstrap.min.css' %}">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="{% static 'admin-static/bower_components/font-awesome/css/font-awesome.min.css' %}">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="{% static 'admin-static/bower_components/Ionicons/css/ionicons.min.css' %}">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="{% static 'admin-static/dist/css/AdminLTE.min.css' %}">
+  <link rel="stylesheet" href="{% static 'admin-static/dist/css/skins/_all-skins.min.css' %}">
+  <!-- Morris chart -->
+  <link rel="stylesheet" href="{% static 'admin-static/bower_components/morris.js/morris.css' %}">
+  <!-- jvectormap -->
+  <link rel="stylesheet" href="{% static 'admin-static/bower_components/jvectormap/jquery-jvectormap.css' %}">
+
+  <link rel="stylesheet" href="{% static 'admin-static/bower_components/bootstrap-daterangepicker/daterangepicker.css' %}">
+
+  <link rel="stylesheet" href="{% static 'admin-static/timePicker.css' %}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.css">
+  
+  <link rel="stylesheet" href="{% static 'admin-static/fselect.css' %}">
+  <!-- bootstrap wysihtml5 - text editor -->
+  <link rel="stylesheet" href="{% static 'admin-static/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css' %}">
+
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+
+  <!-- Google Font -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+
+  <link rel="stylesheet" href="{% static 'admin-static/sweetalert/sweetalert.css' %}">
+
+  <script src="{% static 'admin-static/sweetalert/sweetalert.js' %}"></script>
+
+  <link rel="stylesheet" href="{% static 'admin-static/css/fSelect.css' %}">
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+
+  <header class="main-header">
+    <!-- Logo -->
+    <a href="{% url 'admindashboard' %}" class="logo">
+      <!-- mini logo for sidebar mini 50x50 pixels -->
+      <span class="logo-mini"><b>A</b>L</span>
+      <!-- logo for regular state and mobile devices -->
+      <span class="logo-lg"><b>Adi</b>Loans</span>
+    </a>
+    <!-- Header Navbar: style can be found in header.less -->
+    <nav class="navbar navbar-static-top">
+      <!-- Sidebar toggle button-->
+      <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+        <span class="sr-only"> Toggle navigation </span>
+
+      </a>
+      <a href="#" onClick="history.go(-1);" class="btn btn-primary back_button" >Back</a>
+
+      <div class="navbar-custom-menu">
+        <ul class="nav navbar-nav">
+          <!-- Messages: style can be found in dropdown.less  id="back_url"-->
+          <li class="dropdown messages-menu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <i class="fa fa-envelope-o"></i>
+              <span class="label label-success">4</span>
+            </a>
+            <ul class="dropdown-menu">
+              <li class="header">You have 4 messages</li>
+              <li>
+                <!-- inner menu: contains the actual data -->
+                <ul class="menu">
+                  <li><!-- start message -->
+                    <a href="#">
+                      <div class="pull-left">
+                        <img src="/static/admin-static/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                      </div>
+                      <h4>
+                        Support Team
+                        <small><i class="fa fa-clock-o"></i> 5 mins</small>
+                      </h4>
+                      <p>Why not buy a new awesome theme?</p>
+                    </a>
+                  </li>
+                  <!-- end message -->
+                  <li>
+                    <a href="#">
+                      <div class="pull-left">
+                        <img src="" class="img-circle" alt="User Image">
+                      </div>
+                      <h4>
+                        AdminLTE Design Team
+                        <small><i class="fa fa-clock-o"></i> 2 hours</small>
+                      </h4>
+                      <p>Why not buy a new awesome theme?</p>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#">
+                      <div class="pull-left">
+                        <img src="" class="img-circle" alt="User Image">
+                      </div>
+                      <h4>
+                        Developers
+                        <small><i class="fa fa-clock-o"></i> Today</small>
+                      </h4>
+                      <p>Why not buy a new awesome theme?</p>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#">
+                      <div class="pull-left">
+                        <img src="" class="img-circle" alt="User Image">
+                      </div>
+                      <h4>
+                        Sales Department
+                        <small><i class="fa fa-clock-o"></i> Yesterday</small>
+                      </h4>
+                      <p>Why not buy a new awesome theme?</p>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#">
+                      <div class="pull-left">
+                        <img src="" class="img-circle" alt="User Image">
+                      </div>
+                      <h4>
+                        Reviewers
+                        <small><i class="fa fa-clock-o"></i> 2 days</small>
+                      </h4>
+                      <p>Why not buy a new awesome theme?</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li class="footer"><a href="#">See All Messages</a></li>
+            </ul>
+          </li>
+
+
+          <!-- User Account: style can be found in dropdown.less -->
+          <li class="dropdown user user-menu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+             
+              <img       {% if request.user.user_pics %}
+                           src="/media/{{request.user.user_pics}}" 
+                        {% else %}
+                           src="/static/admin-static/dist/img/user2-160x160.jpg" 
+                        {% endif %} class="user-image" alt="User Image">
+              <span class="hidden-xs">{{request.user.name}}</span>
+            </a>
+            <ul class="dropdown-menu">
+              <!-- User image -->
+              <li class="user-header">
+                <img 
+                        {% if request.user.user_pics %}
+                           src="/media/{{request.user.user_pics}}" 
+                        {% else %}
+                           src="/static/admin-static/dist/img/user2-160x160.jpg" 
+                        {% endif %}
+                         class="img-circle" alt="User Image">
+                <p>
+                   {{request.user.name}} - Super USER
+                   <small> Member since : {{request.user.added|date:"d M Y"}} </small>
+                </p>
+
+              </li>
+              <!-- Menu Body -->
+              <li class="user-body">
+                {% if request.user.is_superuser %}
+                    <a href="{% url 'administrator_update_profile' %}" class="btn btn-default btn-flat">Update Profile </a>
+                {% endif %}
+              </li>
+              <!-- Menu Footer-->
+              <li class="user-footer">
+
+                <div class="pull-left">
+                  <a href="{% url 'super_user_change_password' %}" class="btn btn-default btn-flat">Change Password</a>
+                </div>
+                <div class="pull-right">
+                  <a href="{% url 'adminlogout' %}" class="btn btn-default btn-flat">Sign out</a>
+                </div>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+  <!-- Left side column. contains the logo and sidebar -->
+  <aside class="main-sidebar">
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+      <!-- Sidebar user panel -->
+      <div class="user-panel">
+        <div class="pull-left image">
+          <img src="/static/admin-static/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+        </div>
+        <div class="pull-left info">
+          <p>{{ request.user.name }}</p>
+          <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+        </div>
+      </div>
+      <!-- sidebar menu: : style can be found in sidebar.less -->
+      <ul class="sidebar-menu" data-widget="tree">
+        <li class="header">MAIN NAVIGATION</li>
+          {% if 'setupmanagement' in request.path %}
+
+              {% if '/hrms/setupmanagement/calender/' in request.path %}
+                  <li class="active treeview">
+                      <a href="javascript:;">
+                        <i class="fa fa-dashboard"></i> <span>Calendar Management </span>
+                        <span class="pull-right-container">
+                          <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                      </a>
+                      <ul class="treeview-menu">
+                          <li class=""><a href="{% url 'crm_list_financial_year' %}"><i class="fa fa-circle-o"></i> Manage Financial Year </a></li>
+                          <li><a href="{% url 'crm_list_financial_report_year' %}"><i class="fa fa-circle-o"></i> Manage Reporting Period </a></li>
+                          <li><a href="{% url 'crm_list_holi_days' %}"><i class="fa fa-circle-o"></i> Manage Holidays </a></li>
+                          <li><a href="{% url 'crm_list_working_days' %}"><i class="fa fa-circle-o"></i> Manage Working Days </a></li>
+                          <li><a href="{% url 'crm_list_working_hours' %}"><i class="fa fa-circle-o"></i> Manage Working Hours </a></li>
+                          <li><a href="{% url 'crm_list_over_time' %}"><i class="fa fa-circle-o"></i> Manage Overtime </a></li>
+                          <li><a href="{% url 'crm_list_assessment_year' %}"><i class="fa fa-circle-o"></i> Manage Assessment Year </a></li>
+                      </ul>
+                  </li>
+              {% endif %}
+
+              {% if '/hrms/setupmanagement/callgpssetup/' in request.path %}
+                <li class="treeview">
+
+                    <a href="javascript:;">
+                      <i class="fa fa-dashboard"></i> <span> Outgoing Calls </span>
+                      <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                      </span>
+                    </a>
+                      <ul class="treeview-menu" >
+                        <li class=""><a href="{% url 'crm_define_call_setup_dialer_list' %}"><i class="fa fa-circle-o"></i> Setup Dialer </a></li>
+                        <li><a href="{% url 'crm_define_call_setup_recording_call_language_list' %}"><i class="fa fa-circle-o"></i> Setup Call Recording Language </a></li>
+                        <li><a href="{% url 'crm_define_call_setup_record_call_data_list' %}"><i class="fa fa-circle-o"></i> Setup Recorded Call Data  </a></li>
+                      </ul>
+                </li>
+
+                <li class="treeview">
+                      <a href="javascript:;">
+                      <i class="fa fa-dashboard"></i> <span> Incoming Calls   </span>
+                      <span class="pull-right-container">
+                      <i class="fa fa-angle-left pull-right"></i>
+                      </span>
+                      </a>
+                      <ul class="treeview-menu">
+                      <li class=""><a href="{% url 'crm_incoming_call_setup_dialer_list' %}"><i class="fa fa-circle-o"></i> Set Up Dialer </a></li>
+                      <li><a href="{% url 'crm_incoming_call_ivr_setup_list' %}"><i class="fa fa-circle-o"></i> Setup IVR</a></li>
+                      <li><a href="{% url 'crm_incoming_call_control_number_list' %}"><i class="fa fa-circle-o"></i> Setup  Control Number  </a></li>
+
+                      <li><a href="{% url 'crm_incoming_call_forward_system_list' %}"><i class="fa fa-circle-o"></i> Setup  Call Forwarding System </a></li>
+
+                      <li><a href="{% url 'crm_incoming_call_handling_preference_list' %}"><i class="fa fa-circle-o"></i> Setup Call Handling Preference </a></li>
+
+                      <li><a href="{% url 'crm_incoming_call_missed_call_handling_list' %}"><i class="fa fa-circle-o"></i> Setup Missed Call Handling  </a></li>
+
+                      <li><a href="{% url 'crm_incoming_call_recording_language_list' %}"><i class="fa fa-circle-o"></i> Setup Call Recording Language  </a></li>
+
+                      <li><a href="{% url 'crm_incoming_call_setup_record_call_data_list' %}"><i class="fa fa-circle-o"></i> Setup Recorded Call Data  </a></li>
+                      </ul>
+                </li>
+
+                <li class=" treeview">
+                     <a href="javascript:;">
+                        <i class="fa fa-dashboard"></i> <span> GPS Setup </span>
+                        <span class="pull-right-container">
+                          <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                      </a>
+                      <ul class="treeview-menu">
+                        
+                          <li class=""><a href="{% url 'crm_gps_call_tracking_prefernce_list' %}"><i class="fa fa-circle-o"></i> Setup GPS Tracking Preference </a>
+                          </li>
+
+                          <li>
+                            <a href="{% url 'crm_gps_call_setup_record_google_map_list' %}"><i class="fa fa-circle-o"></i> Setup Google Map </a>
+                          </li>
+                      </ul>
+                </li>
+
+                <li class=" treeview">
+                    <a href="javascript:;">
+                    <i class="fa fa-dashboard"></i> <span> Manage Call Recording </span>
+                    <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                    </a>
+                    <ul class="treeview-menu">
+
+                    <li>
+                    <a href="{% url 'crm_manage_call_recording_list_call_type' %}"><i class="fa fa-circle-o"></i> Call Type </a>
+                    </li>
+
+                    <li>
+                    <a href="{% url 'crm_manage_call_recording_list_call_preference' %}"><i class="fa fa-circle-o"></i> Calling Preference  </a>
+                    </li> 
+
+                    <li>
+                    <a href="{% url 'crm_manage_call_recording_language_list' %}"><i class="fa fa-circle-o"></i> Call Recording Language  </a>
+                    </li>
+
+                    <li>
+                    <a href="{% url 'crm_manage_call_logs_list' %}"><i class="fa fa-circle-o"></i> Call Logs  </a>
+                    </li>
+                    </ul>
+                </li>
+
+                <li class=" treeview">
+                    <a href="javascript:;">
+                        <i class="fa fa-dashboard"></i> <span> Manage Geographical Tracking </span>
+                        <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                    </a>
+
+                    <ul class="treeview-menu">
+
+                      <li>
+                          <a href="{% url 'crm_manage_geographical_tracking_googlemap_list' %}"><i class="fa fa-circle-o"></i> Manage Google Map </a>
+                      </li>
+                      <li>
+                          <a href="{% url 'crm_manage_geographical_tracking_list' %}"><i class="fa fa-circle-o"></i> Manage Geographical Tracking  </a>
+                      </li> 
+
+                    </ul>
+                </li>
+              {% endif %}
+
+              {% if '/hrms/setupmanagement/companyset/' in request.path %}
+                <li class="active treeview">
+                  <a href="javascript:;">
+                    <i class="fa fa-dashboard"></i> <span>Company Setup</span>
+                    <span class="pull-right-container">
+                      <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                  </a>
+                   <ul class="treeview-menu">
+
+                      <li class=""><a href="{% url 'crmparentcompanylist' %}"><i class="fa fa-circle-o"></i> Manage Parent Company </a></li>
+
+
+                      <li class=""><a href="{% url 'crmmanageheadoffice' %}"><i class="fa fa-circle-o"></i> Manage Head Office </a></li>
+
+
+                      <li class=""><a href="{% url 'crmmanagebranchlist' %}"><i class="fa fa-circle-o"></i> Manage Branch</a></li>
+                      <li class="">
+                        <a href="{% url 'countrylist' %}"><i class="fa fa-circle-o"></i> Manage Country</a>
+                      </li>
+                      <li class="">
+                        <a href="{% url 'statelist' %}"><i class="fa fa-circle-o"></i> Manage State </a>
+                      </li>
+                      <li class="">
+                        <a href="{% url 'crmmanagecitylist' %}"><i class="fa fa-circle-o"></i> Manage Cities </a>
+                      </li> 
+
+                       <li class=""><a href="{% url 'crmmapcitylist' %}"><i class="fa fa-circle-o"></i> Mapping Cities With Branches </a></li>
+
+
+                    </ul>
+                </li>
+              {% endif %}
+
+              {% if '/hrms/setupmanagement/response/' in request.path %}
+                <li class="active treeview">
+                  <a href="javascript:;">
+                    <i class="fa fa-dashboard"></i> <span> Response Setup </span>
+                    <span class="pull-right-container">
+                      <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                  </a>
+
+                    <ul class="treeview-menu">
+                      <li class=""><a href="{% url 'responselist' %}"><i class="fa fa-circle-o"></i> Response </a></li>
+
+                    </ul>
+                </li>
+              {% endif %}
+
+              {% if '/hrms/setupmanagement/datasetup/' in request.path %}
+                <li class="treeview">
+                    <a href="#">
+                      <i class="fa fa-dashboard" ></i> <span>Data SetUp</span>
+                      <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                      </span>
+                    </a>
+                    <ul class="treeview-menu" style="display: block;">
+                      <li><a href="{% url 'bulkuploadlist' %}"><i class="fa fa-circle-o"></i> Bulk Data </a></li>
+
+                      <li><a href="{% url 'thirdpartybulkdatalist' %}"><i class="fa fa-circle-o"></i> Third Party Data  </a></li>
+
+                       <li><a href="{% url 'referralpartnerdatamanagementlist' %}"><i class="fa fa-circle-o"></i>  Referral Partner Data </a></li>
+
+                      <li class="treeview">
+                        <a href="#"><i class="fa fa-circle-o"></i> Online Data
+                          <span class="pull-right-container">
+                            <i class="fa fa-angle-left pull-right"></i>
+                          </span>
+                        </a>
+                        <ul class="treeview-menu">
+                          <li class="treeview">
+                              <li><a href="{% url 'onlinevisitorslist' %}"><i class="fa fa-circle-o"></i> Online Data </a></li>
+                              <li><a href="{% url 'onlinechatslist' %}"><i class="fa fa-circle-o"></i> Social Media Data </a></li>
+                          </li>
+                        </ul>
+                      </li>
+                    </ul>
+                </li>
+              {% endif %}
+
+              {% if '/hrms/setupmanagement/template/' in request.path %}
+
+               <li class="active treeview">
+              <a href="javascript:;">
+                <!-- <i class="fa fa-dashboard"></i>  -->
+                <!-- <img src="/static/admin-static/images/ad--icon/side/template-setup.png" class="main-icon"> -->
+                <span>Template Setup</span>
+                <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+              </a>
+              
+                <ul class="treeview-menu">
+            <li class="active treeview">
+              <a href="javascript:;">
+                <i class="fa fa-dashboard"></i> <span>Predefined Templates</span>
+                <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+              </a>
+              
+                <ul class="treeview-menu">
+                  <li><a href="{% url 'customizetemplateadd' %}"><i class="fa fa-circle-o"></i> Upload Templates</a></li>
+                  <li><a href="{% url 'customizetemplatelist' %}"><i class="fa fa-circle-o"></i> Show Templates</a></li>
+
+                  </ul>
+
+                  
+                  <li class="active treeview">
+                        <a href="javascript:;">
+                          <i class="fa fa-dashboard"></i> <span>Customised Templates </span>
+                          <span class="pull-right-container">
+                            <i class="fa fa-angle-left pull-right"></i>
+                          </span>
+                       </a>
+
+                  <ul class="treeview-menu" style="display: block;">
+                        <li class="treeview">
+                                <li><a href="{% url 'updatetemplatetypelist' %}"><i class="fa fa-circle-o"></i> Update  Template Type </a></li>
+
+                                  <li><a href="{% url 'updatepurposeoftemplatelist' %}"><i class="fa fa-circle-o"></i> Update  Purpose of Template </a></li>
+
+                                  <li><a href="{% url 'updatetemplaterequirementlist' %}"><i class="fa fa-circle-o"></i> Update  Template Requirement </a></li>
+
+                                <li><a href="{% url 'updatefieldmasterslist' %}"><i class="fa fa-circle-o"></i>Update  Field Masters  </a></li>
+
+                        </li>
+                          <li class="treeview">
+                                <a href="#"><i class="fa fa-circle-o"></i> Manage Templates 
+                                  <span class="pull-right-container">
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                  </span>
+                                </a>
+                                <ul class="treeview-menu" style="display: none;">
+                                      
+                                      <li class="treeview menu-open">
+                                        <a href="#"><i class="fa fa-circle-o"></i>Additional Template     
+                                            <span class="pull-right-container">
+                                              <i class="fa fa-angle-left pull-right"></i>
+                                            </span>
+                                        </a>
+                                          <ul class="treeview-menu" style="display: none;">
+                                                  {% comment %} <li><a href="{% url 'additionaltemplateadd' %}"><i class="fa fa-circle-o"></i>  Create Template  </a></li>
+                                                 <li><a href="{% url 'additionaltemplatelist' %}"><i class="fa fa-circle-o"></i> Show Template </a></li> {% endcomment %}
+                                          </ul>
+                                          <a href="#"><i class="fa fa-circle-o"></i>Application Form
+                                               
+                                            <span class="pull-right-container">
+                                              <i class="fa fa-angle-left pull-right"></i>
+                                            </span>
+                                        </a>
+                                          <ul class="treeview-menu" style="display: none;">
+                                                {% comment %} <li><a href="{% url 'applicationformadd' %}"><i class="fa fa-circle-o"></i>  Create Template  </a></li>
+                                                 <li><a href="{% url 'applicationformlist' %}"><i class="fa fa-circle-o"></i> Show Template </a></li> {% endcomment %}
+
+                                                
+                                          </ul>
+                                      </li>
+                                </ul>
+                                
+                          </li>
+                </ul>
+
+            </li>
+          </li></li></ul>
+
+                 <!--  <li class="treeview">
+                        <a href="#"><i class="fa fa-circle-o"></i> Template Management
+                              <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                              </span>
+                        </a>
+
+
+                         <a href="#">
+                          <i class="fa fa-dashboard" ></i> <span> Predefine Template </span>
+                          <span class="pull-right-container">
+                            <i class="fa fa-angle-left pull-right"></i>
+                          </span>
+                        </a>
+                        <ul class="treeview-menu" style="display: none;">
+
+                          <li class="treeview">
+                                  <li>
+                                    <a href="{% url 'customizetemplateadd' %}"><i class="fa fa-circle-o"></i> Upload Template  </a>
+                                  </li>
+
+                                  <li>
+                                    <a href="{% url 'customizetemplatelist' %}"><i class="fa fa-circle-o"></i> Show Template  </a>
+                                  </li>
+                          </li>
+                        </ul> -->
+                       <!--  <ul class="treeview-menu" style="display: none;">
+                              <li class="treeview">
+                                  <li><a href="{% url 'crmtemapltesetupclienttypelist' %}"><i class="fa fa-circle-o"></i> Client Type </a></li>
+                                  <li><a href="{% url 'crmtemapltesetupclientcategorylist' %}">
+                                    <i class="fa fa-circle-o"></i> Client Category </a></li>
+                              </li>
+                        </ul> -->
+
+
+                       <!--  <ul class="treeview-menu" style="display: none;">
+                              <li class="treeview">
+                                   <li>
+                                <a href="#"><i class="fa fa-circle-o"></i> Lead Generation  </a>
+                                  </li>
+                                   <li>
+                                    <a href="#"><i class="fa fa-circle-o"></i> Lead Handling  </a>
+                                  </li>
+
+
+                              </li>
+                        </ul>  -->
+                       <!--  <a href="#">
+                          <i class="fa fa-dashboard" ></i> <span> Lead Generation Template </span>
+                          <span class="pull-right-container">
+                            <i class="fa fa-angle-left pull-right"></i>
+                          </span>
+                        </a>
+                        <ul class="treeview-menu" style="display: none;">
+
+                          <li class="treeview">
+                                  <li>
+                                <a href="#"><i class="fa fa-circle-o"></i> Lead Generation  </a>
+                                  </li>
+                          </li>
+                        </ul>
+                        <a href="#">
+                            <i class="fa fa-dashboard" ></i> <span> Lead Handling  Template </span>
+                            <span class="pull-right-container">
+                              <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu" style="display: none;">
+                          <li class="treeview">
+                                  <li>
+                                    <a href="#"><i class="fa fa-circle-o"></i> Lead Handling  </a>
+                                  </li>
+                          </li>
+                        </ul> -->
+                       
+                <!--   </li>
+              {% endif %} -->
+
+              {% if '/hrms/setupmanagement/currencysetup/' in request.path %}
+                 <li class="active treeview">
+                    <a href="javascript:;">
+                      <i class="fa fa-dashboard"></i> <span>Currency Management </span>
+                      <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                      </span>
+                    </a>
+
+                      <ul class="treeview-menu">
+                        <li class=""><a href="{% url 'crmtypeofcurrencylist' %}"><i class="fa fa-circle-o"></i> Currency Type </a></li>
+                        <li class=""><a href="{% url 'crmpurposeofcurrencylist' %}"><i class="fa fa-circle-o"></i> Currency Puspose </a></li>
+                        <li class=""><a href="{% url 'crmcurrecncysetuplist' %}"><i class="fa fa-circle-o"></i> Manage Currency</a></li>
+                         <li class=""><a href="{% url 'crmcurrencyratelist' %}"><i class="fa fa-circle-o"></i> Manage Currency Rates </a></li>
+
+
+                      </ul>
+                  </li>
+              {% endif %}
+
+              {% if '/hrms/setupmanagement/bulkmail/' in request.path %}
+                <li class="active treeview">
+                  <a href="javascript:;">
+                    <i class="fa fa-dashboard"></i> <span> Bulk SMS And Mail Setup  </span>
+                    <span class="pull-right-container">
+                      <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                  </a>
+
+                    <ul class="treeview-menu">
+                      <li class=""><a href="{% url 'crmbulkmessageslist' %}"><i class="fa fa-circle-o"></i> SMS Setup </a></li>
+                      <li class=""><a href="{% url 'crmmailmessageslist' %}"><i class="fa fa-circle-o"></i> Mail Setup </a></li>
+                    </ul>
+                </li>
+              {% endif %}
+
+              {% if '/hrms/setupmanagement/auditrail/' in request.path %}
+               <li class="active treeview">
+                  <a href="javascript:;">
+                    <i class="fa fa-dashboard"></i> <span> Audit Trail Setup  </span>
+                    <span class="pull-right-container">
+                      <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                  </a>
+
+                    <ul class="treeview-menu">
+                      <li class=""><a href="{% url 'crm_gps_audit_trail_list' %}"><i class="fa fa-circle-o"></i> Audit Trail </a></li>
+                      <li class=""><a href="#"><i class="fa fa-circle-o"></i> Normal Logs  </a></li>
+                      <li class=""><a href="#"><i class="fa fa-circle-o"></i> Abnormal Logs  </a></li>
+                      <li class=""><a href="#"><i class="fa fa-circle-o"></i> Security Alert  </a></li>
+                      
+                    </ul>
+                </li>
+              {% endif %}
+
+              {% if '/hrms/setupmanagement/misreporting/' in request.path %}
+                 <li class="active treeview">
+                    <a href="javascript:;">
+                      <i class="fa fa-dashboard"></i> <span> MIS And Reporting Setup  </span>
+                      <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                      </span>
+                    </a>
+                  
+                      <ul class="treeview-menu" >
+                         <li class="active treeview" >
+                              <a href="javascript:;">
+                              <i class="fa fa-circle-o"></i> <span>  Manage Performance  </span>
+                              <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-left"></i>
+                              </span>
+                            </a>
+                              <ul class="treeview-menu" style="display: none;">
+                                    <li class=""><a href="{% url 'crm_mis_reporting_manage_performance_list' %}"><i class="fa fa-circle-o"></i> Define Targets </a></li>
+                              </ul>
+                          </li>
+
+                          <li class="active treeview" >
+                              <a href="javascript:;">
+                              <i class="fa fa-circle-o"></i> <span>  Manage Reporting  </span>
+                              <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-left"></i>
+                              </span>
+                            </a>
+                              <ul class="treeview-menu" style="display: none;">
+                                    <li class="">
+                                      <a href="{% url 'crm_mis_reporting_manage_report_format_list' %}"><i class="fa fa-circle-o"></i> Manage Report Format </a>
+                                    </li>
+                                    <li class="">
+                                      <a href="{% url 'crm_mis_reporting_manage_report_frequency_list' %}"><i class="fa fa-circle-o"></i> Manage Report Frequency </a>
+                                    </li>
+                                    <li class="">
+                                      <a href="{% url 'crm_mis_reporting_manage_report_template_list' %}"><i class="fa fa-circle-o"></i> Manage Report Template </a>
+                                    </li>
+                              </ul>
+                          </li>
+                      </ul>
+                  </li>
+              {% endif %}
+
+              {% if '/hrms/setupmanagement/tablecodesetup/' in request.path %}
+               <li class="active treeview">
+                  <a href="javascript:;">
+                    <i class="fa fa-dashboard"></i> <span> Tables And Code Setup</span>
+                    <span class="pull-right-container">
+                      <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                  </a>
+
+                    <ul class="treeview-menu">
+                      <li class=""><a href="{% url 'crm_table_code_list' %}"><i class="fa fa-circle-o"></i> Tables and Code </a></li>
+                      
+                    </ul>
+                </li>
+              {% endif %}
+
+              {% if '/hrms/setupmanagement/accesspermisson/' in request.path %}
+                <li class="active treeview">
+               
+                    <a href="#"><i class="fa fa-circle-o"></i> Access And Permission
+                          <span class="pull-right-container">
+                            <i class="fa fa-angle-left pull-right"></i>
+                          </span>
+                        </a>
+
+
+                        <ul class="treeview-menu">
+                          <li class=""><a href="{% url 'crm_access_user_permission_user_list' %}"><i class="fa fa-circle-o"></i> Internal Users  </a></li>
+
+                           <li class=""><a href="#"><i class="fa fa-circle-o"></i> Sales Team  </a></li>
+    
+
+                         </ul></li>
+              <ul class="treeview-menu" style="display: block;">
+                    <li class="treeview menu-open">
+                    <a href="#"><i class="fa fa-circle-o"></i> Third Party Agencies 
+                    <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                    </a>
+
+
+                    <ul class="treeview-menu" style="display: none;">
+                    <li><a href="#"><i class="fa fa-circle-o"></i> Placement Consultant </a></li>
+                    </ul>
+                    </li>
+              {% endif %}
+
+
+              {% if '/hrms/setupmanagement/unitvalue/' in request.path %}
+
+          <li class="active treeview">
+              <a href="javascript:;">
+                <!-- <i class="fa fa-dashboard"></i> --> 
+               <!-- <img src="/static/admin-static/images/ad--icon/side/rule.png" class="main-icon"> -->
+                <span> Unit Value Management </span>
+                <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+              </a>
+              <ul class="treeview-menu">
+              <li class=""><a href="{% url 'unitvaluelist' %}"><i class="fa fa-circle-o"></i>Update Unit Value  </a></li>
+            </ul>
+
+           {% endif %}
+
+
+              {% if '/hrms/setupmanagement/notificationsetup/' in request.path %}
+                <li class="treeview">
+                      <a href="#">
+                        <i class="fa fa-dashboard"></i> <span> Sms And Notification </span>
+                        <span class="pull-right-container">
+                          <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                      </a>
+
+                      <ul class="treeview-menu" style="display: none;">
+
+                        <li class="treeview">
+                              <li><a href="{% url 'definesmsnotificationactionlist' %}"><i class="fa fa-circle-o"></i> Update Action for Notification </a></li>
+                            </li>
+                        
+                          <li class="treeview">
+                              <li><a href="{% url 'crm_define_notification_subject_list' %}"><i class="fa fa-circle-o"></i> Update  Subject for Notification </a></li>
+                          </li>
+
+                            
+
+                          <li class="treeview">
+                              <li><a href="{% url 'crm_define_notification_type_list' %}"><i class="fa fa-circle-o"></i> Update Notification Type </a></li>
+
+                          </li>
+
+                          <li class="treeview" > 
+                            <li><a href="{% url 'crm_define_notification_frequency_list' %}"><i class="fa fa-circle-o"></i>  Update Notification Frequency </a></li>
+                          </li>
+
+                          <li class="treeview">
+                              <li><a href="{% url 'crm_define_notification_type_message_list' %}"><i class="fa fa-circle-o"></i> Update  Importance of Notification  </a></li>
+                          </li>
+
+
+                           <li class="treeview">
+                              <li><a href="#"><i class="fa fa-circle-o"></i> Update  Notification Group  </a></li>
+                          </li>
+
+
+                          <li class="treeview">
+                              <li><a href="{% url 'crm_define_notification_import_message_list' %}"><i class="fa fa-circle-o"></i>  Update Target Audience   </a></li>
+                          </li>
+                          <li class="treeview">
+                              <a href="#"><i class="fa fa-circle-o"></i> Template for  Notification
+                                <span class="pull-right-container">
+                                  <i class="fa fa-angle-left pull-right"></i>
+                                </span>
+                              </a>
+                              <ul class="treeview-menu" style="display: none;">
+                                {% for data in notification_type %}
+                                  <li>
+                                      <a href="{% url 'crm_define_template_for_notification_list' data.id %}"><i class="fa fa-circle-o"></i> {{ data.notification_type }} </a>
+                                  </li>
+                                {% endfor %}
+                              </ul>
+                          </li>
+                      </ul>
+                </li>
+              {% endif %}
+
+              {% if '/hrms/setupmanagement/escalation/' in request.path %}
+                 <li class="treeview">
+                
+                <a href="#">
+                  <i class="fa fa-dashboard"></i> 
+                  <span> Escalation Management  </span>
+                  <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                  </span>
+                </a>
+                <ul class="treeview-menu" style="display: none;">
+                    <li><a href="{% url 'crmescalationmatrixdefinelevelslist' %}"><i class="fa fa-circle-o"></i> Update Escalation Level  </a></li>
+
+                     <li class=""><a href="{% url 'crm_escalation_matrix_tot_list' %}"><i class="fa fa-circle-o"></i>Update Turn Around Time </a></li>
+
+                                     <li class=""><a href="{% url 'escalation_manage_escalation_list' %}"><i class="fa fa-circle-o"></i>Manage Escalation </a></li>
+
+                    <!-- <li class="treeview" >
+                        <a href="#"><i class="fa fa-circle-o"></i> Define Turnaround Time
+                        <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                        </a>
+                        <ul class="treeview-menu" style="display: none;">
+                          <li class="treeview">
+                              <li><a href="{% url 'crm_escalation_matrix_tot_list' %}"><i class="fa fa-circle-o"></i> Define  Turnaround Time </a></li>
+                          </li> -->
+                        </ul>
+                    </li>
+                </ul>
+
+              </li>
+              {% endif %}
+
+              {% if '/hrms/setupmanagement/user/setup/' in request.path or '/hrms/setupmanagement/userprofile/' in request.path %}
+                 <li class="treeview">
+                  <a href="#">
+                    <i class="fa fa-dashboard" ></i> <span> User Management </span>
+                    <span class="pull-right-container">
+                      <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                  </a>
+
+
+
+                  <ul class="treeview-menu">
+              {% comment %} <li class=""><a href="{% url 'viewdepartmentuserprofile' %}"><i class="fa fa-circle-o"></i> Update Department </a></li>
+              <li><a href="{% url 'viewdesignationuserprofile' %}"><i class="fa fa-circle-o"></i> Update Designation </a></li>
+              <li><a href="{% url 'viewresponsibilityuserprofile' %}"><i class="fa fa-circle-o"></i> Update Responsibilities </a></li>
+               <li class=""><a href="{% url 'viewrolesuserprofile' %}"><i class="fa fa-circle-o"></i> Update Roles</a></li>
+              <li class=""><a href="{% url 'usertypelist' %}"><i class="fa fa-circle-o"></i> Update User Type</a></li> {% endcomment %}
+              <li class=""><a href="{% url 'crmusersetuplist' %}"><i class="fa fa-circle-o"></i> Manage Users  </a></li>
+
+                
+
+                 <li class=""><a href="{% url 'crm_administrator_setup_list' %}"><i class="fa fa-circle-o"></i> Manage Admin User</a></li>
+                </ul>
+            </li>
+              {% endif %}
+
+              {% if '/hrms/setupmanagement/administrator' in request.path %}
+                <li class="treeview">
+                    <a href="#">
+                      <i class="fa fa-dashboard" ></i> <span> Administrator Setup</span>
+                      <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                      </span>
+                    </a>
+                    <ul class="treeview-menu" style="display: block;">
+                      <li class="treeview">
+                        <a href="#"><i class="fa fa-circle-o"></i> Create User
+                          <span class="pull-right-container">
+                            <i class="fa fa-angle-left pull-right"></i>
+                          </span>
+                        </a>
+                        <ul class="treeview-menu">
+                          <li class="treeview">
+                              <li><a href="{% url 'crm_administrator_setup_list' %}"><i class="fa fa-circle-o"></i> Manage User </a></li>
+
+                          </li>
+                        </ul>
+
+                        
+                      </li>
+                    </ul>
+                </li>
+              {% endif %}
+
+              {% if '/hrms/setupmanagement/allocation/' in request.path %}
+                <li class="treeview">
+                  <a href="#">
+                    <i class="fa fa-dashboard"></i> <span>Allocation Management</span>
+                    <span class="pull-right-container">
+                      <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                  </a>
+                  <ul class="treeview-menu" style="display: block;"> 
+                   <li><a href="{% url 'defineprocesslist' %}"><i class="fa fa-circle-o"></i> Update Work Flow Process </a></li>
+                   
+                     <li><a href="{% url 'approval_matrix_reallocation_criteria_list' %}"><i class="fa fa-circle-o"></i> Upate Reallosaction Criteria </a></li>
+                    
+                    <li><a href="{% url 'leadallocationallocationmatrixslist1' %}"><i class="fa fa-circle-o"></i> Manage Allocation </a></li>
+                    
+                     <li><a href="{% url 'approval_matrix_manage_reallocation_list' %}"><i class="fa fa-circle-o"></i> Manage Reallocation </a></li>
+
+
+                  {% comment %} <li class="treeview menu-open">
+                    <a href="#"><i class="fa fa-circle-o"></i> Manage Allocation
+                    <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                    </a>
+                    <ul class="treeview-menu" style="display: none;">
+                          <li><a href="{% url 'clientsupportsupportallocationallocationmatrixlist' %}"><i class="fa fa-circle-o"></i> Client Support Allocation </a></li>
+                          <li><a href="{% url 'vendorsupportallocationallocationmatrixlist' %}"><i class="fa fa-circle-o"></i> Vendor Support Allocation </a></li>
+                    </ul>
+                    </li>
+                    <li><a href="#"><i class="fa fa-circle-o"></i> Manage Reallocation </a></li></ul> {% endcomment %}
+              {% endif %}
+
+              <!-- {% if '/hrms/setupmanagement/allocation/' in request.path %}
+                <li class="treeview">
+                    <a href="#">
+                      <i class="fa fa-dashboard"></i> <span>Allocation Management</span>
+                      <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                      </span>
+                    </a>
+                    <ul class="treeview-menu" style="display: block;">
+                      <li class="treeview">
+                        <a href="#"><i class="fa fa-circle-o"></i> Define Client
+                          <span class="pull-right-container">
+                            <i class="fa fa-angle-left pull-right"></i>
+                          </span>
+                        </a>
+                        <ul class="treeview-menu">
+                          <li class="treeview">
+                              <li><a href="{% url 'defineclienttypelist' %}"><i class="fa fa-circle-o"></i> Define Client Type </a></li>
+                              <li><a href="{% url 'defineclientcategorylist' %}"><i class="fa fa-circle-o"></i> Define Client Category </a></li>
+                              <li><a href="{% url 'defineclientleadlist' %}"><i class="fa fa-circle-o"></i> Define Lead Values </a></li>
+
+                              <li><a href="{% url 'defineclienttypeoflistlist' %}"><i class="fa fa-circle-o"></i> Define Type of Data </a></li>
+                          </li>
+                        </ul>
+                      </li>
+                    <li class="treeview" >
+                        <a href="#"><i class="fa fa-circle-o"></i> Allocation Matrix
+                          <span class="pull-right-container">
+                            <i class="fa fa-angle-left pull-right"></i>
+                          </span>
+                        </a>
+                        <ul class="treeview-menu" style="display: none;">
+                          <li class="treeview">
+                              <li><a href="#"><i class="fa fa-circle-o"></i> Data Allocation </a></li>
+                              <li><a href="#"><i class="fa fa-circle-o"></i> Lead Allocation </a></li>
+                              <li><a href="{% url 'clientsupportsupportallocationallocationmatrixlist' %}"><i class="fa fa-circle-o"></i> Client Support Allocation </a></li>
+                              <li><a href="{% url 'vendorsupportallocationallocationmatrixlist' %}"><i class="fa fa-circle-o"></i> Vendor Support Allocation </a></li>
+                          </li>
+                        </ul>
+                    </li>
+                    </ul>
+                </li>
+              {% endif %} -->
+
+                {% if '/hrms/setupmanagement/product/' in request.path %}
+                  <li class="active treeview">
+                <a href="javascript:;">
+                  <i class="fa fa-dashboard"></i> <span> Product Management </span>
+                  <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                  </span>
+                </a>
+                <ul class="treeview-menu">
+                  {% comment %} <li class=""><a href="{% url 'crm_productcategorylist' %}"><i class="fa fa-circle-o"></i>  Product Category </a></li> {% endcomment %}
+                  {% comment %} <li class=""><a href="{% url 'crmproductsetuplist' %}"><i class="fa fa-circle-o"></i> Product Type </a></li> {% endcomment %}
+
+                   {% comment %} <li class=""><a href="{% url 'productfacilitylist' %}"><i class="fa fa-circle-o"></i> Product Facility </a></li> {% endcomment %}
+
+
+                  <li class=""><a href="{% url 'productnamelist' %}"><i class="fa fa-circle-o"></i>  Product Name </a></li>
+
+                </ul>
+                <ul class="treeview-menu" style="display: block;">
+                    <li class="treeview menu-open">
+                    <a href="#"><i class="fa fa-circle-o"></i> Revenue Management
+                    <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                    </a>
+
+
+                    <ul class="treeview-menu" style="display: none;">
+                   <li class=""><a href="{% url 'crm_productcategorylist' %}"><i class="fa fa-circle-o"></i> Update Revenue </a></li>
+                  
+                  
+                  <li class=""><a href="{% url 'crmupdatetaxlist' %}"><i class="fa fa-circle-o"></i> Update Tax Rates  </a></li>
+
+                   <li class=""><a href="{% url 'managepricinglist' %}"><i class="fa fa-circle-o"></i> Manage Pricing  </a></li>
+
+                    </ul>
+                    </li>
+
+
+                  <li class="active treeview">
+              
+                <ul class="treeview-menu">  
+                </ul>
+                </li>
+              {% endif %}
+
+
+
+
+
+
+
+
+
+
+{% comment %} 
+                  <span class="pull-right-container">Product & Revenue Management</span>
+              {% if '/hrms/setupmanagement/product/' in request.path %}
+                
+                    <li class="active treeview">
+                      
+                    <a href="#"><i class="fa fa-circle-o"></i> Calendar Management 
+                          <span class="pull-right-container">
+                            <i class="fa fa-angle-left pull-right"></i>
+                          </span>
+                        </a>
+                        <ul class="treeview-menu">
+                          <li class=""><a href="{% url 'productnamelist' %}"><i class="fa fa-circle-o"></i> Manage Products </a></li>
+    
+
+                         </ul></li>
+              
+                </li>
+              {% endif %}
+ {% endcomment %}
+              {% if '/hrms/setupmanagement/approvalmatrix/' in request.path %}
+                <li class="treeview">
+                    <a href="#">
+                      <i class="fa fa-dashboard"></i> <span> Approval Management   </span>
+                      <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                      </span>
+                    </a>
+                    <ul class="treeview-menu" style="display: none;">
+                          <li>
+                              <a href="{% url 'crm_approval_matrix_define_approval_level_list' %}"><i class="fa fa-circle-o"></i>  Update Approval Level </a>
+                          </li>
+                          <li>
+                              <a href="{% url 'crm_approval_matrix_define_process_level_list' %}"><i class="fa fa-circle-o"></i>  Updae Work Flow Process </a>
+                          </li>
+                          <li>
+                              <a href="{% url 'crm_approval_matrix_define_mapwithprocess_list' %}"><i class="fa fa-circle-o"></i>Map Approval Level with Users  </a>
+                          </li>
+
+                          <li>
+                              <a href="{% url 'mapapprovaluser_list' %}"><i class="fa fa-circle-o"></i>Map Approval Level with Joint Users  </a>
+                          </li>
+                    </ul>
+                </li>  
+              {% endif %}
+            {% elif '/hrms/knowledgetraining/' in request.path %}
+              <li class="treeview">
+                  <a href="#">
+                    <i class="fa fa-dashboard"></i> <span>Knowledge Sharing</span>
+                    <span class="pull-right-container">
+                      <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                  </a>
+                  <ul class="treeview-menu" style="display: none;">
+                    <li>
+                        <a href="{% url 'crm_crmemployee_knowledgetraining_knowledgetype_list' %}"><i class="fa fa-circle-o"></i> Update Knowledge Type </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'crm_crmemployee_knowledgetraining_defineknowledgelevel_list' %}"><i class="fa fa-circle-o"></i> Update Knowledge Level  </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'crm_crmemployee_knowledgetraining_manageknowledge_list' %}"><i class="fa fa-circle-o"></i> Manage Knowledge  </a>
+                    </li>
+
+                  </ul>
+
+
+                    <li class="treeview">
+                  <a href="#">
+                    <i class="fa fa-dashboard"></i> <span>Training and Development</span>
+                    <span class="pull-right-container">
+                      <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                  </a>
+                  <ul class="treeview-menu" style="display: none;">
+                     <li>
+                        <a href="{% url 'crm_crmemployee_knowledgetraining_defineproductraining_list' %}"><i class="fa fa-circle-o"></i> Update Product Taining  </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'crm_crmemployee_knowledgetraining_manageproducttraining_list' %}"><i class="fa fa-circle-o"></i> Manage Product Training  </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'crm_crmemployee_knowledgetraining_defineproductpromotions_list' %}"><i class="fa fa-circle-o"></i> Update Product Promotions  </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'crm_crmemployee_knowledgetraining_manageproductpromotions_list' %}"><i class="fa fa-circle-o"></i> Manage Product Promotions  </a>
+                    </li>
+
+
+
+
+
+           <!--  <li class="treeview">
+              <a href="#">
+                <i class="fa fa-dashboard"></i> <span> Knowledge & Training Management </span>
+                <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+              </a> -->
+              <!-- <ul class="treeview-menu" style="display: none;">
+                    <li>
+                        <a href="{% url 'crm_crmemployee_knowledgetraining_knowledgetype_list' %}"><i class="fa fa-circle-o"></i> Update Knowledge Type </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'crm_crmemployee_knowledgetraining_defineknowledgelevel_list' %}"><i class="fa fa-circle-o"></i> Update Knowledge Level  </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'crm_crmemployee_knowledgetraining_manageknowledge_list' %}"><i class="fa fa-circle-o"></i> Manage Knowledge  </a>
+                    </li> -->
+                    <!-- <li>
+                        <a href="{% url 'crm_crmemployee_knowledgetraining_defineproductraining_list' %}"><i class="fa fa-circle-o"></i> Update Product Taining  </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'crm_crmemployee_knowledgetraining_manageproducttraining_list' %}"><i class="fa fa-circle-o"></i> Manage Product Training  </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'crm_crmemployee_knowledgetraining_defineproductpromotions_list' %}"><i class="fa fa-circle-o"></i> Update Product Promotions  </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'crm_crmemployee_knowledgetraining_manageproductpromotions_list' %}"><i class="fa fa-circle-o"></i> Manage Product Promotions  </a>
+                    </li> -->
+              </ul>
+            </li>
+            {% elif '/hrms/hrms-employee/' in request.path %}
+              {% if '/emplyeesservices/manageemployee' in request.path %}
+                  <li class="treeview">
+                      <a href="#">
+                        <i class="fa fa-dashboard"></i> <span>Employee Management </span>
+                        <span class="pull-right-container">
+                          <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                      </a>
+                      <ul class="treeview-menu" style="display: none;">
+
+                                  <li><a href="{% url 'crmdepartmentlist' %}"><i class="fa fa-circle-o"></i> Update  Department </a></li>
+
+                                  <li><a href="{% url 'crmdesignationlist' %}"><i class="fa fa-circle-o"></i> Update Designation </a></li>
+
+                                  <li><a href="{% url 'crmresposibilitylist' %}"><i class="fa fa-circle-o"></i> Update Responsibilites </a></li>
+
+                                  <li><a href="{% url 'crmrolelist' %}"><i class="fa fa-circle-o"></i> Update Roles </a></li>
+
+                                  <li><a href="{% url 'crm_crmemployee_manageemployee_reportingstructure_list' %}"><i class="fa fa-circle-o"></i> Update Reporting  Structure </a></li>
+
+                                   <li><a href="{% url 'crmupdateemploymentypelist' %}"><i class="fa fa-circle-o"></i> Update Employment Type </a></li>
+                                   <li><a href="{% url 'employee_emplyeesservices_payrollof_list' %}"><i class="fa fa-circle-o"></i> Update Payroll Company </a></li>
+
+
+
+                                  <li><a href="{% url 'crm_crmemployee_manageemployee_employeeid_list' %}"><i class="fa fa-circle-o"></i> Update Employee ID </a></li>
+
+                                  <li><a href="{% url 'crm_crmemployee_manageemployee_managegrade_list' %}"><i class="fa fa-circle-o"></i> Manage Grade  </a></li>
+
+                                  <li><a href="{% url 'crm_crmemployee_manageemployee_managesalaryrange_list' %}"><i class="fa fa-circle-o"></i>  Manage Salary Range  </a></li>
+
+                                  <li><a href="{% url 'crm_crmemployee_manageemployee_definesalary_list' %}"><i class="fa fa-circle-o"></i>  Update Salary   </a></li>
+
+
+                                  <li><a href="{% url 'crm_crmemployee_manageemployee_otherincome_list' %}"><i class="fa fa-circle-o"></i>  Update Other Income   </a></li>
+                                  <li><a href="{% url 'crm_crmemployee_manageemployee_define_deductions_list' %}"><i class="fa fa-circle-o"></i>  Update Deductions   </a></li>
+
+                                  <li><a href="{% url 'crm_crmemployee_manageemployee_language_list' %}"><i class="fa fa-circle-o"></i>  Manage Laguage    </a></li>
+
+                                  <li><a href="{% url 'crm_crmemployee_manageemployee_qualification_list' %}"><i class="fa fa-circle-o"></i>  Manage Qualification  </a></li>
+
+                                  <li><a href="{% url 'crm_crmemployee_manageemployee_expereince_list' %}"><i class="fa fa-circle-o"></i>  Manage Expereince </a></li>
+
+                                  <li><a href="{% url 'crm_crmemployee_manageemployee_family_list' %}"><i class="fa fa-circle-o"></i>  Manage Family   </a></li>
+
+                                 <!--  <li><a href="{% url 'employee_emplyeesservices_typeofjob_list' %}"><i class="fa fa-circle-o"></i>  Type of Job  </a></li>
+                                  <li><a href="{% url 'employee_emplyeesservices_payrollof_list' %}"><i class="fa fa-circle-o"></i>  Payroll of  </a></li> -->
+
+                        </li>
+                      </ul>
+                  </li>
+              {% elif 'recruitmentmanagement' in request.path %}
+                  <li class="treeview">
+                      <a href="#">
+                        <i class="fa fa-dashboard"></i> <span>Recruitment Planning </span>
+                        <span class="pull-right-container">
+                          <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                      </a>
+                      <ul class="treeview-menu" style="display: none;">
+                              <li><a href="{% url 'crm_crmemployee_recruitmentmanagement_employeestrength_list' %}"><i class="fa fa-circle-o"></i> Update Employee Strength </a></li>
+
+                              <li><a href="{% url 'crm_crmemployee_recruitmentmanagement_qualification_list' %}"><i class="fa fa-circle-o"></i> Update Qualification  </a></li>
+
+                              <li><a href="{% url 'crm_crmemployee_recruitmentmanagement_experience_list' %}"><i class="fa fa-circle-o"></i> Update Experience </a></li>
+
+                              <li><a href="{% url 'crm_crmemployee_recruitmentmanagement_recruitmentrules_list' %}"><i class="fa fa-circle-o"></i> Manage Recruitment Rules </a></li>
+                      </ul>
+                      <a href="#">
+                        <i class="fa fa-dashboard"></i> <span>Candidate Sourcing </span>
+                        <span class="pull-right-container">
+                          <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                      </a>
+                      <ul class="treeview-menu" style="display: none;">
+                              <li>
+                                <a href="{% url 'crm_crmemployee_recruitmentmanagement_candidatesourcing_list' %}"><i class="fa fa-circle-o"></i> Manage Job Publishment </a>
+                              </li>
+
+                              <li>
+                                <a href="{% url 'crm_crmemployee_recruitmentmanagement_managereceiptofresume_list' %}"><i class="fa fa-circle-o"></i>Manage Receipt of Resume  </a>
+                              </li>
+                      </ul>
+
+                    <a href="#">
+                        <i class="fa fa-dashboard"></i> <span> Interveiw Process  </span>
+                        <span class="pull-right-container">
+                          <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                      </a>
+                      <ul class="treeview-menu" style="display: none;">
+                                                                  {% comment %} Update Screening Process done
+                                                                    Manage Psychometric Test done 
+                                                                    Manage Test Result depnd
+                                                                    Manage Interview Process done
+                                                                    Update Score Card done
+                                                                    Manage Approving  Authority
+                                                                    Manage Selection Process done {% endcomment %}
+
+                                                    
+                              <li>
+                                <a href="{% url 'crm_crmemployee_recruitmentmanagement_interveiwprocess_list' %}"><i class="fa fa-circle-o"></i> Update Screening Process </a>
+                              </li>
+                              <li>
+                                <a href="{% url 'crm_crmemployee_recruitmentmanagement_managepsychometrictest_list' %}"><i class="fa fa-circle-o"></i> Manage Psychometric Test  </a>
+                              </li>
+                               <li>
+                                <a href="{% url 'crm_crmemployee_managetestresult_list' %}"><i class="fa fa-circle-o"></i> Manage Test Result  </a>
+                              </li>
+
+                              <li>
+                                <a href="{% url 'crm_crmemployee_recruitmentmanagement_manageinterviewprocess_list' %}"><i class="fa fa-circle-o"></i>Manage Interview Process  </a>
+                              </li>
+
+                              <li>
+                                <a href="{% url 'crm_crmemployee_recruitmentmanagement_scorecard_list' %}"><i class="fa fa-circle-o"></i>Update Score card  </a>
+                              </li>
+
+                              <li>
+                                <a href="{% url 'crm_crmemployee_recruitmentmanagement_managecandidateshortlistingauthority_list' %}"><i class="fa fa-circle-o"></i> Manage Approving  Authority </a>
+                              </li>
+
+                              <li>
+                                <a href="{% url 'crm_crmemployee_recruitmentmanagement_manageselectionprocess_list' %}"><i class="fa fa-circle-o"></i>Manage Selection Process </a>
+                              </li>
+                      </ul>
+                  </li>
+              {% elif 'holidaysandleaves' in request.path %}
+                <li class="active treeview">
+                      <a href="javascript:;">
+                        <i class="fa fa-dashboard"></i> <span> Holiday Management </span>
+                        <span class="pull-right-container">
+                          <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                      </a>
+                      <ul class="treeview-menu">
+                        <li>
+                            <a href="{% url 'crm_crmemployee_holidaysandleaves_holidays_list' %}"><i class="fa fa-circle-o"></i> Holiday Management  </a>
+                        </li>
+                      </ul>
+                </li>
+                <li class="treeview menu-open">
+                      <a href="#"><i class="fa fa-circle-o"></i>Leave Management 
+                      <span class="pull-right-container">
+                      <i class="fa fa-angle-left pull-right"></i>
+                      </span>
+                      </a>
+                    <ul class="treeview-menu" style="display: none;">
+                        <li>
+                          <a href="{% url 'crm_crmemployee_holidaysandleaves_defineleavetype_list' %}"><i class="fa fa-circle-o"></i> Update Leave Type  </a>
+                        </li>
+                        <li>
+                          <a href="{% url 'crm_crmemployee_holidaysandleaves_manageleaveqouta_list' %}"><i class="fa fa-circle-o"></i> Update Leave Quota </a>
+                        </li>
+                    </ul>
+              {% elif 'manageclaims' in request.path %}
+                  <li class="treeview menu-open">
+                        <a href="#"><i class="fa fa-circle-o"></i> Travel Management 
+                            <span class="pull-right-container">
+                            <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu" style="display: none;">
+                                <li>
+                                  <a href="{% url 'crm_crmemployee_manageclaims_traveltype_list' %}"><i class="fa fa-circle-o"></i> Update Travel Type </a>
+                                </li>
+                                <li>
+                                <a href="{% url 'crm_crmemployee_manageclaims_modeoftravel_list' %}"><i class="fa fa-circle-o"></i> Update Mode of Travel  </a>
+                                </li>
+                                <li>
+                                  <a href="{% url 'crm_crmemployee_manageclaims_travelpolicy_list' %}"><i class="fa fa-circle-o"></i> Update Travel Policy  </a>
+                                </li>
+                               <li><a href="{% url 'crm_crmemployee_manageclaims_managetravel_list' %}"><i class="fa fa-circle-o"></i> Manage Travel  </a></li>
+                        </ul>
+                   
+                      <a href="#"><i class="fa fa-circle-o"></i> Claim Management
+                      <span class="pull-right-container">
+                      <i class="fa fa-angle-left pull-right"></i>
+                      </span>
+                      </a>
+                      <!-- <ul class="treeview-menu" style="display: none;">
+                        <li class="treeview menu-open">
+                          <a href="#"><i class="fa fa-circle-o"></i> Manage Claims
+                          <span class="pull-right-container">
+                          <i class="fa fa-angle-left pull-right"></i>
+                          </span>
+                          </a> -->
+                          <ul class="treeview-menu" style="display: none;">
+
+                               <li><a href="{% url 'crm_crmemployee_manageclaims_claimtype_list' %}"><i class="fa fa-circle-o"></i> Update Claim Type  </a></li>
+                               <li><a href="{% url 'crm_crmemployee_manageclaims_claimentitlement_list' %}"><i class="fa fa-circle-o"></i>  Claim Entitlement   </a></li>
+                          </ul>
+                        </li>
+                        <li class="treeview menu-open">
+                          <a href="#"><i class="fa fa-circle-o"></i>Advance Management 
+                          <span class="pull-right-container">
+                          <i class="fa fa-angle-left pull-right"></i>
+                          </span>
+                          </a>
+                          <ul class="treeview-menu" style="display: none;">
+
+                               <li><a href="{% url 'updateadvancetype_list' %}"><i class="fa fa-circle-o"></i>Update Advance Type </a></li>
+                               <li><a href="{% url 'dvanceentitlement_list' %}"><i class="fa fa-circle-o"></i>  Advance Entitlement   </a></li>
+                          </ul>
+                        </li>
+
+                        <li class="treeview menu-open">
+                          <a href="#"><i class="fa fa-circle-o"></i> Reimbursement Management 
+                          <span class="pull-right-container">
+                          <i class="fa fa-angle-left pull-right"></i>
+                          </span>
+                          </a>
+                          <ul class="treeview-menu" style="display: none;">
+
+                               <li><a href="{% url 'crm_crmemployee_managereimbursement_reimbursementtype_list' %}"><i class="fa fa-circle-o"></i>Update Reimbursement  Type  </a></li>
+                               <li><a href="{% url 'crm_crmemployee_managereimbursement_claimentitlement_list' %}"><i class="fa fa-circle-o"></i>  Reimbursement  Entitilement   </a></li>
+                          </ul>
+                        </li>
+                      </ul>
+
+
+                  </li>
+              {% elif 'managepayroll' in request.path %}
+                    <li class="treeview menu-open">
+                      <a href="#"><i class="fa fa-circle-o"></i> Payroll Process Management 
+                      <span class="pull-right-container">
+                      <i class="fa fa-angle-left pull-right"></i>
+                      </span>
+                      </a>
+                      <ul class="treeview-menu" style="display: none;">
+                          <li><a href="{% url 'crm_crmemployee_manageemployee_taxstructure_list' %}"><i class="fa fa-circle-o"></i> Update Tax Structure</a></li>
+
+                          <li><a href="{% url 'crm_crmemployee_manageemployee_reimbursement_list' %}"><i class="fa fa-circle-o"></i> Update  Reimbursement </a></li>
+
+                          <li><a href="{% url 'crm_crmemployee_manageemployee_exemptedincome_list' %}"><i class="fa fa-circle-o"></i> Update  Exempted Income </a></li>
+
+                          <li><a href="{% url 'crm_crmemployee_manageemployee_advances_list' %}"><i class="fa fa-circle-o"></i> Update Advances </a></li>
+
+
+                          <li><a href="{% url 'crm_crmemployee_manageemployee_statutorydeductions_list' %}"><i class="fa fa-circle-o"></i> Update Statutory Deductions </a></li>
+                          <li><a href="{% url 'crm_crmemployee_manageemployee_updateotherdeductions_list' %}"><i class="fa fa-circle-o"></i> Update Other Deductions  </a>
+
+
+                          <li><a href="{% url 'crm_crmemployee_manageemployee_deductions_list' %}"><i class="fa fa-circle-o"></i> Update Deductions </a>
+                      </li>
+                      </ul>
+                      </li>
+              {% elif 'hrpolicies' in request.path %}
+                  <li class="treeview menu-open">
+                      <a href="#"><i class="fa fa-circle-o"></i> Policies and Forms Management 
+                      <span class="pull-right-container">
+                      <i class="fa fa-angle-left pull-right"></i>
+                      </span>
+                      </a>
+                        <ul class="treeview-menu" style="display: none;">
+                             <li><a href="{% url 'crm_crmemployee_hrpolicies_policytype_list' %}"><i class="fa fa-circle-o"></i> Update HR Policies </a></li>
+                             <li><a href="{% url 'crm_crm_employee_hrpolicies_form_list' %}"><i class="fa fa-circle-o"></i>Update  Forms  </a></li>
+                        </ul>
+                  </li>
+              {% elif 'attendanceovertimemanagement' in request.path %}
+                  <li class="treeview menu-open">
+                      <a href="#"><i class="fa fa-circle-o"></i> Attendance & Overtime  Management 
+                      <span class="pull-right-container">
+                      <i class="fa fa-angle-left pull-right"></i>
+                      </span>
+                      </a>
+                        <ul class="treeview-menu" style="display: none;">
+                             <li><a href="#"><i class="fa fa-circle-o"></i> Attendance Management </a></li>
+                             <li><a href="{% url 'crm_crmemployee_attendanceovertimemanagement_overtime_list' %}"><i class="fa fa-circle-o"></i> Over Time Management    </a></li>
+                        </ul>
+                  </li>
+              {% elif 'onbboardingexitmanagement' in request.path %}
+                  <li class="active treeview">
+                    <a href="javascript:;">
+                      <i class="fa fa-dashboard"></i> <span> Remuneration Management </span>
+                      <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                      </span>
+                    </a>
+                    <ul class="treeview-menu">
+                      <li>
+                          <a href="{% url 'onbboardingexitmanagement_remuneration_list' %}"><i class="fa fa-circle-o"></i> Manage Remuneration   </a>
+                      </li>
+                    </ul>
+                  </li>
+                  <li class="treeview menu-open">
+                  <a href="#"><i class="fa fa-circle-o"></i> Registration Management
+                  <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                  </span>
+                  </a>
+                  <ul class="treeview-menu" style="display: none;">
+                      <li>
+                        <a href="{% url 'registrationmanagment_employmenttype_list' %}"><i class="fa fa-circle-o"></i> Manage Employment Type   </a>
+                      </li>
+                      <!-- <li>
+                        <a href="{% url 'registrationmanagment_payrolltype_list' %}"><i class="fa fa-circle-o"></i> Manage Payroll Type </a>
+                      </li> -->
+                      <li>
+                        <a href="{% url 'registrationmanagment_payrollagency_list' %}"><i class="fa fa-circle-o"></i> Manage Payroll Company  </a>
+                      </li>
+                      <li>
+                        <a href="{% url 'registrationmanagment_keyresponsibilityareas_list' %}"><i class="fa fa-circle-o"></i> Update Key Responsibility Areas </a>
+                      </li>
+                  </ul>
+                  </li>
+
+                  <li class="treeview menu-open">
+                      <a href="#"><i class="fa fa-circle-o"></i>Exit Management 
+                      <span class="pull-right-container">
+                      <i class="fa fa-angle-left pull-right"></i>
+                      </span>
+                      </a>
+                      <ul class="treeview-menu" style="display: none;">
+
+                          <li>
+                              <a href="{% url 'exitmanagement_exittype_list' %}"><i class="fa fa-circle-o"></i> Update Exit Type </a>
+                          </li>
+
+                          <li>
+                              <a href="{% url 'exitmanagement_noticeperiod_list' %}"><i class="fa fa-circle-o"></i> Update Notice Period </a>
+                          </li>
+
+                          <li>
+                              <a href="{% url 'crm_exitapprovalauthority_list' %}"><i class="fa fa-circle-o"></i> Update Exit Approval Authority </a>
+                          </li>
+
+                          <li>
+                              <a href="{% url 'exitmanagement_finaldsettlement_list' %}"><i class="fa fa-circle-o"></i> Update Final Settlement  </a>
+                          </li>
+
+                          <li>
+                              <a href="{% url 'exitmanagement_exitinterview_list' %}"><i class="fa fa-circle-o"></i> Update Exit Interview</a>
+                          </li>
+                      </ul>
+                  </li>
+                  <li class="treeview menu-open">
+                      <a href="#"><i class="fa fa-circle-o"></i>Asset Management 
+                      <span class="pull-right-container">
+                      <i class="fa fa-angle-left pull-right"></i>
+                      </span>
+                      </a>
+                      <ul class="treeview-menu" style="display: none;">
+                          <li>
+                            <a href="{% url 'assetmanagement_assettype_list' %}"><i class="fa fa-circle-o"></i> Update Assets Type </a>
+                          </li>
+                          <li>
+                            <a href="{% url 'assetmanagement_manageasset_list' %}"><i class="fa fa-circle-o"></i> Manage Assets </a>
+                          </li>
+                          <li>
+                            <a href="{% url 'assetmanagement_allocationpolicy_list' %}"><i class="fa fa-circle-o"></i> Update Allocation Policy  </a>
+                          </li>
+                          
+                      </ul>
+                  </li>
+              {% elif 'performanceappraisalmanagement' in request.path %}
+                  <li class="active treeview">
+                    <a href="javascript:;">
+                      <i class="fa fa-dashboard"></i> <span> Performance Management </span>
+                      <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                      </span>
+                    </a>
+                    <ul class="treeview-menu">
+                      <li>
+                          <a href="{% url 'performanceappraisalmanagement_performancemanagementtarget_list' %}"><i class="fa fa-circle-o"></i> Update Targets   </a>
+                      </li>
+                       <li>
+                          <a href="{% url 'performanceappraisalmanagement_updateincentivetype_list' %}"><i class="fa fa-circle-o"></i> Update Incentive Type  </a>
+                      </li>
+                      <li>
+                          <a href="{% url 'performanceappraisalmanagement_performancemanagementincentive_list' %}"><i class="fa fa-circle-o"></i> Update Incentive </a>
+                      </li>
+                          <li>
+                          <a href="{% url 'performanceappraisalmanagement_updatebonus_list' %}"><i class="fa fa-circle-o"></i> Update Bonus </a>
+                      </li>
+                      <li>
+                          <a href="{% url 'performanceappraisalmanagement_manageperformanceincentive_list' %}"><i class="fa fa-circle-o"></i> Manage Performance Incentive  </a>
+                      </li>
+                       </li>
+                          <li>
+                          <a href="{% url 'p_managebonus_list' %}"><i class="fa fa-circle-o"></i> Manage Bonus  </a>
+                      </li>
+
+                    </ul>
+                  </li>
+                  <li class="treeview menu-open">
+                  <a href="#"><i class="fa fa-circle-o"></i> Appraisal Management 
+                  <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                  </span>
+                  </a>
+                  <ul class="treeview-menu" style="display: none;">
+                      <li>
+                        <a href="{% url 'performanceappraisalmanagement_appraisalmanagementdefineappraisalfrequency_list' %}"><i class="fa fa-circle-o"></i> Update Appraisal Frequency  </a>
+                      </li>
+                       <li>
+                        <a href="{% url 'performanceappraisalmanagement_updateappraisalprocesstype_list' %}"><i class="fa fa-circle-o"></i> Update Appraisal Process Type </a>
+                      </li>
+                      <li>
+                        <a href="{% url 'performanceappraisalmanagement_appraisalmanagementcrossdepartment_list' %}"><i class="fa fa-circle-o"></i> Update Cross Department  </a>
+                      </li>
+                        <li>
+                        <a href="{% url 'performanceappraisalmanagement_updatepyschometricest_list' %}"><i class="fa fa-circle-o"></i>Update Pyschometric Test  </a>
+                      </li>
+                      <li class="treeview">
+                        <a href="{% url 'performanceappraisalmanagement_manageappraisalincentive_list' %}"><i class="fa fa-circle-o"></i> Update Appraisal  Rating
+                          <span class="pull-right-container">
+                            <i class="fa fa-angle-left pull-right"></i>
+                          </span>
+                        </a>
+                        <ul class="treeview-menu" style="display: none;">
+                          <li><a href="{% url 'performanceappraisalmanagement_appraisalratingdefineweightage_list' %}"><i class="fa fa-circle-o"></i> Update Weightage  </a></li>
+                          <li><a href="{% url 'performanceappraisalmanagement_appraisalratingmanagerating_list' %}"><i class="fa fa-circle-o"></i> Manage Rating  </a></li>
+                        </ul>
+                      </li>
+                      <li>
+                        <a href="{% url 'performanceappraisalmanagement_defineappraisalcommittee_list' %}"><i class="fa fa-circle-o"></i> Update Appraisal Committee  </a>
+                      </li>
+                      <li class="treeview">
+                        <a href="#"><i class="fa fa-circle-o"></i> Update Appraisal Benefits
+                          <span class="pull-right-container">
+                            <i class="fa fa-angle-left pull-right"></i>
+                          </span>
+                        </a>
+                        <ul class="treeview-menu" style="display: none;">
+                          <li><a href="{% url 'performanceappraisalmanagement_updateappraisalbenefittype_list' %}"><i class="fa fa-circle-o"></i>  Update Appraisal Benefit Type </a></li>
+                          <li><a href="{% url 'performanceappraisalmanagement_definechangeingrade_list' %}"><i class="fa fa-circle-o"></i> Update Grade Change   </a></li>
+                       
+                          <li><a href="{% url 'performanceappraisalmanagement_defineincrement_list' %}"><i class="fa fa-circle-o"></i> Update Increments  </a></li>
+                          <li><a href="{% url 'performanceappraisalmanagement_defineappraisalincentive_list' %}"><i class="fa fa-circle-o"></i> Update Appraisal Incentive  </a></li>
+                             <li><a href="{% url 'performanceappraisalmanagement_managegradechange_list' %}"><i class="fa fa-circle-o"></i> Manage Grade Change </a></li>
+
+                                <li><a href="{% url 'performanceappraisalmanagement_manageincrements_list1' %}"><i class="fa fa-circle-o"></i> Manage Increments </a></li>
+                                   <li><a href="{% url 'performanceappraisalmanagement_manageappraisalincentive_list' %}"><i class="fa fa-circle-o"></i> Manage Appraisal Incentive </a></li>
+                        </ul>
+                      </li>
+                  </ul>
+                  </li>
+              {% endif %} 
+
+          {% endif %}
+      </ul>
+    </section>
+  </aside>
+
+  {% block content %}
+  {% endblock %}
+  <footer class="main-footer">
+    <div class="pull-right hidden-xs">
+      <b>Version</b> 1.00.00
+    </div>
+    <strong> Copyright &copy; 2019  aditshsoft</strong> All rights reserved.
+  </footer>
+
+<input type="hidden" id="bind_head_office_url" value="{% url 'crmbindheadoffice' %}">
+<input type="hidden" id="bind_branches_url" value="{% url 'crmbindbranches' %}">
+<input type="hidden" id="bind_get_user_url" value="{% url 'crmgetuserdetail' %}">
+<input type="hidden" id="get_user_exists" value="{% url 'check_username_exists' %}">
+<input type="hidden" id="get_phone_exists" value="{% url 'check_phone_exists' %}">
+<input type="hidden" id="bind_country_state" value="{% url 'crmbinddata' %}">
+
+
+</div>
+{% include "layout/admin_message.html" %}
+  <!-- jQuery 3 -->
+<script src="{% static 'admin-static/bower_components/jquery/dist/jquery.min.js' %}"></script>
+  <!-- jQuery UI 1.11.4 -->
+  <script src="{% static 'admin-static/bower_components/jquery-ui/jquery-ui.min.js' %}"></script>
+
+  <script>
+    $.widget.bridge('uibutton', $.ui.button);
+  </script>
+  <!-- Bootstrap 3.3.7 -->
+  <script src="{% static 'admin-static/bower_components/bootstrap/dist/js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'admin-static/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js' %}"></script>
+  <!-- Bootstrap WYSIHTML5 -->
+  <script src="{% static 'admin-static/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js' %}"></script>
+  <!-- Slimscroll -->
+  <script src="{% static 'admin-static/bower_components/jquery-slimscroll/jquery.slimscroll.min.js' %}"></script>
+  <!-- FastClick -->
+  <script src="{% static 'admin-static/bower_components/fastclick/lib/fastclick.js' %}"></script>
+  <!-- AdminLTE App -->
+  <script src="{% static 'admin-static/dist/js/adminlte.min.js' %}"></script>
+  <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+  <script src="{% static 'admin-static/dist/js/pages/dashboard.js' %}"></script>
+  <!-- AdminLTE for demo purposes -->
+  <script src="{% static 'admin-static/dist/js/demo.js' %}"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/jquery.validate.min.js"></script>
+  <script src="{% static 'admin-static/bower_components/ckeditor/ckeditor.js' %} "></script>
+  <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+  <script src="{% static 'admin-static/js/crm.js' %}"></script>
+  <script src="{% static 'admin-static/fselect.js' %}"></script>
+  <script src="{% static 'admin-static/js/jquery-timepicker.js' %}"></script>
+  <script src="{% static 'admin-static/js/ajax.js' %}"></script>
+  <script src="{% static 'admin-static/bower_components/datatables.net/js/jquery.dataTables.min.js' %}"></script>
+  <script src="{% static 'admin-static/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js' %}"></script>
+
+
+<script type="text/javascript">
+  // @@@@@@@@@@ Defualt selected Side Menu @@@@@@@@@@@@@
+    var pathname = window.location.pathname;
+    $(".sidebar-menu  li ul li a").each(function(){
+        var link = $(this).attr('href');
+        if (link  == pathname){
+            $(this).parent("li").addClass("active");
+            $(this).parent("li").parent("ul").addClass('menu-open').slideDown();
+            $(".treeview-menu").first().show()
+        }
+    })
+
+// @@@@@@ Date Pikcer @@@@@@@@@@@@@@@@
+  $('#end_date_time_working_hours,#start_date_time_working_hours,#start_date_time_over_time,#end_date_time_over_time').datepicker({
+      uiLibrary:'bootstrap',
+      dateFormat: 'dd/mm/yy'
+      
+  });
+   $('#id_start_date,#id_end_date').datepicker({
+      uiLibrary:'bootstrap',
+      dateFormat: 'dd/mm/yy'
+  });
+
+// @@@@@@ Only Accept Numeric Value @@@@@
+$('#id_mobile_no, #id_maximum_score, #id_passing_score, #id_assessment_year, #id_no_of_grades, #id_rating, #id_increment, #id_max_no_of_participant').keypress(function(e){
+    var value = $(this).val();
+    value = value.replace(/^(0*)/, "");
+    $(this).val(value);
+    if (e.which == 8 || e.which == 0) {
+        return !0
+    }
+    if (e.which < 46 || e.which > 59) {
+        return !1
+    }
+    if (e.which == 46 && $(this).val().indexOf('.') != -1) {
+        return !1
+    }
+});
+
+// @@@@@@@@ Back Button 
+$(document).ready(function(){
+  $("#back_url").attr('href',document.referrer)
+  $("#id_logo_upload").addClass("form-control")
+});
+
+// @@@@@@@@@@@@@@@@@@@@@ Access and Permission @@@@@@@@@@@@@@@@@@@@@@
+$(".bokinTp").click(function(){
+  $(".bokinBot").slideUp(400);
+  if($(this).hasClass("active")){
+    $(".bokinTp").removeClass("active");
+    $(".bokinBot").slideUp(400);
+  }
+  else{
+    $(".bokinTp").removeClass("active");
+    $(this).next('.checked_all_checkbox').next(".bokinBot").slideDown(400);
+    $(this).addClass("active");
+  }
+});
+
+$('.checked_all_checkbox').click(function(){
+    get_table_id = $(this).attr('data-attr')
+    if($(this).val() == "0"){
+      if ($(this).is(':checked')){
+          $(this).next("#"+get_table_id).find('input').prop('checked', true);
+      }
+      else{
+        $(this).next("#"+get_table_id).find('input').prop('checked', false);
+      }
+    }
+    else{
+        if ($(this).is(':checked')){
+          $(this).next('#'+get_table_id).find('input').prop('checked', true);
+        }
+        else{
+          $(this).next('#'+get_table_id).find('input').prop('checked', false);
+        }
+    }
+
+})
+
+
+function remove_all_checkbox(get_this_val, all_chkbox){
+  get_name = $(get_this_val).attr('name')
+  get_chk_name = $(get_this_val).attr('class')
+  if (all_chkbox){
+      if ($('input[name="'+get_name+'"]:checked').length == 1){
+        $('input[name="'+get_chk_name+'"]').prop('checked', true);
+      }
+      else{
+        $('input[name="'+get_chk_name+'"]').prop('checked', false);
+      }
+  }
+  else{
+      if($('input[name="'+get_name+'"]:checked').length == 4){
+        $('.'+get_name).prop('checked', true);
+      }
+      else{
+         $('.'+get_name).prop('checked', false);
+      }
+  }
+}
+</script>
+
+<!-- @@@@@@@@@@@ Calender Set Up @@@@@@@@@@@@@ -->
+<script type="text/javascript">
+    $("#id_weekly_time_interval").hunterTimePicker();
+    $("#id_time").hunterTimePicker();
+    $("#id_weekly_off_time_interval").hunterTimePicker();
+    html = '<option val= ""> Select Option</option>'
+    {% for p in working_days %}
+        html += '<option val="{{p.0}}">{{p.1}}</option>'
+    {% endfor %}
+    $("#id_weekly_working_days").html(html)
+    $("#id_weekly_off_working_days").html(html)
+    $('.multiselect, #id_brach').fSelect()
+    $('#id_period_of_type').daterangepicker();
+</script>
+
+<!-- @@@@@@@@@@@@ SMS And Notification CK-Editor -->
+<script type="text/javascript">
+  CKEDITOR.replace('id_template',{
+  extraPlugins: 'uploadimage,image2,colorbutton,font,undo',
+  height: 200,
+  width: 500,
+  filebrowserUploadUrl: '{% url "uploadimage" %}',
+  filebrowserImageUploadUrl: '{% url "uploadimage" %}',
+  stylesSet: [
+    { name: 'Narrow image', type: 'widget', widget: 'image', attributes: { 'class': 'image-narrow' } },
+    { name: 'Wide image', type: 'widget', widget: 'image', attributes: { 'class': 'image-wide' } }
+  ],
+  contentsCss: [ CKEDITOR.basePath + 'contents.css', '>css/widgetstyles.css' ],
+  image2_disableResizer: true,
+  allowedContent :true
+  });
+  CKEDITOR.config.extraPlugins = 'colorbutton,font';
+
+</script>
+
+<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ Map With Branch Cities JS @@@@@@@@@@@@@@@@@@  -->
+<script type="text/javascript">
+$("#id_city").on('change', function(){
+  get_selected_city_text()
+})
+$("#id_brach").on('change', function(){
+  get_seleted_branch()
+})
+$(document).ready(function(){
+  get_selected_city_text()
+  get_seleted_branch()
+})
+function get_selected_city_text(){
+    get_text = $("#id_city option:selected").map(function () {
+        return $(this).text();
+    }).get().join(', ')
+    $("#select_city").text(get_text)
+}
+function get_seleted_branch(){
+    get_text = $("#id_brach option:selected").map(function () {
+        return $(this).text();
+    }).get().join(', ')
+    $("#select_branch").text(get_text)
+}
+
+$('#example2').dataTable({
+  "searching": true,
+  "bPaginate": false,
+  "showNEntries" : false,
+  "bInfo": false,
+});
+$("#id_grade").change(function(){
+  if($(this).val() != ""){
+    $("#gross_salary_deduction").show()
+  }
+  else{
+    $("#gross_salary_deduction").hide()
+  }
+})
+</script>
+
+
+
+<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ CSS of Date Picker and  Multi Select @@@@@@@@@@@@@@@@@@  -->
+<style type="text/css">
+.callout callout-info{/*background-color: gray !important;*/}
+.Hunter-time-picker .Hunter-wrap {position: relative;width: 97%;background: #ffffff;padding: -2px;}
+.Hunter-minute-wrap{left: -166px; display: block;}
+.error{color: red}
+.fs-wrap{display: block;width: 100%;}
+.fs-label{height: 31px;padding: 6px 12px;}
+.fs-dropdown{width: 366px;}
+#id_logo_upload{height: -13px;}
+.small-box p {font-size: 13px;}
+</style>
+</body>
+
+</html>
+
+
+

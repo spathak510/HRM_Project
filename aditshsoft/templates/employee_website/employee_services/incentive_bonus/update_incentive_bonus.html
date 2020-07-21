@@ -1,0 +1,77 @@
+{% extends "layout/website_layout.html" %}
+{% load templatetag %}
+{% block content %}
+
+<div class="content-wrapper" style="min-height: 916px;">
+    <section class="content-header">
+      <h1>
+        Update  Incentive & Bonus
+        <small></small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="{% url 'admindashboard' %}"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="#"> Update  Incentive & Bonus    </a></li>
+        <li class="active"></li>
+      </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="box">
+
+            <div class="box-header">
+              {% get_permission_data_from 11 1 as permission_menu %}
+
+              {% if permission_menu.add %}
+                  <form action="" method="post" id="upload_bulk_from_id" enctype="multipart/form-data" novalidate="novalidate">
+                       <div class="row">
+                            {% csrf_token %}
+                            {% comment %} <div class="col-md-3">
+                                  <div class="form-group">
+                                  <label> File Upload  </label>
+                                    <input type="file" class="form-control upload_bulk_data" name="upload_bulk_data">
+                                  </div>
+                                  <div class="form-group">
+                                      <input name="" type="submit" value="Submit" class="btn btn-primary" id="upload_bulk_from_btn"> 
+                                </div>
+                                </form>
+                                <form action="" method="post" id="upload_bulk_from_id" enctype="multipart/form-data" novalidate="novalidate">
+                            </div> {% endcomment %}
+                      </div>   
+                      <div class="row">
+          
+                        {% csrf_token %}
+                          
+                          {% for field in form %}
+
+                              <div class="col-md-4">
+                                  <div class="form-group">
+                                    <label>{{ field.label }}  </label>
+                                      {{ field }}
+                                </div>   
+                              </div>
+                          {% endfor %}
+                    
+                          
+                      </div>  
+                      <div class="form-group">
+                            <input name="" type="submit" value="Submit" class="btn btn-primary" id="upload_bulk_from_btn"> 
+                      </div>
+                  </form>
+              {% endif %}
+            </div>
+
+          <!-- /.box -->
+        </div>
+                <div class="row">
+            {% include "layout/manage_pagination.html" %}
+        </div>
+      </div>
+      <!-- /.row -->
+    </section>
+    <!-- /.content -->
+</div>
+{% endblock %}
+

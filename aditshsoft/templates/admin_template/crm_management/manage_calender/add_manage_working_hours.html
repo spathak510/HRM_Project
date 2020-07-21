@@ -1,0 +1,148 @@
+{% extends "layout/admin_layout.html" %}
+{% load static %}
+{% load staticfiles %}
+
+{% block content %}
+
+<div class="content-wrapper" style="min-height: 946px;">
+  <section class="content">
+    <div class="box box-default">
+      <div class="box-header with-border">
+        
+      {% if workinghoursid %}
+        <h3 class="box-title">  Update Working Hours</h3>
+      {% else %}
+        <h3 class="box-title"> Add Working Hours </h3>
+      {% endif %}
+        
+      </div>
+      <div class="box-body">
+         <form action="" method="post" id="working_hours_form">
+        <div class="row">
+
+          {% csrf_token %}
+
+            <input type="hidden" name="workinghoursid" value="{{workinghoursid}}">
+            <div class="col-md-4">
+                  <div class="form-group">
+                      <label> Working Days </label>
+                            <select class="form-control" name="working_hours" required="">
+                                  <option value="" >Select Working Days</option>
+                                  {% for work_days in working_days %}
+                                    <option value="{{work_days.0}}" {% if work_days.0 == data.working_days %} selected="" {% endif %}>{{work_days.1}}</option>
+                                  {% endfor %}
+                            </select> 
+                  </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                     <label> Start  Time  </label>
+                     <select name="start_date_time" class="form-control" required="">
+                       <option value="">Select Start Time</option>
+                       {% for p in get_time_slot %}
+                       <option value="{{p}}" {% if data.start_date_time ==  p %} selected=""  {% endif %}>{{p}}</option>
+                       {% endfor %}
+                     </select>
+                </div>
+              </div>
+
+                <div class="col-md-4">
+                  <div class="form-group">
+                      <label>  From Lunch Break </label>
+                       <select name="lunch_break"  class="form-control" required="">
+                       <option value="">Select From Lunch Break </option>
+                       {% for p in get_time_slot %}
+                       <option value="{{p}}" {% if data.lunch_break_from ==  p %} selected=""  {% endif %}>{{p}}</option>
+                       {% endfor %}
+                     </select>
+                  </div>
+                </div>
+
+
+
+                <div class="col-md-4">
+                  <div class="form-group">
+                      <label>  To Lunch Break </label>
+                       <select name="to_lunch_break"  class="form-control" required="">
+                       <option  value=""> Select  To Lunch Break </option>
+                       {% for p in get_time_slot %}
+                       <option value="{{p}}" {% if data.lunch_break_to ==  p %} selected=""  {% endif %}>{{p}}</option>
+                       {% endfor %}
+                     </select>
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                      <div class="form-group">
+                         <label> End  Time  </label>
+                          <select name="end_date_time"  class="form-control" required="">
+                       <option value="">Select End Time </option>
+                       {% for p in get_time_slot %}
+                       <option value="{{p}}" {% if data.end_date_time ==  p %} selected=""  {% endif %}>{{p}}</option>
+                       {% endfor %}
+                       </select>
+                    </div>
+                </div>
+
+<!--               <div class="col-md-4">
+                  <div class="form-group">
+                      <label> Half Day Start Time  </label>
+                       <select name="half_days_start_date_time"  class="form-control" required="">
+                       <option  value=""> Select  Half Day Start Time </option>
+                       {% for p in get_time_slot %}
+                       <option value="{{p}}" {% if data.half_days_start_date_time ==  p %} selected=""  {% endif %}>{{p}}</option>
+                       {% endfor %}
+                     </select>
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                      <div class="form-group">
+                         <label> Half Day End Time </label>
+                          <select name="half_days_end_date_time"  class="form-control" required="">
+                       <option value="">Select Half Day End Time </option>
+                       {% for p in get_time_slot %}
+                       <option value="{{p}}" {% if data.half_days_end_date_time ==  p %} selected=""  {% endif %}>{{p}}</option>
+                       {% endfor %}
+                       </select>
+                    </div>
+                </div> -->
+
+              <div class="col-md-4">
+                    <div class="form-group">
+                       <label> Logout Time  </label>
+                      <select name="logout_time"  class="form-control" required="">
+                       <option  value="">Select Logout Time </option>
+                       {% for p in get_time_slot %}
+                       <option value="{{p}}" {% if data.logout_time ==  p %} selected=""  {% endif %}>{{p}}</option>
+                       {% endfor %}
+                       </select>
+                  </div>
+              </div>
+
+              <div class="col-md-4">
+                  <div class="form-group">
+                      <label> Is Active  </label>
+                      {% if workinghoursid %}
+                          <input type="checkbox"   name="is_active" {% if data.is_active %} checked="" {% endif %}>
+                      {% else %}
+                          <input type="checkbox"   name="is_active" checked="">
+                      {% endif %}
+                  </div>
+              </div>
+        </div>
+        <div class="form-group">
+
+                      {% if workinghoursid %}
+                          <input name="" type="submit" value="Update" class="btn btn-primary" id="working_hours_btn"> 
+                      {% else %}
+                          <input name="" type="submit" value="Submit" class="btn btn-primary" id="working_hours_btn"> 
+                      {% endif %}
+
+                </div>
+          </form>
+      </div>
+  </section>
+</div>
+
+{% endblock %}

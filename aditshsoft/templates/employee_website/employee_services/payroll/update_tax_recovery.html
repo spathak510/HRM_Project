@@ -1,0 +1,145 @@
+{% extends "layout/website_layout.html" %}
+{% load templatetag %}
+{% block content %}
+
+<div class="content-wrapper" style="min-height: 916px;">
+    <section class="content-header">
+      <h1>
+        Update Tax Recovery
+        <small></small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="{% url 'admindashboard' %}"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="#"> Update Tax Recovery  </a></li>
+        <li class="active"></li>
+      </ol>
+    </section>
+
+    <section class="content">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="box">
+            <div class="box-header">
+            <form action="" method="post" id="parent_company_form" enctype="multipart/form-data" novalidate="novalidate">
+
+                  <div class="row">
+                    {% csrf_token %}
+                    <input type="hidden" name="upload_data_by_csv">
+                      <div class="col-md-4">
+                            <div class="form-group">
+                                <label> File Upload(Upload Data By CSV)  </label>
+                                  <input type="file" class="form-control upload_bulk_data" name="upload_bulk_data" required="">
+                            </div>
+                        </div>
+                  </div>
+                  <div class="form-group">
+                    <input name="" type="submit" value="Submit" class="btn btn-primary" id="upload_bulk_from_btn"> 
+                  </div>
+            </form>
+
+            <form action="" method="post" id="parent_company_form" enctype="multipart/form-data" novalidate="novalidate">
+               {% for field in form %}
+            
+                <div class="col-md-4">
+                    <div class="form-group">
+                     {% csrf_token %}
+                      <label>{{ field.label }}  </label>
+                        {{ field }}
+                   </div> 
+                     
+                </div>
+                
+            {% endfor %}
+            <div class="form-group">
+                    <input name="" type="submit" value="Submit" class="btn btn-primary" id="upload_bulk_from_btn"> 
+            </div>
+
+
+                 <form method="POST" id="allocate_data">
+                          {% csrf_token %}
+                          <div class="col-md-5">
+                              <label> Status </label>
+                              <div class="form-group">
+                                  <select name="status" class="form-control" id="">
+                                   <option value="">Select Status</option>
+                                  {% for user in status %}
+                                      <option value="{{user.0}}">{{user.1}}
+                                      </option>
+                                  {% endfor %}
+                                  </select>
+                              </div>
+                          </div>
+                          <input type="hidden" name="bul_data" id="bul_data">
+                          <div class="col-md-3">
+                              <div class="form-group">
+                               <input type="button" id="upload_data" value="GO" class="btn btn-primary">
+                              </div>
+                          </div>
+                      </form>
+                </div>
+            <div class="box-body">
+            <div class='table-responsive'> <div style="overflow-x:auto;">
+              <table id="example2" class="table table-bordered table-hover">
+                  <thead>
+                      <tr>
+                          <td> <input type="checkbox" name="select_all" id="select_all"> Select All </th> </td>
+                          <th> Location  </th>
+                          <th> Department </th>
+                          <th> Assessment Year  </th>
+                          <th> Employee id </th>
+                          <th> Employee Name </th>
+                          <th> year to date salary </th>
+                          <th>Annual salary  </th>
+                          <th> Total Tax Payable </th>
+                          <th> Tax Already Recovered </th>
+                          <th> Recovery During Current Month  </th>
+                          <th> Total Tax Recovered </th>
+                          <th> Balance Tax Payable </th>
+                         
+                          <th> Status </th>
+                         
+                          <th> Action </th>
+                      </tr>
+                  </thead>
+                <tbody>
+                    {% if responselistquery %}
+                         {% for data in responselistquery %}
+                           <tr>
+                             <td>
+                              <input type="checkbox" name="check_box_select[]" class="checkboxes" value="{{data.id}}"></td>
+                           
+                            <td>{{ data.location }}</td>
+                            <td> {{ data.departments }} </td>
+                            <td> {{ data.assessment_year}} </td>
+                            <td> {{ data.employee_id}} </td>
+                            <td> {{ data.employee_names}} </td>
+                            <td> {{ data.year_to_date_salary }} </td>
+                            <td> {{ data.annual_salary }} </td>
+                            <td> {{ data.total_tax_payable }} </td>
+                            <td> {{ data.tax_already_recovered }} </td>
+                            <td> {{ data.recovery_during_current_month }} </td>
+                            <td> {{ data.total_tax_recovered }} </td>
+                            <td> {{ data.balance_tax_payable }} </td>
+                            <td> {{ data.status }} </td>
+                            <td><a href="{% url 'crm_employee_services_payroll_tax_recovery_update' data.id %}" > Update </a>
+                               
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    {% else %}
+                    <tr><td></td></tr>
+                    {% endif %}
+                </tfoot>
+              </table>
+            </div>
+          </div>
+        </div>
+                <div class="row">
+            {% include "layout/manage_pagination.html" %}
+        </div>
+      </div>
+    </section>
+</div>
+{% include "layout/admin_message.html" %}
+{% endblock %}
+

@@ -1,0 +1,155 @@
+
+{% extends "layout/admin_layout.html" %}
+{% load static %}
+{% load staticfiles %}
+
+{% block content %}
+
+<div class="content-wrapper" style="min-height: 946px;">
+  <section class="content">
+    <div class="box box-default">
+      <div class="box-header with-border">
+
+
+           {% if overtimeid %}
+                <h3 class="box-title">Update Over Time </h3>
+              {% else %}
+                <h3 class="box-title">Add Over Time </h3>
+              {% endif %}
+
+
+      </div>
+      <div class="box-body">
+        <form action="" method="post" id="overtime_form">
+        <div class="row">
+
+          {% csrf_token %}
+
+            <input type="hidden" name="overtimeid" value="{{overtimeid}}">
+            <div class="col-md-4">
+                  <div class="form-group">
+                      <label> Start  Time  </label>
+                     <select name="start_date_time" class="form-control" required="">
+                       <option value="">Select Start Time</option>
+                       {% for p in get_time %}
+                       <option value="{{p}}" {% if data.start_date_time ==  p %} selected=""  {% endif %}>{{p}}</option>
+                       {% endfor %}
+                     </select>
+                  </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                   <label> Start End Time  </label>
+
+                    <select name="end_date_time" class="form-control" required="">
+                       <option value="">Select End Time</option>
+                       {% for p in get_time %}
+                       <option value="{{p}}" {% if data.end_date_time ==  p %} selected=""  {% endif %}>{{p}}</option>
+                       {% endfor %}
+                     </select>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                 <div class="form-group">
+                     <label> Days  </label>
+                    <select name="over_time_days" class="form-control">
+                            <option value="" selected="">Select days </option>
+                            {% for im in working_days %}
+                                <option value="{{im.0}}" {% if im.0 == data.days %} selected="" {% endif %}>{{im.1}}</option>
+                            {% endfor %}
+                      </select> 
+                </div>
+              
+                
+              </div>
+
+
+              <div class="col-md-4">
+
+                <div class="form-group">
+                    <label> Parent Company  </label>
+                             <select name="parent_company" class="form-control">
+
+                                  <option value="" >Select Parent Company </option>
+                                  {% for appli in parent_company %}
+                                      <option value="{{appli.id}}" 
+                                      {% if appli.id == data.parent_com_id %} selected="" {% endif %}>{{appli.company_id}}</option>
+                                  {% endfor %}
+                            </select> 
+
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                    <label> Head Office  </label>
+                             <select name="head_offce" class="form-control">
+
+                                  <option value="" >Select Head Office </option>
+                                  {% for appli in head_offce %}
+                                      <option value="{{appli.id}}" 
+                                      {% if appli.id == data.head_office_id %} selected="" {% endif %}>{{appli.hod_id}}</option>
+                                  {% endfor %}
+                            </select> 
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                    <label> Branches  </label>
+                             <select name="branches" class="form-control multiselect" multiple="">
+
+                                  <option value="" >Select Branches </option>
+                                  {% for appli in branches %}
+                                    <option value="{{appli.id}}" 
+                                      {% for data in data.manageovertimeapplicable_set.all %}
+                                      
+                                      {% if appli.id == data.brach_id %} selected="" {% endif %}
+
+                                      {% endfor %}
+                                      >{{appli.branch_id}}</option>
+                                  {% endfor %}
+                            </select> 
+                </div>
+              </div>
+              <div class="col-md-4">
+
+                <div class="form-group">
+
+                    <label> Impact on Salary   </label>
+                    <select name="implact_on_salry" class="form-control">
+
+                            <option value="" >Select Impact on Salary </option>
+                            {% for im in impace_on_salary %}
+                                <option value="{{im.0}}" {% if im.0 == data.impact_on_salary %} selected="" {% endif %}>{{im.1}}</option>
+                            {% endfor %}
+                      </select> 
+                  </div>
+                </div>
+              </div>
+
+                            <div class="col-md-4">
+                  <div class="form-group">
+                        <label> Is Active  </label>
+                      {% if overtimeid %}
+                          <input type="checkbox"   name="is_active" {% if data.is_active %} checked="" {% endif %}>
+                      {% else %}
+                          <input type="checkbox"   name="is_active" checked="">
+                      {% endif %}
+                  </div>
+              </div>
+        
+              
+      </div>
+      <div class="form-group">
+                      {% if overtimeid %}
+                        <input name="" type="submit" value="Update" class="btn btn-primary" id="overtime_btn"> 
+                      {% else %}
+                        <input name="" type="submit" value="Submit" class="btn btn-primary" id="overtime_btn"> 
+                      {% endif %}
+                </div>
+          </form>
+    </div>
+  </section>
+</div>
+
+{% endblock %}

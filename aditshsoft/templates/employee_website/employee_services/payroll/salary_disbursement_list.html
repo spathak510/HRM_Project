@@ -1,0 +1,124 @@
+{% extends "layout/website_layout.html" %}
+{% load templatetag %}
+{% block content %}
+
+<div class="content-wrapper" style="min-height: 916px;">
+    <section class="content-header">
+      <h1>
+       Salary Disbursement  
+        <small></small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="{% url 'admindashboard' %}"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="#"> Salary Disbursement  </a></li>
+        <li class="active"></li>
+      </ol>
+    </section>
+
+    <section class="content">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="box">
+            <div class="box-header">
+
+              <div class="row">
+                {% get_permission_data_from 12 13 as permission_menu %}
+
+                  {% if permission_menu.add %}
+                        <form action="" method="post" id="upload_bulk_from_id" enctype="multipart/form-data" novalidate="novalidate">
+                          {% csrf_token %}
+                          <div class="col-md-3">
+                              <div class="form-group">
+                                <label> File Upload  </label>
+                                <input type="file" class="form-control upload_bulk_data" name="upload_bulk_data">
+                              </div>
+                          </div>
+                          <div class="form-group">
+                            <input name="" type="submit" value="Submit" class="btn btn-primary" id="upload_bulk_from_btn"> 
+                          </div>
+                      </form>
+                  {% endif %}
+                   <div class="form-group">
+                            <a href= "{% url 'crm_crmemployee_manageemployee_salarydisbursement_add' %} " class="btn btn-primary" >Add Data </a> 
+                          </div>
+              </div>
+           </div>
+            <div class="box-body">
+            <div class='table-responsive'> <div style="overflow-x:auto;">
+              <table id="example2" class="table table-bordered table-hover">
+                    <thead>
+                        <tr>     
+                          <th> Sr.No </th>  
+                          <th> Month and Year  </th>
+                          <th> Employee id  </th>
+                          <th> Employee Name  </th>
+                          <th> Bank Name  </th>
+                          <th> IFSC Code </th>
+                          <th> Account Number </th>
+                          <th> Amount </th>
+                          <th> Mode of Payment </th>
+                          <th> Date of Payment  </th>
+                          <th> Approval Status </th>
+                          <th> Action  </th>
+                        </tr>
+                    </thead>
+                <tbody>
+                    {% if responselistquery %}
+                         {% for data in responselistquery %}
+                           <tr>
+                            <td><strong>{{ responselistquery.start_index|add:forloop.counter0 }}</strong></td>
+                            
+                            <td>
+                               {{ data.month_and_year|date:'M , Y' }} 
+                              {{ data.month_and_year }}
+                            </td>
+                            <td> {{ data.employee_id }} </td>
+                            <td> {{ data.employee_names }} </td>
+                            <td> {{ data.bank_name }} </td>
+                            <td> {{ data.ifsc_code }} </td>
+                            <td> 
+                              {{ data.account_number }} 
+                            </td>
+                            <td> {{ data.amount }} </td>
+                            
+                            <td> 
+                              {{ data.mode_of_payment }}
+                            </td>
+
+                            <td> 
+                              {{ data.date_of_payment }} 
+                            </td>
+
+                            <td>
+                                {{ data.approval_level.approval_level }}
+                            </td>
+
+                            <td>
+                              <a href= "{% url 'crm_crmemployee_manageemployee_salarydisbursement_update' data.id %} "  >Edit </a> 
+                                {% comment %} {% approval_status_update_policies_circualr request.user.id data.id 16 as get_approval_level %}
+                                  
+                                &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;
+                                {% if get_approval_level %}
+                                    <a href="{% url 'approval_vacancy_update_status' data.id get_approval_level.0.approval_level.sequence 16 %}" class="approval_level_cls"> {{ get_approval_level.0.approval_level.approval_level }} </a>
+                                {% endif  %} {% endcomment %}
+                            </td>
+
+                        </tr>
+                        {% endfor %}
+                    {% else %}
+                    <tr><td></td></tr>
+                    {% endif %}
+                </tfoot>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+            {% include "layout/manage_pagination.html" %}
+        </div>
+      </div>
+    </section>
+</div>
+{% include "layout/admin_message.html" %}
+{% endblock %}
+

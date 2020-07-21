@@ -1,0 +1,87 @@
+{% extends "layout/admin_layout.html" %}
+{% load static %}
+{% load staticfiles %}
+
+
+{% load templatetag %}
+
+{% block content %}
+    <div class="content-wrapper form-pd" style="min-height: 946px;">
+    <section class="content">
+      <ol class="breadcrumb">
+        <li><a href="{% url 'admindashboard' %}"><i class="fa fa-dashboard"></i> Home</a></li>
+                <li><a href="#">Setup Management</a></li>
+
+        <li class="active">Manage Escalation</li>
+      </ol>
+      <div class="box box-default">
+        <div class="box-header with-border">
+            <h3 class="box-title">Add Details</h3>
+        </div>
+        <div class="box-body">
+          <form action="" method="post" id="parent_company_form" enctype="multipart/form-data">
+              <div class="row">
+                {% csrf_token %}
+                {% for field in form %}
+                      {% if field.label == "User" %}
+
+                        <div class="col-md-4">
+                          <div class="form-group">
+                              <label>{{ field.label }}  
+                              {% if field.field.required %}
+                              <span class="error"> *</span>
+                              {% endif %}</label>
+                              {{ field }}
+                          </div>   
+                        </div>
+
+                        {% comment %} <div class="col-md-4">
+                          <div class="form-group">
+                            <label> Process Name <span class="error"> *</span></label>
+                              <select name="process_name" id="id_process_name" class="form-control multiselect" required="" multiple="">
+                              {% if id %}
+                                {% for data1 in get_user_allocattion_process %}
+                                  <option value="{{data1.process_name_id}}" 
+
+                                    {% for dt  in company.manageescalationprocessname_set.all %}
+
+                                    {% if data1.process_name_id == dt.process_name_id %}
+                                      selected="" 
+                                    {% endif  %}
+
+                                    {% endfor %}
+
+                                  >
+                                    {{ data1.process_name.process_name }} > {{ data1.process_name.sub_process_name }}  > {{ data1.process_name.child_process_name }}
+                                  </option>
+                                {% endfor %}
+                              {% endif %}
+                            </select>
+                          </div>
+                        </div> {% endcomment %}
+
+
+                      {% comment %} {% else %}
+                        <div class="col-md-4">
+                          <div class="form-group">
+                              <label>{{ field.label }}  
+                              {% if field.field.required %}
+                              <span class="error"> *</span>
+                              {% endif %}</label>
+                              {{ field }}
+                          </div>   
+                        </div>{% endcomment %}
+                      {% endif %}
+                    {% endfor %} 
+                </div>
+
+              <div class="form-group tlc">
+                  <input name="" type="submit" value="Submit" class="btn btn-primary bl-btn" id="submitbtn">
+              </div>
+          </form>
+        </div>
+      </div>
+  </section>
+</div>
+
+{% endblock %}

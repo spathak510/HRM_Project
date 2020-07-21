@@ -1,0 +1,109 @@
+{% extends "layout/admin_layout.html" %}
+{% load static %}
+{% load staticfiles %}
+
+
+{% load templatetag %}
+
+{% block content %}
+
+
+<div class="content-wrapper add-detail-page" style="min-height: 916px;">
+    <section class="content-header">
+      <h1>Manage Pricing     <small></small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="{% url 'admindashboard' %}"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="#">Tables</a></li>
+        <li class="active"></li>
+      </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="box">
+            <div class="box-header">
+                    <!-- <h3 class="box-title"> Financial Year List </h3> -->
+                    <div class="row">
+                        <div class="col-md-6">
+                          <a href="{% url 'managepricingadd' %}" class="btn btn-primary bl-btn">Add Details </a>
+                        </div>
+                    </div>
+            </div>
+            <div class="box-body">
+<div class='table-responsive'> <div style="overflow-x:auto;">
+
+              <table id="example2" class="table table-bordered table-hover">
+                <thead>
+                <tr>	 						 		
+                        <th width="6%">Sr.No</th>
+                       
+                        <th width="8">Product Type</th>
+                        <th width="8">Product Name</th>
+                        <th width="8">Revenue Type</th>
+                        <th width="8">Revenue Name</th>
+                        <th width="8">Revenue Rate</th>
+                       <th width="8">Unit Value</th>
+                        <th width="8">Taxation Type</th>
+                        <th width="8">Taxation Name</th>
+                        <th width="8">Taxation Type</th>
+                        <th width="8">Unit Value</th>
+                        
+                         <th width="8">Description</th>
+                         <th width="8">Active/Deactive</th>
+                         <th width="8">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if responselistquery%}
+                         {% for company_details in responselistquery %}
+                            {% if forloop.counter|divisibleby:2 %}
+                            <tr class="rpFirstRow">
+                            {% else %}
+                            <tr class="rpSecRow">
+                            {% endif %}
+
+                <td><strong>{{forloop.counter}}</strong></td>
+                <td>{{company_details.product_type}}</td>
+                 <td>{{company_details.product_name}}</td>
+                 <td>{{company_details.revenue_type}}</td>               
+                 <td>{{company_details.revenue_name}}</td>
+
+                  <td>{{company_details.revenue_rate}}</td>
+                  <td>{{company_details.unit_value}}</td>
+                  <td>{{company_details.taxation_type}}</td>
+                 <td>{{company_details.taxation_name}}</td>
+                 <td>{{company_details.rate}}</td>
+                  <td>{{company_details.unit_value}}</td>
+                 <td>{{company_details.description}}</td>
+                 <td>{{company_details.is_active}}</td>
+       
+                  <td><a href="{% url 'managepricingedit' company_details.id %}" style="color: green;">Edit</a>
+                              &nbsp;  &nbsp;  &nbsp;  &nbsp;
+                            <a href="{% url 'managepricingdelete' company_details.id %}" style="color: red;">Delete</a></td>
+
+                
+                
+              </tr>
+                        {% endfor %}
+                    {% else %}
+                    <tr><td></td></tr>
+                    {% endif %}
+                </tfoot>
+              </table>
+            </div>
+          </div>
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </section>
+    <!-- /.content -->
+  </div>
+
+{% include "layout/admin_message.html" %}
+{% endblock %}
+

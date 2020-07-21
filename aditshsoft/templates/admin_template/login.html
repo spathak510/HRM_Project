@@ -1,0 +1,64 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>aditshsoft</title>
+<link rel="stylesheet" type="text/css" href="{% static 'admin-static/css/stylesheet.css' %}">
+<link rel="stylesheet" href="{% static 'admin-static/sweetalert/sweetalert.css' %}">
+</head>
+<body>
+<div class="loginCon">
+    <form method="post" id="adminlogin">
+        {% csrf_token %}
+    	<div class="loginBox">
+        	<div class="loginHd"> Administrator Login</div>
+            <div class="loginField"> Email :</div>
+            <div class="loginLabal"><input type="text" class="loginInput" name="username"></div>
+            <div class="loginField"> Password:</div>
+            <div class="loginLabal"><input type="password" class="loginInput" name="password"></div>
+            <div class="rem">
+            </div>
+            <div><input name="" type="submit" value="Submit" class="loginBtn" id="adminloginbtn"></div>
+        </div>
+    </form>
+</div>
+{% include "layout/admin_message.html" %}
+<script type="text/javascript" src="{% static 'admin-static/js/jquery.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'admin-static/js/function.js' %}"></script>
+<script src="{% static 'admin-static/sweetalert/sweetalert.js' %}"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/jquery.validate.min.js"></script>
+<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    $("#adminlogin").validate({
+        rules: {
+            username: {
+                required: !0,
+            },
+            password: {
+                required: !0,
+            },
+        },
+        messages: {
+            username: {
+                required: "This field is required.",
+            },
+            password: {
+                required: "This field is required.",
+            },
+        },
+        highlight: function(element) {
+            $(element).children().addClass('error')
+        },
+        submitHandler: function(form) {
+            $("#adminloginbtn").text("Please wait...")
+            $('#adminloginbtn').attr('disabled', 'disabled');
+            form.submit()
+        }
+    });
+})
+</script>
+</body>
+</html>

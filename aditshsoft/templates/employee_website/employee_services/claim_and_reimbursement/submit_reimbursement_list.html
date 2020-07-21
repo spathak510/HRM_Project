@@ -1,0 +1,120 @@
+{% extends "layout/website_layout.html" %}
+{% load templatetag %}
+{% block content %}
+
+<div class="content-wrapper" style="min-height: 916px;">
+    <section class="content-header">
+      <h1>
+        Reimbursement  Processed 
+        <small></small>
+      </h1>
+      <ol class="breadcrumb">
+        <li>
+          <a href="{% url 'admindashboard' %}"><i class="fa fa-dashboard"></i> Home </a>
+        </li>
+        <li> <a href="#"> Reimbursement  Processed  </a> </li>
+        <li class="active"> </li>
+      </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="box">
+            <div class="box-header">
+               <div class="row">
+                  <form action="" method="get"  enctype="multipart/form-data" novalidate="novalidate">
+                  <div class="row">
+                      <div class="col-md-3">
+                            <div class="form-group">
+                            <label> Filter  </label>
+                             <select name="filter" onchange="this.form.submit()" class="form-control ">
+                              {% get_permission_data_from 9 9 as permission_menu %}
+                               <option> Select </option>
+                              {% if permission_menu.view %}
+                                <option value="2" {% if request.GET.filter == "2" %} selected="" {% endif %}> Current Month </option>
+                              {% endif %}
+
+                              {% get_permission_data_from 9 10 as permission_menu %}
+
+                              {% if permission_menu.view %}
+                               <option value="3" {% if request.GET.filter == "3" %} selected="" {% endif %}> Previous Months </option>
+                              {% endif %}
+                              
+                             </select>
+                            </div>
+                      </div>
+                  </div>
+                </form>
+                </div>
+            <div class="box-body">
+            <div class='table-responsive'> <div style="overflow-x:auto;">
+              <table id="example2" class="table table-bordered table-hover">
+                <thead>
+                  <tr>
+
+                      <th> Sr.No </th>
+                      <th> Employee ID </th>
+                      <th> Employee Name  </th>
+                      <th> Reimbursement Month  </th>
+                      <th> Reimbursement Type  </th>
+                      <th> Reimbursement Period   </th>
+                      <th> Amount Claimed  </th>
+                      <th> Amount Approved  </th>
+                      <th> Date of Processing  </th>
+                      <th> Approval Level  </th>
+                      <th> Action  </th>
+                  </tr>
+                </thead>
+                <tbody>
+                    {% if responselistquery %}
+                         {% for data in responselistquery %}
+                          <tr>
+                              <td>
+                                  <strong>
+                                  {{ responselistquery.start_index|add:forloop.counter0 }}
+                                </strong>
+                              </td>
+                              <td>{{ data.employee_id }}</td>
+                              <td>{{ data.employee_names }}</td>
+                              <td>{{ data.reimbursement_month_1 }}</td>
+                              <td>{{ data.reimbursement_type_1 }}</td>
+                              <td>{{ data.reimbursement_period_1 }}</td>
+                              <td>{{ data.amount_1 }}</td>
+                              <td>{{ data.approved_amount }}</td>
+                              <td>{{ data.date_of_processing|date:"d-m-Y" }}</td>
+                              <td>{{ data.approval_level.approval_level }}</td>
+                              <td>
+                                 {% comment %} {% approval_status_reimbursement request.user.id data.id as get_approval_level %}
+                                  
+                                  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;
+                                  {% if get_approval_level %}
+                                      <a href="{% url 'approval_vacancy_update_status' data.id get_approval_level.0.approval_level.sequence 6 %}" class="approval_level_cls"> {{ get_approval_level.0.approval_level.approval_level }}  </a>
+                                  {% endif  %}  {% endcomment %}
+                                  {% if permission_menu.edit %}
+                                  <a href="{% url 'crm_employee_services_claimandreimbursement_submitreimbursement_reimbursement_reimbursementprocessed_Update' data.id %}"> Update </a>
+                                {% endif %}
+                                  
+                              </td>
+                          </tr>
+                        {% endfor %}
+                    {% else %}
+                    <tr><td></td></tr>
+                    {% endif %}
+                </tfoot>
+              </table>
+            </div>
+          </div>
+          <!-- /.box -->
+        </div>
+                <div class="row">
+            {% include "layout/manage_pagination.html" %}
+        </div>
+      </div>
+      <!-- /.row -->
+    </section>
+    <!-- /.content -->
+</div>
+{% endblock %}
+

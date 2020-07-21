@@ -1,0 +1,73 @@
+{% extends "layout/admin_layout.html" %}
+{% block content %}
+
+  <div class="content-wrapper" style="min-height: 946px;">
+    <section class="content">
+      <div class="box box-default">
+        <div class="box-header with-border">
+                  <h3 class="box-title">Add Details</h3>
+          
+        </div>
+        <div class="box-body">
+          <form action="" method="post" id="parent_company_form" enctype="multipart/form-data">
+        <div class="row">
+
+                    {% csrf_token %}
+                    {% for field in form %}
+                        <div class="col-md-4">
+                          {% if field.label == "contact_no" %}
+                            <div class="form-group">
+                              <label>{{ field.label }} </label>
+                              {{ field }}
+                            </div>
+                          {% elif field.label == "Local Currency" %}
+                            <div class="form-group">
+                              <label> {{ field.label }}</label>
+                              <select name="local_currency" class="form-control multiselect" multiple="multiple" required="" id="id_local_currency">
+                                <option value="">---------</option>
+                                {% for data in local_curncy %}
+                                  <option value="{{ data.id }}"
+                                  {% for data1 in details.manageheadofficelocalcurrency_set.all %}
+                                    {% if data1.local_currency_id == data.id %}
+                                      selected="" 
+                                    {% endif %}
+                                  {% endfor %}
+                                  > {{ data.type_of_currency }} </option>
+                                {% endfor %}
+                              </select>
+                            </div>
+                          {% elif field.label == "Reporting Currency" %}
+                            <div class="form-group">
+                              <label> {{ field.label }} </label>
+                                <select name="reporting_currency" class="form-control multiselect" multiple="multiple" required="" id="id_reporting_currency">
+                                  <option value="">---------</option>
+                                  {% for data in reporting_curncy %}
+                                      <option value="{{ data.id }}" 
+                                      {% for data1 in details.manageheadofficereportingcurrency_set.all %}
+                                        {% if data1.reporting_currency_id == data.id %}
+                                          selected="" 
+                                        {% endif %}
+                                      {% endfor %}
+                                      > {{ data.type_of_currency }} </option>
+                                  {% endfor %}
+                                </select>
+                            </div>
+                          {% else %}
+                            <div class="form-group">
+                              <label>{{ field.label }} </label>
+                              {{ field }}
+                            </div>
+                          {% endif %}
+                        </div>
+                    {% endfor %}
+       
+        <div class="form-group">
+                  
+                        <input name="" type="submit" value="Submit" class="btn btn-primary" id="submitbtn"></div>
+                </div>
+          </form>
+      </div>
+  </section>
+</div>
+
+{% endblock %}

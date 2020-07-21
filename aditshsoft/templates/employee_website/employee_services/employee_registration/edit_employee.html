@@ -1,0 +1,529 @@
+{% extends "layout/website_layout.html" %}
+{% block content %}
+
+  <div class="content-wrapper" style="min-height: 946px;">
+    <section class="content">
+      <div class="box box-default">
+        <div class="box-header with-border">
+          <h3 class="box-title"> Edit Update Registrations </h3>
+        </div>
+        <div class="box-body">
+          <form action="" method="post" id="parent_company_form" enctype="multipart/form-data">
+            {% csrf_token %}
+              <div class="row">
+                <div class="box-header with-border">
+                  <h3 class="box-title"> Personal Details </h3>
+                </div>
+                    {% for field in personal_details %}
+                        <div class="col-md-4">
+                            <div class="form-group">
+                              <label>{{ field.label }}  </label>
+                                {{ field }}
+                           </div>   
+                        </div>
+                    {% endfor %}
+              </div>
+              <div class="row">
+                <div class="box-header with-border">
+                  <h3 class="box-title"> Family Details  </h3>
+                </div>
+                <div class="with-border">
+                    <h4 class="box-title color-famly"> Mother   </h4>
+                      {% for field in family_detail_mother %}
+                          <div class="col-md-4">
+                              <div class="form-group">
+                                <label>{{ field.label }}  </label>
+                                  {{ field }}
+                             </div>   
+                          </div>
+                      {% endfor %}
+
+                    <div class="with-border">
+                    <h4 class="box-title color-famly"> Father   </h4>
+                    </div>
+
+                      {% for field in family_detail_father %}
+                          <div class="col-md-4">
+                              <div class="form-group">
+                                <label>{{ field.label }}  </label>
+                                  {{ field }}
+                             </div>   
+                          </div>
+                      {% endfor %}
+                    <div class="with-border">
+                    <h4 class="box-title color-famly"> Spouse   </h4>
+                    </div>
+
+                      {% for field in family_detail_spouse %}
+                          <div class="col-md-4">
+                              <div class="form-group">
+                                <label>{{ field.label }}  </label>
+                                  {{ field }}
+                             </div>   
+                          </div>
+                      {% endfor %}
+
+                    <div class="with-border">
+                    <h4 class="box-title color-famly"> Children   </h4>
+                    </div>
+
+                      {% for field in family_detail_children %}
+                          <div class="col-md-4">
+                              <div class="form-group">
+                                <label>{{ field.label }}  </label>
+                                  {{ field }}
+                             </div>   
+                          </div>
+                      {% endfor %}
+                </div>
+              </div>
+
+              <div class="row">
+                  <div class="box-header with-border">
+                    <h3 class="box-title"> Medical History  </h3>
+                  </div>
+                  <div id="append_medical_history1">
+                      {% for field in medical_history %}
+                        <div class="col-md-4">
+                            <div class="form-group">
+                              <label>Blood Group  </label>
+                                <input type="text" name="blood_group_{{forloop.counter}}" maxlength="200" class="form-control" required="" id="id_blood_group_1" value="{{field.blood_group_1}}">
+                           </div>   
+                        </div>
+                    
+                        <div class="col-md-4">
+                            <div class="form-group">
+                              <label>Type of Illness  </label>
+                                <input type="text" name="type_of_illness_{{forloop.counter}}" maxlength="200" class="form-control" required="" id="id_type_of_illness_1" value="{{field.type_of_illness_1}}">
+                           </div>   
+                        </div>
+                    
+                        <div class="col-md-4">
+                            <div class="form-group">
+                              <label>Result  </label>
+                                <input type="text" name="result_{{forloop.counter}}" maxlength="200" class="form-control" required="" id="id_result_1" value="{{field.result_1}}">
+                           </div>   
+                        </div>
+                      {% endfor %}
+                    </div>
+                    <a href="javascript:void(0)" id="append_add_more_sub_field1" style="color: red"  class="ad_more">Add Medical </a>
+              </div>
+
+              <div class="row">
+                <div class="box-header with-border">
+                  <h3 class="box-title"> Correspondance Address   </h3>
+                </div>
+                    {% for field in form %}
+                        <div class="col-md-4">
+                            <div class="form-group">
+                              <label>{{ field.label }}  </label>
+                                {{ field }}
+                           </div>   
+                        </div>
+                    {% endfor %}
+              </div>
+
+              <div class="row">
+                <div class="box-header with-border">
+                  <h3 class="box-title"> Permanent Address    </h3>
+                </div>
+                    {% for field in form %}
+                        <div class="col-md-4">
+                            <div class="form-group">
+                              <label>{{ field.label }}  </label>
+                                {{ field }}
+                           </div>   
+                        </div>
+                    {% endfor %}
+              </div>
+
+              <div class="row">
+                <div class="box-header with-border">
+                  <h3 class="box-title"> Joining Details    </h3>
+                </div>
+                    {% for field in joining_detail %}
+                        <div class="col-md-4">
+                            <div class="form-group">
+                              <label>{{ field.label }}  </label>
+                                {{ field }}
+                           </div>   
+                        </div>
+                    {% endfor %}
+              </div>
+
+              <div class="row">
+                <div class="box-header with-border">
+                  <h3 class="box-title"> Educational Qualification </h3>
+                </div>
+                    <div id="append_educationale_qualification1">
+                      {% for field in qualification %}
+                        <div class="col-md-4">
+                            <div class="form-group">
+                              <label>Course Name  </label>
+                                <input type="text" name="educational_qualificationcourse_name_{{forloop.counter}}" maxlength="200" class="form-control" required="" id="id_educational_qualificationcourse_name_1" value="{{field.educational_qualificationcourse_name_1}}">
+                           </div>   
+                        </div>
+                    
+                        <div class="col-md-4">
+                            <div class="form-group">
+                              <label>Start Date  </label>
+                                <input type="text" name="educational_qualificationstart_date_{{forloop.counter}}" maxlength="200" class="form-control" required="" id="id_educational_qualificationstart_date_1" value="{{field.educational_qualificationstart_date_1}}">
+                           </div>   
+                        </div>
+                    
+                        <div class="col-md-4">
+                            <div class="form-group">
+                              <label>End Date  </label>
+                                <input type="text" name="educational_qualificationend_date_{{forloop.counter}}" maxlength="200" class="form-control" required="" id="id_educational_qualificationend_date_1" value="{{field.educational_qualificationend_date_1}}">
+                           </div>   
+                        </div>
+                    
+                        <div class="col-md-4">
+                            <div class="form-group">
+                              <label>Marks / Division  </label>
+                                <input type="text" name="educational_qualificationmarks_division_{{forloop.counter}}" maxlength="200" class="form-control" required="" id="id_educational_qualificationmarks_division_1" value="{{field.educational_qualificationmarks_division_1}}">
+                           </div>   
+                        </div>
+                    
+                        <div class="col-md-4">
+                            <div class="form-group">
+                              <label>Roll Number  </label>
+                                <input type="text" name="educational_qualificationroll_number_{{forloop.counter}}" maxlength="200" class="form-control" required="" id="id_educational_qualificationroll_number_1" value="{{field.educational_qualificationroll_number_1}}">
+                           </div>   
+                        </div>
+                    
+                        <div class="col-md-4">
+                            <div class="form-group">
+                              <label>University / Institution  </label>
+                                <input type="text" name="educational_qualificationuniversity_institution_{{forloop.counter}}" maxlength="200" class="form-control" required="" id="id_educational_qualificationuniversity_institution_1" value="{{field.educational_qualificationuniversity_institution_1}}">
+                           </div>   
+                        </div>
+                    {% endfor %}
+                </div>
+                  <a href="javascript:void(0)" id="append_add_more_qualification1" class="ad_more" style="color: red" >Add Qualification</a>
+              </div>
+
+              <div class="row">
+                <div class="box-header with-border">
+                  <h3 class="box-title"> Professional Journey   </h3>
+                </div>
+                    <div id="append_professional_journey1">
+                      {% for field in professional_journey %}
+                          <div class="col-md-4">
+                              <div class="form-group">
+                                <label>Company  </label>
+                                  <input type="text" name="professional_journeycompany_{{forloop.counter}}" maxlength="200" class="form-control" required="" id="id_professional_journeycompany_1" value="{{field.professional_journeycompany_1}}">
+                             </div>   
+                          </div>
+                      
+                          <div class="col-md-4">
+                              <div class="form-group">
+                                <label>Start Date  </label>
+                                  <input type="text" name="professional_journeystart_date_{{forloop.counter}}" maxlength="200" class="form-control" required="" value="{{field.professional_journeycompany_1}}">
+                             </div>   
+                          </div>
+                      
+                          <div class="col-md-4">
+                              <div class="form-group">
+                                <label>End Date  </label>
+                                  <input type="text" name="professional_journeyend_date_{{forloop.counter}}" maxlength="200" class="form-control" required="" value="{{field.professional_journeycompany_1}}">
+                             </div>   
+                          </div>
+                      
+                          <div class="col-md-4">
+                              <div class="form-group">
+                                <label>Last Designation  </label>
+                                  <select name="professional_journeylast_desgination_{{forloop.counter}}" class="form-control" required="" >
+                                      <option value="" selected="">---------</option>
+                                      {% for data in user_userdesignation %}
+                                      <option value="{{data.id}}" 
+
+                      {% if  field.professional_journeylast_desgination_1_id == data.id %}  
+                                      selected="" 
+                                      {% endif %}>{{data.designation}}</option>
+                                      {% endfor %}
+                                    </select>
+                             </div>   
+                          </div>
+                      
+                          <div class="col-md-4">
+                              <div class="form-group">
+                                <label>Nature of Duties  </label>
+                                  <input type="text" name="professional_journeynature_of_duties_{{forloop.counter}}" maxlength="200" class="form-control" required="" value="{{field.professional_journeycompany_1}}">
+                             </div>   
+                          </div>
+                      
+                          <div class="col-md-4">
+                              <div class="form-group">
+                                <label>Last Drawn Salary  </label>
+                                  <input type="text" name="professional_journeylast_drawn_dalary_{{forloop.counter}}" maxlength="200" class="form-control" required="" value="{{field.professional_journeycompany_1}}">
+                             </div>   
+                          </div>
+                      {% endfor %}
+                    
+                </div>
+                <a href="javascript:void(0)" id="append_add_more_professional_journey1" class="ad_more" style="color: red" >Add Professional </a>
+              </div>
+
+              <div class="row">
+                <div class="box-header with-border">
+                  <h3 class="box-title"> Salary Structutre   </h3>
+                </div>
+
+                      <div id="append_salary_structure1">
+                      {% for field in salary_structutre %}
+                        <div class="col-md-4">
+                            <div class="form-group">
+                              <label>
+                                Salary Code  </label>
+                                <input type="text" name="salary_structut_salary_code_{{forloop.counter}}" maxlength="200" class="form-control" required="" value="{{field.salary_structut_salary_code_1}}">
+                           </div>   
+                        </div>
+                    
+                        <div class="col-md-4">
+                            <div class="form-group">
+                              <label>
+                                Salary Name  </label>
+                                <input type="text" name="salary_structut_salary_name_{{forloop.counter}}" maxlength="200" class="form-control" required="" value="{{field.salary_structut_salary_name_1}}">
+                           </div>   
+                        </div>
+                    
+                        <div class="col-md-4">
+                            <div class="form-group">
+                              <label>
+                                Salary Frequency   </label>
+                                <input type="text" name="salary_structut_salary_frequency_{{forloop.counter}}" maxlength="200" class="form-control" required="" value="{{field.salary_structut_salary_frequency_1}}">
+                           </div>   
+                        </div>
+                    
+                        <div class="col-md-4">
+                            <div class="form-group">
+                              <label>
+                                Amount offered  </label>
+                                <input type="text" name="salary_structut_amount_offered_{{forloop.counter}}" maxlength="200" class="form-control" required="" value="{{field.salary_structut_amount_offered_1}}">
+                           </div>   
+                        </div>
+                    
+                        <div class="col-md-4">
+                            <div class="form-group">
+                              <label>
+                                Percentage/ Value Flag  </label>
+                                <input type="text" name="salary_structut_percentage_value_flag_{{forloop.counter}}" maxlength="200" class="form-control" required="" value="{{field.salary_structut_percentage_value_flag_1}}">
+                           </div>   
+                        </div>
+                    
+                        <div class="col-md-4">
+                            <div class="form-group">
+                              <label>
+                                Taxability  </label>
+                                <input type="text" name="salary_structut_taxability_{{forloop.counter}}" maxlength="200" class="form-control" required="" value="{{field.salary_structut_taxability_1}}">
+                           </div>   
+                        </div> 
+                      {% endfor %}
+                    
+                </div>
+                <a href="javascript:void(0)" id="append_add_more_sal_stru1" class="ad_more" style="color: red" >Add Salary </a>
+              </div>
+
+              <div class="row">
+                <div class="box-header with-border">
+                  <h3 class="box-title">  Deduction & Perquisites </h3>
+                </div>
+                <div id="append_salary_structure">
+                    {% for field in deduction_perquisites %}
+                        <div class="col-md-4">
+                            {% if field.label == "Appicablitity" %}
+                                <div class="form-group">
+                                    <label>
+                                      {{ field.label }}  </label>
+                                      {{ field }}
+                               </div>
+                            {% else %}
+                                <div class="deduction_perquisites_yes_no">
+                                    <div class="form-group">
+                                        <label>
+                                          {{ field.label }}  </label>
+                                          {{ field }}
+                                   </div>
+                                </div>
+                              {% endif %}
+                           
+                        </div>
+                    {% endfor %}
+                </div>
+              </div>
+              <div class="row">
+                <div class="box-header with-border">
+                  <h3 class="box-title"> Bank Details    </h3>
+                </div>
+                    {% for field in bank_detail %}
+                        <div class="col-md-4">
+                            <div class="form-group">
+                              <label>{{ field.label }}  </label>
+                                {{ field }}
+                           </div>   
+                        </div>
+                    {% endfor %}
+              </div>
+
+              <div class="row">
+                <div class="box-header with-border">
+                  <h3 class="box-title"> References </h3>
+                </div>
+                  <div id="append_references1">
+                      {% for field in references %}
+                        <div class="col-md-4">
+                            <div class="form-group">
+                              <label>Name  </label>
+                                <input type="text" name="referencename_{{forloop.counter}}" maxlength="200" class="form-control" required="" value="{{field.referencename_1}}">
+                           </div>   
+                        </div>
+                    
+                        <div class="col-md-4">
+                            <div class="form-group">
+                              <label>Relationship  </label>
+                                <input type="text" name="referencerelationship_{{forloop.counter}}" maxlength="200" class="form-control" required="" value="{{field.referencerelationship_1}}">
+                           </div>   
+                        </div>
+                    
+                        <div class="col-md-4">
+                            <div class="form-group">
+                              <label>Contact Number  </label>
+                                <input type="text" name="referencecontact_number_{{forloop.counter}}" maxlength="200" class="form-control" required="" value="{{field.referencecontact_number_1}}">
+                           </div>   
+                        </div>
+                    
+                        <div class="col-md-4">
+                            <div class="form-group">
+                              <label>Email id  </label>
+                                <input type="text" name="referenceemail_id_{{forloop.counter}}" maxlength="200" class="form-control" required="" value="{{field.referenceemail_id_1}}">
+                           </div>   
+                        </div>
+                    
+                        <div class="col-md-4">
+                            <div class="form-group">
+                              <label>Address  </label>
+                                <input type="text" name="referenceaddress_{{forloop.counter}}" maxlength="200" class="form-control" required="" value="{{field.referenceaddress_1}}">
+                           </div>   
+                        </div>
+                    
+                        <div class="col-md-4">
+                            <div class="form-group">
+                              <label>Known since  </label>
+                                <input type="text" name="referenceknown_since_{{forloop.counter}}" maxlength="200" class="form-control" required="" value="{{field.referenceknown_since_1}}">
+                           </div>   
+                        </div>
+                      {% endfor %}
+                  </div>
+                  <a href="javascript:void(0)" id="append_add_references1" class="ad_more" style="color: red" > Add References </a>
+              </div>
+
+              <div class="row">
+                <div class="box-header with-border">
+                  <h3 class="box-title"> Verification Report </h3>
+                </div>
+                    {% for field in verification_report %}
+                        <div class="col-md-4">
+                            <div class="form-group">
+                              <label>{{ field.label }}  </label>
+                                {{ field }}
+                           </div>   
+                        </div>
+                    {% endfor %}
+              </div>
+
+              <div class="row">
+                <div class="box-header with-border">
+                  <h3 class="box-title"> Documents </h3>
+                </div>
+              <div id="append_document1">
+                      {% for p in documents %}
+
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                              <label>Name of Documents  </label>
+                                <input type="text" name="name_of_documents_{{forloop.counter}}" maxlength="200" class="form-control" required="" value="{{p.name_of_documents_1}}">
+                           </div>   
+                        </div>
+                    
+                        <div class="col-md-6">
+                            <div class="form-group">
+                              <label>Upload  </label>
+                            Currently: <a href="/media/upload_report/{{p.upload_1}}">upload_report/{{p.upload_1}}</a><br>Change:
+                                <input type="file" name="upload_{{forloop.counter}}" class="form-control"  id="id_upload_1">
+                           </div>   
+                        </div>
+
+                    {% endfor %}
+                </div>
+                <a href="javascript:void(0)" id="append_add_document1" class="ad_more" style="color: red" >Add Document </a>
+              </div>
+        <div class="form-group">
+                  
+        <input name="" type="submit" value="Submit" class="btn btn-primary" id="submitbtn"></div>
+      </div>
+          </form>
+  </section>
+</div>
+<style type="text/css">
+.box-title{ color: #3c8dbc;margin-left: 11px;}
+.color-famly{ color: #b92525;}
+.ad_more {color: #fff!important;background: #204d74;padding: 6px 13px;border-radius: 4px;margin-left: 909px;}
+</style>
+<script src="{% static 'admin-static/bower_components/jquery/dist/jquery.min.js' %}"></script>
+<script type="text/javascript">
+
+count = parseInt('{{medical_history.count}}') + 1
+$("#append_add_more_sub_field1").click(function(){
+   var html = '<div id="append_medical_history"><div class="col-md-4"><div class="form-group"><label>Blood Group  </label><input type="text" name="blood_group_'+count+'" maxlength="200" class="form-control" required="" id="id_blood_group_'+count+'"></div></div><div class="col-md-4"><div class="form-group"><label>Type of illness  </label><input type="text" name="type_of_illness_'+count+'"  maxlength="200" class="form-control" required="" id="id_type_of_illness_'+count+'" ></div> </div><div class="col-md-4"><div class="form-group"><label>Result  </label><input type="text" name="result_'+count+'"  maxlength="200" class="form-control" required="" id="id_result_'+count+'"></div>   </div></div>'
+  
+   $("#append_medical_history1").append(html)
+   count += 1
+  })
+
+count1 = parseInt('{{qualification.count}}') + 1
+$("#append_add_more_qualification1").click(function(){
+   var html = '<div class="col-md-4"><div class="form-group"><label>Course Name  </label><input type="text" name="educational_qualificationcourse_name_'+count1+'" maxlength="200" class="form-control " required="" id="id_course_name@'+count1+'"></div> </div><div class="col-md-4"><div class="form-group"><label>Start Date  </label><input type="text" name="educational_qualificationstart_date_'+count1+'" class="form-control " required="" id="id_start_date@'+count1+'"></div> </div><div class="col-md-4"><div class="form-group"><label>End Date  </label><input type="text" name="educational_qualificationend_date_'+count1+'" class="form-control " required="" id="id_end_date@'+count1+'"></div>   </div><div class="col-md-4"><div class="form-group"><label>Marks / Division  </label><input type="text" name="educational_qualificationmarks_division_'+count1+'" maxlength="200" class="form-control " required="" id="id_marks_division@'+count1+'"></div>   </div><div class="col-md-4"><div class="form-group"><label>Roll Number  </label><input type="text" name="educational_qualificationroll_number_'+count1+'" maxlength="200" class="form-control " required="" id="id_roll_number@'+count1+'"></div> </div><div class="col-md-4"><div class="form-group"><label>University / Institution  </label><input type="text" name="educational_qualificationuniversity_institution_'+count1+'" maxlength="200" class="form-control" required="" id="id_university_institution@'+count1+'"></div></div>'
+  
+   $("#append_educationale_qualification1").append(html)
+   count1 += 1
+  })
+
+
+count2 = parseInt('{{professional_journey.count}}') + 1
+$("#append_add_more_professional_journey1").click(function(){
+   var html = '<div class="col-md-4"><div class="form-group"><label>Company  </label><input type="text" name="professional_journeycompany_'+count2+'" maxlength="200" class="form-control" required="" id="id_company@@'+count2+'"></div>   </div><div class="col-md-4"><div class="form-group"><label>Start Date  </label><input type="text" name="professional_journeystart_date_'+count2+'" class="form-control" required="" id="id_start_date@@'+count2+'"></div>   </div><div class="col-md-4"><div class="form-group"><label>End Date  </label><input type="text" name="professional_journeyend_date_'+count2+'" class="form-control" required="" id="id_end_date@@'+count2+'"></div>   </div><div class="col-md-4"><div class="form-group"><label>Last Desgination  </label><select name="professional_journeylast_desgination_'+count2+'" class="form-control valid" required="" id="id_professional_journeylast_desgination_1" aria-invalid="false"><option value="" selected="">---------</option>{% for data in user_userdesignation %}<option value="{{data.id}}">{{data.designation}}</option>{% endfor %}</select></div></div><div class="col-md-4"><div class="form-group"><label>Nature of Duties  </label><input type="text" name="professional_journeynature_of_duties_'+count2+'" maxlength="200" class="form-control" required="" id="id_nature_of_duties@@'+count2+'"></div>   </div><div class="col-md-4"><div class="form-group"><label>Last Drawn Salary  </label><input type="text" name="professional_journeylast_drawn_dalary_'+count2+'" maxlength="200" class="form-control" required="" id="id_last_drawn_dalary@@'+count2+'"></div></div>'
+      $("#append_professional_journey1").append(html)
+      count2 += 1
+  })
+
+
+count3 = parseInt('{{salary_structutre.count}}') + 1
+$("#append_add_more_sal_stru1").click(function(){
+   var html = '<div class="col-md-4"><div class="form-group"><label>Salary Code  </label><input type="text" name="salary_structut_salary_code_'+count3+'" maxlength="200" class="form-control" required="" id="id_salary_structut_salary_code_'+count3+'"></div> </div><div class="col-md-4"><div class="form-group"><label>Salary Name  </label><input type="text" name="salary_structut_salary_name_'+count3+'" maxlength="200" class="form-control" required="" id="id_salary_name@@@'+count3+'"></div>   </div><div class="col-md-4"><div class="form-group"><label>Salary Frequency   </label><input type="text" name="salary_structut_salary_frequency_'+count3+'" maxlength="200" class="form-control" required="" id="id_salary_frequency@@@'+count3+'"></div> </div><div class="col-md-4"><div class="form-group"><label>Amount offered  </label><input type="text" name="salary_structut_amount_offered_'+count3+'" maxlength="200" class="form-control" required="" id="id_amount_offered@@@'+count3+'"></div> </div><div class="col-md-4"><div class="form-group"><label>Percentage/ Value Flag  </label><input type="text" name="salary_structut_percentage_value_flag_'+count3+'" maxlength="200" class="form-control" required="" id="id_percentage_value_flag@@@'+count3+'"></div></div><div class="col-md-4"><div class="form-group"><label>Taxability  </label><input type="text" name="salary_structut_taxability_'+count3+'" maxlength="200" class="form-control" required="" id="id_Taxability@@@'+count3+'"></div> </div>'
+  
+      $("#append_salary_structure1").append(html)
+      count3 += 1
+  })
+
+
+count4 = parseInt('{{references.count}}') + 1
+$("#append_add_references1").click(function(){
+   var html = '<div id="append_references"><div class="col-md-4"><div class="form-group"><label>Name  </label><input type="text" name="referencename_'+count4+'" maxlength="200" class="form-control" required="" id="id_name_'+count4+'"></div></div><div class="col-md-4"><div class="form-group"><label>Relationship  </label><input type="text" name="referencerelationship_'+count4+'" maxlength="200" class="form-control" required="" id="id_relationship_'+count4+'"></div> </div><div class="col-md-4"><div class="form-group"><label>Contact Number  </label><input type="text" name="referencecontact_number_'+count4+'" maxlength="200" class="form-control" required="" id="id_contact_number_'+count4+'"></div> </div><div class="col-md-4"><div class="form-group"><label>Email id  </label><input type="text" name="referenceemail_id_'+count4+'" maxlength="200" class="form-control" required="" id="id_email_id_'+count4+'"></div></div><div class="col-md-4"><div class="form-group"><label>Address  </label><input type="text" name="referenceaddress_'+count4+'" maxlength="200" class="form-control" required="" id="id_address_'+count4+'"></div></div><div class="col-md-4"><div class="form-group"><label>Known since  </label><input type="text" name="referenceknown_since_'+count4+'" maxlength="200" class="form-control" required="" id="id_known_since_'+count4+'"></div> </div></div>'
+  
+      $("#append_references1").append(html)
+      count4 += 1
+  })
+
+
+count5 = parseInt('{{documents.count}}') + 1 
+$("#append_add_document1").click(function(){
+   var html = '<div class="col-md-6"><div class="form-group"><label>Name of Documents  </label><input type="text" name="name_of_documents_'+count5+'" maxlength="200" class="form-control" required="" id="id_name_of_documents_'+count5+'"></div></div><div class="col-md-6"><div class="form-group"><label>Upload  </label><input type="file" name="upload_'+count5+'" class="form-control" required="" id="id_upload_'+count5+'"></div></div>'
+  
+   $("#append_document1").append(html)
+   count5 += 1
+  })
+
+</script>
+{% endblock %}

@@ -1,0 +1,242 @@
+{% extends "layout/website_layout.html" %}
+{% load templatetag %}
+{% block content %}
+
+<div class="content-wrapper" style="min-height: 946px;">
+    <section class="content">
+      <div class="box box-default">
+        <div class="box-header with-border">
+          <h3 class="box-title">Salary Slip </h3>
+        </div>
+        <div class="box-body">
+        <div class="row">
+            <div class="content container">
+
+                    <!-- Page Header -->
+                    {% for data in get_report2 %}
+                    <div class="page-header">
+                        <div class="row"> 
+                            <div class="col-md-4 pdb-30">
+                            </div>
+                            <div class="col-md-4 pdb-30">
+                                <h3 class="text-center">{{data.name}}</h3>
+                            </div>
+                            <div class="col-md-4 pdb-30">
+                                {% comment %} <h3 class="text-right">{{data.logo_upload}}</h3> {% endcomment %}
+                                 <img src="/{{ data.logo_upload.url }}/" class="img-responsive" style="width: 40%; float: left; margin-right: 10px;" />
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /Page Header -->
+
+                    <div class="row"> 
+                        <div class="col-md-12 pdb-30">
+                            <h3 class="text-center">Registered Office :</h3>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    {% for data in responselistquery %}
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="bread-vik text-center">Pay slip for the month of <strong>{{ data.month_and_year.month_and_year}}</strong></div>
+                        </div>
+                    </div>
+                    
+                    
+                    <div class="row">
+                       
+                        <div class="col-md-12">
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <h4 class="card-title mb-0 text-center">Salary Slip</h4>
+                                            </div>
+                                             <div class="card-body">
+                                                <div class="table-responsive">
+                                                    <table class="table table-bordered mb-0">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>Employee ID</td>
+                                                                <td>{{ data.employee_id }}</td>
+                                                                {% for ac in get_bank %}
+                                                                <td>Bank Account No</td>
+                                                                <td>{{ac.bank_account_number}}</td>
+                                                                {% endfor %}
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Employee Name</td>
+                                                                {% comment %} <td><input type="text" class="form-control"></td> {% endcomment %}
+                                                                <td>{{data.employee_names}}</td>
+                                                                {% for ac in get_bank %}
+                                                                <td>Bank Name</td>
+                                                                <td>{{ac.bank_name}}</td>
+                                                                {% endfor %}
+                                                                {% comment %} <td><input type="text" class="form-control"></td> {% endcomment %}
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Grade</td>
+                                                                    <td>{{data.joining_grade_offered.joining_grade_offered}}</td>
+                                                                <td>PF A/c No</td>
+                                                                <td>{{data.pf}}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Designation</td>
+                                                                <td>{{data.designation}}</td>
+                                                                <td>Total Days in Month</td>
+                                                                <td>{{data.days_in_month}}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Department</td>
+                                                                <td>{{data.department}}</td>
+                                                                <td>Working Days</td>
+                                                                <td>{{data.working_days}}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Location</td>
+                                                                <td>{{data.location}}</td>
+                                                                <td>Leave Taken</td>
+                                                                <td>{{data.leave_balance.leave_balance}}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Pan Card</td>
+                                                               <td>{{data.pan_card_1}}</td>
+                                                                <td>Leave Without Pay</td>
+                                                                <td>{{data.leave_without_pay}}</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                        <div class="row pdt-30">
+                                            <div class="col-lg-7">
+                                                <div class="card-header">
+                                                    <h5 class="card-title mb-0 text-center">Earnings</h5>
+                                                </div>
+                                                <div class="table-responsive">
+                                                    <table class="table table-bordered mb-0">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Particulars</th>
+                                                                <th>Monthly Rate</th>
+                                                                <th>Current Month</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                {% for data in get_report3 %}
+                                                                <td>{{data.salary_code}}</td>
+                                                                {% endfor %}
+                                                                 <td>{{ data.basic_pay }}</td>
+                                                                    <td> {{ data.hra_allowances }} </td>
+                                                                    
+                                                            </tr>
+                                                                
+                                                            <tr>
+                                                                {% for data in get_report3 %}
+                                                                <td>{{data.salary_code}}</td>
+                                                                {% endfor %}
+                                                                <td>{{ data.basic_pay }}</td>
+                                                                <td> {{ data.hra_allowances }} </td>
+                                                            </tr>
+                                                            <tr>
+                                                                {% for data in get_report3 %}
+                                                                <td>{{data.salary_code}}</td>
+                                                                {% endfor %}
+                                                                <td>{{ data.basic_pay }}</td>
+                                                                <td> {{ data.hra_allowances }} </td>
+                                                            </tr>
+                                                            <tr>
+                                                                {% for data in get_report3 %}
+                                                                <td>{{data.salary_code}}</td>
+                                                                {% endfor %}
+                                                                <td>{{ data.basic_pay }}</td>
+                                                                <td> {{ data.hra_allowances }} </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Gross Earning</td>
+                                                                <td>{{data.total}}</td>
+                                                                <td>{{data.total}}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Net Salary Payable</td>
+                                                                <td>{{data.net_salary_payable}}</td>
+                                                                <td>{{data.net_salary_payable}}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Net Salary in Words</td>
+                                                                {% comment %} <td colspan="2"><input type="text" class="form-control"></td> {% endcomment %}
+                                                                <td colspan="2"></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-5">
+                                                <div class="card-header">
+                                                    <h5 class="card-title mb-0 text-center">Deductions</h5>
+                                                </div>
+                                                <div class="table-responsive">
+                                                    <table class="table table-bordered mb-0">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Particulars</th>
+                                                                <th>Amount</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                            <td>PF Deduction</td>
+                                                            <td>{{ data.pf }}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                 <td>ESIC Deduction</td>
+                                                                 <td>{{ data.esic }}</td>
+                                                            
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Absent</td>
+                                                                <td>{{ data.absent }}</td>
+                                                            </tr>
+                                                            <tr>
+                                                               <td>Income</td>
+                                                               <td>{{ data.income }}</td>
+                                                                </tr>
+                                                            <tr>
+                                                                <td>Gross Deduction</td>
+                                                                <td>{{ data.loan_recovery }}</td>
+                                                            </tr>
+                                                            <tr>
+                                                            <td></td>
+                                                                <td>{{data.amount}}</td>
+                                                                
+                                                            </tr>
+                                                            <tr>
+                                                                {% comment %} <td colspan="2"><input type="text" class="form-control"></td> {% endcomment %}
+                                                                <td colspan="2"></td>
+
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    
+                                </div>
+                            
+                        </div>
+                    </div>
+                    {% endfor %}
+                    
+
+                    
+                    
+                    <h3 class="pdb-30">NB: This is System generated Pay slip and does not require signatures</h3>
+                </div>
+            </div>
+
+         
+    </section>
+</div>
+
+{% endblock %}

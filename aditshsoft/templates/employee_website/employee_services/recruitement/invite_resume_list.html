@@ -1,0 +1,103 @@
+{% extends "layout/website_layout.html" %}
+{% load templatetag %}
+
+{% block content %}
+
+
+<div class="content-wrapper" style="min-height: 916px;">
+    <section class="content-header">
+      <h1>
+        Resume Receipt 
+        <small></small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="{% url 'index' %}"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="#"> Resume Receipt </a></li>
+        <li class="active"></li>
+      </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="box">
+            <div class="box-header">
+               <div class="row">
+                {% get_permission_data_from 1 5 as permission_menu %}
+
+                    {% if permission_menu.add %}
+                        <div class="col-md-6">
+                          <a href="{% url 'crm_website_employeeservices_recruitement_list1' %}" class="btn btn-primary"> Add Resume  </a>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="box-body">
+            <div class='table-responsive'> <div style="overflow-x:auto;">
+              <table id="example2" class="table table-bordered table-hover">
+                <thead>
+                  <tr>
+                      <th> Sr.No </th>
+                      <th> Location  </th>
+                      <th> Department </th>
+                      <th>Designation</th>
+                      <th> Received from </th>
+                      <th> Name of Candidate </th>
+                      <th> Mobile Number</th>
+                      <th> Email Id </th>
+                      <th> Resume   </th>
+                      
+                      <th> Status </th>
+                      <th> Action</th>
+                  </tr>
+
+                </thead>
+                <tbody>
+                    {% if responselistquery %}
+                         {% for data in responselistquery %}
+                           <tr>
+                            <td><strong>{{ responselistquery.start_index|add:forloop.counter0 }}</strong></td>
+                            <td> {{ data.location}}</td>
+                            <td> {{ data.department.department }}</td>
+                            <td> {{ data.designation }}
+                            <td> {{ data.received_from }} </td>
+                            <td> {{ data.name_of_candidate }} </td>
+                            <td> {{ data.phone_no }} </td>
+                            <td> {{ data.email_id }} </td>
+                           
+                            <td><a href="/media/{{ data.resume_received_doc }}" target="_blank">Resume</td>
+                           
+                            <td>{{ data.resume_status }}</td>
+                            
+                            <td>
+                              {% if permission_menu.edit %}
+                                <a href="{% url 'crm_website_employeeservices_recruitement_inviteresume_edit' data.id %}" style="color: green;">Review</a>
+                              {% endif %}
+                              {% if permission_menu.delete %}
+                              &nbsp;  &nbsp;  &nbsp;  &nbsp;
+                                  <a href="{% url 'crm_website_employeeservices_recruitement_inviteresume_delete' data.id %}" style="color: red;">Delete </a>
+                              {% endif %}
+                        </tr>
+                        {% endfor %}
+                    {% else %}
+                    <tr><td></td></tr>
+                    {% endif %}
+                </tfoot>
+              </table>
+            </div>
+          </div>
+          <!-- /.box -->
+        </div>
+                <div class="row">
+            {% include "layout/manage_pagination.html" %}
+        </div>
+      </div>
+      <!-- /.row -->
+    </section>
+    <!-- /.content -->
+  </div>
+
+{% include "layout/admin_message.html" %}
+{% endblock %}
+

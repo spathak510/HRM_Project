@@ -1,0 +1,90 @@
+{% extends "layout/website_layout.html" %}
+
+{% load templatetag %}
+{% block content %}
+
+
+<div class="content-wrapper" style="min-height: 916px;">
+    <section class="content-header">
+      <h1>
+        Candidates Joined
+        <small></small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="{% url 'admindashboard' %}"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="#"> Candidates Joined  </a></li>
+        <li class="active"></li>
+      </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="box">
+            <div class="box-header">
+               <div class="row">
+
+            </div>
+            <div class="box-body">
+            <div class='table-responsive'> <div style="overflow-x:auto;">
+              <table id="example2" class="table table-bordered table-hover">
+                <thead>
+                  <tr>
+
+                      <th> Sr.No </th>
+                      <th> Name of Candidate </th>
+                      <th> Department </th>
+                      <th> Designation   </th>
+                      <th> Offer accepted on </th>
+                      <th> Formalities completed on </th>
+                      <th> Date of Joining </th>
+                      <th> Location  </th>
+                      <th> Upload Documents  </th>
+                      <th> Status </th>
+                      <th> Action</th>
+
+                  </tr>
+                </thead>
+                <tbody>
+                    {% if responselistquery %}
+                         {% for data in responselistquery %}
+                           <tr>
+                            <td><strong>{{ responselistquery.start_index|add:forloop.counter0 }}</strong></td>
+                            <td> {{ data.name_of_candidate }} </td>
+                            <td>{{ data.department.department }}</td>
+                            <td>{{ data.designation.designation }}</td>
+                            
+                            <td> {{ data.offer_accepted_on }} </td>
+                            <td> {{ data.formalities_completed_on }} </td>
+                            <td> {{ data.date_of_joining }} </td>
+                            <td>{{ data.location}}</td>
+                            <td> <a href="/media/{{ data.upload_documents }}" target="_blank"> Document </a>  </td>
+                            <td>{{ data.get_status_display }}</td>
+                            
+                            <td>
+                              <a href="{% url 'crm_website_employeeservices_recruitement_candidatejoined_update' data.id %}" style="color: green;">Edit</a>
+                              
+                        </tr>
+                        {% endfor %}
+                    {% else %}
+                    <tr><td></td></tr>
+                    {% endif %}
+                </tfoot>
+              </table>
+            </div>
+          </div>
+          <!-- /.box -->
+        </div>
+                <div class="row">
+            {% include "layout/manage_pagination.html" %}
+        </div>
+      </div>
+      <!-- /.row -->
+    </section>
+    <!-- /.content -->
+  </div>
+
+{% include "layout/admin_message.html" %}
+{% endblock %}
+

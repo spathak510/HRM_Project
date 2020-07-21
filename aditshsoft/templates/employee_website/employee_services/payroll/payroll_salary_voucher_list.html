@@ -1,0 +1,123 @@
+{% extends "layout/website_layout.html" %}
+{% load templatetag %}
+{% block content %}
+
+<div class="content-wrapper" style="min-height: 916px;">
+    <section class="content-header">
+      <h1>
+       Salary Vouchers  
+        <small></small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="{% url 'admindashboard' %}"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="#"> Salary Vouchers  </a></li>
+        <li class="active"></li>
+      </ol>
+    </section>
+
+    <section class="content">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="box">
+            <div class="box-header">
+
+              <div class="row">
+                {% get_permission_data_from 12 14 as permission_menu %}
+                  {% if permission_menu.add %}
+                    <form action="" method="post" id="upload_bulk_from_id" enctype="multipart/form-data" novalidate="novalidate">
+                      {% csrf_token %}
+                      <div class="col-md-3">
+                            <div class="form-group">
+                            <label> File Upload  </label>
+                              <input type="file" class="form-control upload_bulk_data" name="upload_bulk_data">
+                            </div>
+                      </div>
+                      <div class="form-group">
+                        <input name="" type="submit" value="Submit" class="btn btn-primary" id="upload_bulk_from_btn"> 
+                      </div>
+                    </form>
+                    
+                     <form action="" method="post" id="parent_company_form" enctype="multipart/form-data" novalidate="novalidate">
+                      {% for field in form %}
+                
+                <div class="col-md-3">
+                    <div class="form-group">
+                     {% csrf_token %}
+                      <label>{{ field.label }}  </label>
+                        {{ field }}
+                   </div> 
+                     
+                </div>
+                
+            {% endfor %}
+            <div class="form-group">
+                    <input name="" type="submit" value="Submit" class="btn btn-primary" id="upload_bulk_from_btn"> 
+            </div>
+
+                  {% endif %}
+              </div>
+                     </div>
+            <div class="box-body">
+            <div class='table-responsive'> <div style="overflow-x:auto;">
+              <table id="example2" class="table table-bordered table-hover">
+                    <thead>
+                        <tr> 
+                              <th> Sr.No </th>  
+                          <th> Month and Year  </th>
+                          <th> GL Code </th>
+                          <th> Particulars </th>
+                          <th> Debit Amount </th>
+                          <th> Credit Amount   </th>
+                          <th> Status </th>
+                          <th> Approval Status </th>
+                          <th> Action </th>
+                        </tr>
+                    </thead>
+                <tbody>
+                    {% if responselistquery %}
+                         {% for data in responselistquery %}
+                           <tr>
+                            <td><strong>{{ responselistquery.start_index|add:forloop.counter0 }}</strong></td>
+                            
+                            <td>
+                              {{ data.month_and_year|date:'M , Y' }}
+                              {{ data.month_and_year }}
+                            </td>
+                            <td> {{ data.gl_code }} </td>
+                            <td> {{ data.particulars }} </td>
+                            <td> {{ data.debit_amount }} </td>
+                            <td> {{ data.credit_amount }} </td>
+                            <td> {{ data.get_status_display }} </td>
+                            <td>
+                                {{ data.approval_level }}
+                            </td> 
+                            <td>
+                                    <a href="{% url 'crm_crmemployee_manageemployee_salaryvoucher_update' data.id %}"> Update </a>
+
+                                {% approval_status_update_policies_circualr request.user.id data.id 15 as get_approval_level %}
+                                  
+                                &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;
+                                {% if get_approval_level %}
+                                    <a href="{% url 'crm_crmemployee_manageemployee_salaryvoucher_update' data.id %}"> Update </a>
+                                {% endif  %}
+                            </td>
+
+                        </tr>
+                        {% endfor %}
+                    {% else %}
+                    <tr><td></td></tr>
+                    {% endif %}
+                </tfoot>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+            {% include "layout/manage_pagination.html" %}
+        </div>
+      </div>
+    </section>
+</div>
+{% include "layout/admin_message.html" %}
+{% endblock %}
+

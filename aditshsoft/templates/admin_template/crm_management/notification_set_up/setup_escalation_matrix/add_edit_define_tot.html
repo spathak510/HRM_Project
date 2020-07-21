@@ -1,0 +1,127 @@
+{% extends "layout/admin_layout.html" %}
+{% load static %}
+{% load staticfiles %}
+
+{% block content %}
+
+  <div class="content-wrapper" style="min-height: 946px;">
+    <section class="content">
+      <div class="box box-default">
+        <div class="box-header with-border">
+                  <h3 class="box-title">Add Turnaround Time</h3>
+          
+        </div>
+        <div class="box-body">
+          <form action="" method="post" id="parent_company_form" enctype="multipart/form-data">
+        <div class="row">
+
+          {% csrf_token %}
+
+            <input  type="hidden" >
+            
+                  {% for field in form %}
+                    {% if field.label == "User" %}
+                        <div class="col-md-4">
+                              <div class="form-group">
+                              <label>{{ field.label }}  </label>
+                                      {{ field }}
+                              </div>   
+                        </div>
+                        <div class="col-md-4">
+                              <div class="form-group">
+                                   <label> Department  </label>
+                                    <input type="text" class="form-control" id="id_department" maxlength="200" disabled="" value="{{company.user.department.department}}">
+                              </div>
+                        </div>
+                        <div class="col-md-4">
+                              <div class="form-group">
+                                   <label> Designation  </label>
+                                    <input type="text" class="form-control" id="id_designation" maxlength="200" disabled="" value="{{company.user.designation.designation}}">
+                              </div>
+
+                        </div>
+                        <div class="col-md-4">
+                              <div class="form-group">
+                                   <label> Responsibilities  </label>
+                                    <input type="text" class="form-control" id="id_responsibility" maxlength="200" disabled="" value="{{company.user.responsibilities.responsibilities}}">
+                              </div>
+
+                        </div>
+          
+                      <div class="col-md-4">
+                            <div class="form-group">
+                            <label>Process Name
+                            </label>
+                          <select name="process_name" class="multiselect form-control" required="" multiple="">
+                                {% for data in  process_name %}
+                                  <option value="{{data.id}}" 
+                                    {% for data1 in company.escalationmatrixdefineturnaroundtimeprocessname_set.all %}
+                                        {% if data1.process_name_level_id == data.id %}
+                                          selected="" 
+                                        {% endif %}
+                                    {% endfor %}
+                                  >
+                                  {{ data.process_level }}
+                                  </option>
+                                {% endfor %}
+                              </select>
+                             
+                            </div>   
+                      </div>
+                    <div class="col-md-4">
+                          <div class="form-group">
+                            <label>Escalation Level  </label>
+                              <select name="escalation_level" class="multiselect form-control" required="" multiple="">
+                                {% for data in escalation_level %}
+                                  <option value="{{data.id}}" 
+                                    {% for data1 in company.escalationmatrixdefineturnaroundtimeescalationname_set.all %}
+                                        {% if data1.escalation_name_id == data.id %}
+                                          selected="" 
+                                        {% endif %}
+                                    {% endfor %}
+                                  >
+                                  {{ data.level }}
+                                  </option>
+                                {% endfor %}
+                              </select>
+                          </div>   
+                    </div>
+                    <div class="col-md-4">
+                          <div class="form-group">
+                            <label>Escalation To   </label>
+                              <select name="escalation_to" class="multiselect form-control" required="" multiple="">
+                                {% for data in user_list %}
+                                  <option value="{{data.id}}"
+                                    {% for data1 in company.escalationmatrixdefineturnaroundtimeuser_set.all %}
+                                    {% if data1.escalation_user_id == data.id %}
+                                      selected="" 
+                                    {% endif %}
+                                    {% endfor %}
+                                  >{{ data.name }}</option>
+                                {% endfor %}
+                              </select>
+                          </div>   
+                    </div>
+                    {% else %}
+                      <div class="col-md-4">
+                              <div class="form-group">
+                              <label>{{ field.label }}  </label>
+                                      {{ field }}
+                              </div>   
+                      </div>
+                    {% endif %}
+                  {% endfor %}
+       
+       
+                </div>
+                 <div class="form-group">
+                    <input name="" type="submit" value="Submit" class="btn btn-primary" id="submitbtn">
+                </div>
+      </div>
+          </form>
+  </section>
+</div>
+<style type="text/css">
+.fs-wrap {height: 101px;}
+</style>
+{% endblock %}

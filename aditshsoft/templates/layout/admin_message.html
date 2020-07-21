@@ -1,0 +1,22 @@
+{% load static %}
+{% load i18n %}
+{% if messages %}
+    {% for message in messages %}
+        {% if  forloop.counter == 1 %}
+            <script type="text/javascript" src="{% static 'admin-static/js/jquery.min.js' %}"></script>
+          	{% if  message.tags == 'success'%}
+                <script type="text/javascript">
+                        swal("Good job", "{{ message }}", "success")
+                </script>
+            {% elif  message.tags == 'warning'%}
+                <script type="text/javascript">
+                        swal("Warning", "{{ message }}", "warning")
+                </script>
+            {% else %}
+                <script type="text/javascript">
+                    swal("Error", "{{ message }}", "error")
+                </script>
+            {% endif %}
+        {% endif %}
+    {% endfor %}
+{% endif %}

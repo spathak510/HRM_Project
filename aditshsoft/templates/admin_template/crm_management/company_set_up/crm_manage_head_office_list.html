@@ -1,0 +1,124 @@
+{% extends "layout/admin_layout.html" %}
+{% load static %}
+{% load staticfiles %}
+
+
+{% load templatetag %}
+
+{% block content %}
+
+
+<div class="content-wrapper" style="min-height: 916px;">
+    <section class="content-header">
+      <h1>
+        Manage Head Office
+        <small></small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="{% url 'admindashboard' %}"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="#"> Manage Head Office </a></li>
+        <li class="active"></li>
+      </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="box">
+            <div class="box-header">
+                    <!-- <h3 class="box-title"> Financial Year List </h3> -->
+                    <div class="row">
+                        <div class="col-md-6">
+                          <a href="{% url 'crmmanageheadofficeadd' %}" class="btn btn-primary"> Add Head Office </a>
+                        </div>
+                    </div>
+            </div>
+            <div class="box-body">
+<div class='table-responsive'> <div style="overflow-x:auto;">
+
+              <table id="example2" class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                <th width="6%">Sr.No</th>
+                        <th >Parent Company</th>
+                        <th >HOD Id</th>
+                        <th >Name</th>
+                        <th >Building</th>
+                        <th >Block No.</th>
+                        <th >Sector</th>
+                        <th >Country</th>
+                        <th >City</th>
+                        <th >District</th>
+                        <th >State</th>
+                        <th >Pin Code</th>
+                        <th >CIN No.</th>
+                        <th >Pan Card</th>
+                        <th >GST No.</th>
+                        <th >Website</th>
+                        <th >Email</th>
+                        <th >Contact</th>
+                        <th >Local Currency</th>
+                        <th >Reporting Currency</th>
+                        <th >Start Date</th>
+                        <th >Active/Deactive</th>
+                        <th >Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        {% for company_details in responselistquery %}
+                        <tr>    
+                            <td><strong>{{forloop.counter}}</strong></td>
+                            <td>{{company_details.parent_company}}</td>
+                            <td>{{company_details.hod_id}}</td>
+                            <td>{{ company_details.name }}</td>
+                            <td>{{company_details.building}}</td>
+                            <td>{{ company_details.block_no }}</td>
+                            <td>{{ company_details.sector }}</td>
+                            <td>{{ company_details.country }}</td>
+                            <td>{{company_details.city}}</td>
+                            <td>{{ company_details.district }}</td>
+                            <td>{{company_details.state}}</td>
+                            <td>{{company_details.pincode}}</td>
+                            <td>{{ company_details.cin_no }}</td>
+                            <td>{{company_details.pan_card}}</td>
+                            <td>{{ company_details.gst_no }}</td>
+                            <td>{{ company_details.website }}</td>
+                            <td>{{company_details.email_id}}</td>
+                            <td>{{ company_details.contact_no }}</td>
+                            <td>
+                                {% for data in company_details.manageheadofficelocalcurrency_set.all %}
+                                    <li>{{ data.local_currency }}</li>
+                                {% endfor %}
+                            </td>
+                            <td>
+                                {% for data in company_details.manageheadofficereportingcurrency_set.all %}
+                                    <li>{{ data.reporting_currency }}</li>
+                                {% endfor %}
+                            </td>
+                            <td>{{ company_details.start_date }}</td>
+                            <td>{{ company_details.is_active }}</td>
+
+                            <td><a href="{% url 'crmmanageheadofficeedit' company_details.id %}" style="color: green;">Edit</a>
+                           
+                            <a href="{% url 'crmofficedelete' company_details.id %}" style="color: red;">Delete</a></td>
+
+                        </tr>
+                        {% endfor %}
+                    
+                </tfoot>
+              </table>
+            </div>
+          </div>
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </section>
+    <!-- /.content -->
+  </div>
+
+{% include "layout/admin_message.html" %}
+{% endblock %}
+

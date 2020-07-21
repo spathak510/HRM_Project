@@ -1,0 +1,84 @@
+{% extends "layout/admin_layout.html" %}
+{% load static %}
+{% load staticfiles %}
+
+
+{% load templatetag %}
+
+
+
+{% block content %}
+
+  <div class="content-wrapper form-pd" style="min-height: 946px;">
+    <section class="content">
+      <ol class="breadcrumb">
+        <li><a href="{% url 'admindashboard' %}"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="#">Setup Management</a></li>
+        <li class="active">Manage Month End Process</li>
+      </ol>
+      <div class="box box-default">
+        <div class="box-header with-border">
+                  <h3 class="box-title">Add Details</h3>
+          
+        </div>
+        <div class="box-body">
+          <form action="" method="post" id="parent_company_form" enctype="multipart/form-data">
+        <div class="row">
+
+          {% csrf_token %}
+
+          <div class="col-md-4">
+               <div class="form-group">
+                            <span>Process Name 
+                           </span>
+                          <select name="process_name" class="multiselect form-control" required="" multiple="">
+
+                          {% for im in process_name %}
+
+                           {% comment %} {% get_sub_process im.process_name as sub_process_data %} {% endcomment %}
+
+                                <optgroup label="{{im.process_name}}">
+                                {% for data in sub_process_data %}
+                                    <option value="{{data.id}}"
+                                    {% for p in escalation_process_name  %}
+                                      {% if p.process_name_level_id == data.id %} selected="" 
+                                    {% endif %}
+                                    {% endfor %}
+                                    > {{data.sub_process_name}}  > {{data.child_process_name}}</option>
+                                {% endfor %}
+                            {% endfor %}
+                              </select>
+                             
+                            </div>  </optgroup></select></div> 
+
+            <input  type="hidden" >
+            
+                {% for field in form %}
+
+            <div class="col-md-4">
+
+                <div class="form-group">
+
+                <span>{{field.label}} 
+                  {% if field.field.required %}
+                   <span class="error"> *</span>
+                   {% endif %}</span> 
+                  {{ field }}
+                
+             </div>   
+              </div>
+            {% endfor %}
+       
+        
+                </div>
+                <div class="form-group tlc">
+                  
+                        <input name="" type="submit" value="Submit" class="btn btn-primary bl-btn-sm" id="submitbtn"></div>
+          </form>
+      </div>
+  </section>
+</div>
+
+
+
+{% endblock %}

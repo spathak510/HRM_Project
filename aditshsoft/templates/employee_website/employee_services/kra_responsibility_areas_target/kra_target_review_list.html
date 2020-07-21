@@ -1,0 +1,124 @@
+{% extends "layout/website_layout.html" %}
+{% load templatetag %}
+{% block content %}
+
+<div class="content-wrapper" style="min-height: 916px;">
+
+      <section class="content-header">
+        <h1>
+          KRA & Targets Review 
+          <small></small>
+        </h1>
+        <ol class="breadcrumb">
+          <li><a href="{% url 'admindashboard' %}"><i class="fa fa-dashboard"></i> Home</a></li>
+          <li><a href="#"> KRA & Targets Review </a></li>
+          <li class="active"></li>
+        </ol>
+      </section>
+      
+      <section class="content">
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="box">
+              <div class="box-header">
+                 <div class="row">
+                  <form action="" method="GET" > 
+                    <select name="filter_type" onchange='this.form.submit()'>
+                      <option value=""> Select Option</option>
+                      {% get_permission_data_from 3 3 as permission_menu %}
+
+                      {% if permission_menu.view %}
+                          <option value="1"> Current  Month </option>
+                      {% endif %}
+
+                      {% get_permission_data_from 3 4 as permission_menu %}
+
+                       {% if permission_menu.view %}
+                          <option value="2"> Previous  Months </option>
+                      {% endif %}
+                    </select>
+                    </form>
+                  </div>
+              <div class="box-body">
+              <div class='table-responsive'> <div style="overflow-x:auto;">
+                <table id="example2" class="table table-bordered table-hover">
+                  <thead>  
+                    <tr>
+
+                        <th> Sr.No </th>
+                        <th> Month & Year   </th>
+                        <th> Employee id   </th>
+                        <th> Employee Name </th>
+                        <th> Designation  </th>
+                        <th> Department  </th>
+                        <th> Location </th>
+                        <th> KRA Type </th>
+                        <th> KRA Frequency </th>
+                        <th> KRA Details </th>
+                        <th> KRA Fulfilment </th>
+                        <th> Reporting Officer </th>
+                        <th> Approval Status </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                      {% if responselistquery %}
+                           {% for data in responselistquery %}
+                             <tr>
+                              <td>
+                                <strong>{{ responselistquery.start_index|add:forloop.counter0 }}</strong>
+                              </td>
+                              <td>
+                                {{ data.month_and_year|date:"M Y" }}
+                              </td>
+                              <td>{{ data.employee_id }}</td>
+                              <td>{{ data.employee_names }}</td>
+                              <td>{{ data.designation.designation }}</td>
+                              <td>
+                                {{ data.department }}
+                              </td>
+                              <td>
+                                {{ data.location }}
+                              </td>
+                              <td>
+                                {{ data.kra_type }}
+                              </td>
+
+                              <td>
+                                {{ data.kra_frequency }}
+                              </td>
+
+                              <td>
+                                {{ data.kra_details }}
+                              </td>
+                              
+                              <td>
+                                {{ data.kra_fulfilment }}
+                              </td>
+                              <td>
+                                {{ data.reporting_officer.name }}
+                              </td>
+                              <td>
+                                {{ data.get_status_display }}
+                              </td>
+                            
+                          </tr>
+                          {% endfor %}
+                      {% else %}
+                      <tr><td></td></tr>
+                      {% endif %}
+                  </tfoot>
+                </table>
+              </div>
+            </div>
+            <!-- /.box -->
+          </div>
+                  <div class="row">
+              {% include "layout/manage_pagination.html" %}
+          </div>
+        </div>
+        <!-- /.row -->
+      </section>
+</div>
+
+{% endblock %}
+

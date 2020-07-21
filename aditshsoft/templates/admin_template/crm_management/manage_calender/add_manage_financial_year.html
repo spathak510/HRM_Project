@@ -1,0 +1,103 @@
+{% extends "layout/admin_layout.html" %}
+{% load static %}
+{% load staticfiles %}
+
+{% block content %}
+
+<div class="content-wrapper" style="min-height: 946px;">
+  <section class="content">
+    <div class="box box-default">
+      <div class="box-header with-border">
+
+          {% if financialid %}
+            <h3 class="box-title">Update Financial Year</h3>
+          {% else %}
+            <h3 class="box-title">Add Financial Year</h3>
+          {% endif %}
+        
+      </div>
+      <div class="box-body">
+          <form action="" method="post" id="financial_form">
+        <div class="row">
+
+          {% csrf_token %}
+
+            <input type="hidden" name="financialid" value="{{financialid}}">
+
+            <div class="col-md-4">
+              <div class="form-group">
+                  <label>From Month </label>
+                  <select name="from_month" id="from_month" class="form-control">
+
+                        <option value="" >Select From Month</option>
+                        {% for moth in month_list %}
+                            <option value="{{moth.0}}" {% if moth.0 == data.from_month %} selected="" {% endif %}>{{moth.1}}</option>
+                        {% endfor %}
+                  </select> 
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                  <label>From Year </label>
+                    <select name="from_year" class="form-control" id="from_year">
+                          <option value="" >Select From  Year</option>
+                          {% for moth in year_list %}
+                              <option value="{{moth}}" {% if moth == data.from_year %} selected="" {% endif %}>{{moth}}</option>
+                          {% endfor %}
+                    </select> 
+              </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>To Month  </label>
+                        <select name="to_month" id="to_month" class="form-control">
+                            <option value="" >Select To Month</option>
+                            {% for moth in month_list %}
+                                <option value="{{moth.0}}" {% if moth.0 == data.to_month %} selected="" {% endif %}>{{moth.1}}</option>
+                            {% endfor %}
+                        </select>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="form-group">
+                      <label>To Year </label>
+                      <select name="to_year" class="form-control" id="to_year">
+                        <option value="" >Select To  Year</option>
+                          {% for moth in year_list %}
+                            <option value="{{moth}}" {% if moth == data.to_year %} selected="" {% endif %}>{{moth}}</option>
+                          {% endfor %}
+                      </select> 
+                </div>
+                <label id="to_year-error" class="error" for="to_year"></label>
+            </div>
+
+
+
+            <div class="col-md-4">
+                <div class="form-group">
+                      <label> Is Active  </label>
+                      
+                      {% if financialid %}
+                          <input type="checkbox"   name="is_active" {% if data.is_active %} checked="" {% endif %}>
+                      {% else %}
+                          <input type="checkbox"   name="is_active" checked="">
+                      {% endif %}
+                </div>
+            </div>
+
+        </div>
+        <div class="form-group">
+                  {% if financialid %}
+                        <input name="" type="submit" value="Update" class="btn btn-primary" id="financial_form_btn"> 
+                        {% else %}
+                        <input name="" type="submit" value="Submit" class="btn btn-primary" id="financial_form_btn"> 
+                  {% endif %}
+                </div>
+          </form>
+      </div>
+  </section>
+</div>
+
+{% endblock %}

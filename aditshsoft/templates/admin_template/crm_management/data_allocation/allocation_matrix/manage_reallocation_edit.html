@@ -1,0 +1,54 @@
+
+{% extends "layout/admin_layout.html" %}
+{% load static %}
+{% load staticfiles %}
+{% block content %}
+
+<div class="content-wrapper" style="min-height: 946px;">
+    <section class="content">
+      <div class="box box-default">
+        <div class="box-header with-border">
+            <h3 class="box-title">Add/Edit Manage Reallocation</h3>
+        </div>
+        <div class="box-body">
+          <form action="" method="post" id="manage_lead_reallocation_form" enctype="multipart/form-data">
+              <div class="row">
+                  {% csrf_token %}
+                  {% for field in form %}
+                    <div class="col-md-4">
+                        {% if  field.label == "Process Name" %}
+                          <div class="form-group">
+                              {% get_reallocated_process_name  details.id  as reallocated_process_name %}
+                              <label>Process Name <span class="error"> *</span></label>
+                              <select name="process_name" class="form-control" multiple="" required="" maxlength="200" id="id_process_name">
+                                {% for p in get_user_lead_allocation %}
+                                    <option value="{{p.process_name_id}}"
+                                      {% for s in reallocated_process_name %}
+                                        {% if p.process_name_id == s.process_name_id %}
+                                            selected=""
+                                        {% endif %} 
+                                      {% endfor %}
+                                    >{{p.process_name.process_name}}  > {{p.process_name.sub_process_name}}  > {{ p.process_name.child_process_name}}</option>
+                                {% endfor %}
+                              </select>
+                          </div>
+                        {% else %}
+                          <div class="form-group">
+                              <label>{{ field.label }} {% if field.field.required %}
+                              <span class="error"> *</span>
+                              {% endif %}</label>
+                              {{ field }}
+                          </div>
+                        {% endif %}
+                    </div>
+                  {% endfor %}
+              </div>
+              <div class="form-group">   
+                  <input name="" type="submit" value="Submit" class="btn btn-primary" id="submitbtn">
+              </div>
+          </form>
+      </div>
+  </section>
+</div>
+
+{% endblock %}

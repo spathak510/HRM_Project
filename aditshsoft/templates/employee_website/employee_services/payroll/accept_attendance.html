@@ -1,0 +1,165 @@
+{% extends "layout/website_layout.html" %}
+{% load templatetag %}
+{% block content %}
+
+<div class="content-wrapper" style="min-height: 916px;">
+    <section class="content-header">
+      <h1>
+        Accept Attendance 
+        <small></small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="{% url 'admindashboard' %}"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="#"> Accept Attendance   </a></li>
+        <li class="active"></li>
+      </ol>
+    </section>
+
+    <section class="content">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="box">
+            <div class="box-header">
+                  <div class="row">
+                      <!-- <form method="POST" id="allocate_data">
+                          {% csrf_token %}
+                          <div class="col-md-3">
+                              <label> Status </label>
+                              <div class="form-group">
+                                  <select name="status" class="form-control" id="">
+                                   <option value="">Select Status</option>
+                                  {% for user in stauts %}
+                                      <option value="{{user.0}}">{{user.1}}
+                                      </option>
+                                  {% endfor %}
+                                  </select>
+                              </div>
+                          </div>
+                          <input type="hidden" name="bul_data" id="bul_data">
+                          <div class="col-md-3">
+                              <div class="form-group">
+                               <input type="button" id="upload_data" value="GO" class="btn btn-primary">
+                              </div>
+                          </div>
+                      </form> -->
+                  </div>
+            <div class="box-body">
+            <div class='table-responsive'> <div style="overflow-x:auto;">
+              <table id="example2" class="table table-bordered table-hover">
+                  <thead>
+                      <tr>
+                          <!-- <td> <input type="checkbox" name="select_all" id="select_all"> Select All </th> </td> -->
+                          <th> Location  </th>
+                          <th> Department </th>
+                          <th> Month and Year  </th>
+                          <th> No of Days in Month   </th>
+                          <th> Weekly Off </th>
+                          <th> Monthly Off </th>
+                          <th> Holidays </th>
+                          <th> Working Days </th>
+                          <th> Employee id </th>
+                          <th> Employee Name </th>
+                          <th> Days Worked  </th>
+                          <th> Leaves taken </th>
+                          <th> Days Absent  </th>
+                          <th> Status  </th>
+                          <th> Action  </th>
+                      </tr>
+                  </thead>
+                <tbody>
+                    {% comment %} {% if responselistquery %}
+                         {% for data in responselistquery %}
+                           <tr>
+                            <td>
+                              {{ data.location }}
+                            </td>
+                            <td> {{ data.department }} </td>
+                             <td> {% now "F" %} and  {% now "Y" %} </td>
+                            {% get_number_of_days_month as total_days %}
+                            <td> {{total_days}} </td>
+                            {% get_weekly_off_days as weekly_off %}
+                            <td>  {{weekly_off}} </td>
+
+                            {% get_monthly_off_days as monthly_off %} 
+                            <td> {{monthly_off}} </td>
+
+                            {% get_monthly_holidays_days as holidays_off %}
+                             <td> {{ holidays_off }} </td>
+                            <td> {% get_working_days total_days  weekly_off  monthly_off  holidays_off %}</td>
+                            <td> {{ data.id }} </td>
+                            <td> {{ data.name }} </td>
+                            {% days_worked  data.id total_days as total_worked_or_absent %} 
+
+                            <td> {{ total_worked_or_absent.get_user_total_attendance }} </td>
+                            
+                            {% get_current_month_approved_leaves data.id as approved_leaves %}
+                            <td>
+                            {{ approved_leaves.total_leaves }}</td>
+                            <td> {{ total_worked_or_absent.get_user_total_absent }} </td>
+
+                            <td > {% get_current_month_approved_status data.id %} </td> 
+                        </tr>
+                        {% endfor %}
+                    {% else %}
+                    <tr><td></td></tr>
+                    {% endif %} {% endcomment %}
+                    {% if responselistquery %}
+                         {% for data in responselistquery %}
+                            {% for d in get_all_data %}
+                            
+                           <tr>
+                            <td>{{ data.location }}</td>
+                    <td>{{ data.department }}</td>
+                    <td>{{data.login_time|date:"M Y"}}</td>
+                    {% get_number_of_days_month as total_days %}
+                            <td> {{total_days}} </td>
+                    
+                    {% get_weekly_off_days as weekly_off %}
+                            <td>  {{weekly_off}} </td>
+                    {% get_monthly_off_days as monthly_off %} 
+                            <td> {{monthly_off}} </td>
+
+                   
+                    <td> holi {{ d1.holidays_type }}</td>
+                    
+                   
+                    <td>6</td>
+                    <td>{{ data.employee_id }}</td>
+                    <td>{{ data.employee_names }}</td>
+                     {% days_worked  data.id total_days as total_worked_or_absent %} 
+                            <td> {{ total_worked_or_absent.get_user_total_attendance }} </td>
+                    
+                            {% get_current_month_approved_leaves data.id as approved_leaves %}
+                            <td>
+                            {{ approved_leaves.total_leaves }}</td>
+                            <td> {{ total_worked_or_absent.get_user_total_absent }} </td>
+                        <td>{{ data.attendance_status }}</td>
+
+                        <td><a href="{% url 'crm_employee_services_payroll_accept_attendance_update' data.id %}"> Update </a>
+                          {% if get_approval_level %}
+                                     <a href="{% url 'crm_employee_services_payroll_accept_attendance_update' data.id %}"> Update </a>
+                                    {% endif  %}
+                        </td>
+                        </tr>
+                            {% endfor %}
+                        {% endfor %}
+                    {% else %}
+                    <tr><td></td></tr>
+                    {% endif %}
+
+
+                   
+                </tfoot>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+            {% include "layout/manage_pagination.html" %}
+        </div>
+      </div>
+    </section>
+</div>
+{% include "layout/admin_message.html" %}
+{% endblock %}
+

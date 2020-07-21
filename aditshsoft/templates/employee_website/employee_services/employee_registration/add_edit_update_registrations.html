@@ -1,0 +1,339 @@
+{% extends "layout/website_layout.html" %}
+{% block content %}
+
+  <div class="content-wrapper" style="min-height: 946px;">
+    <section class="content">
+      <div class="box box-default">
+        <div class="box-header with-border">
+          <h3 class="box-title"> Add Update Registrations </h3>
+        </div>
+        <div class="box-body">
+          <form action="" method="post" id="user_registration_personal_details" enctype="multipart/form-data">
+            {% csrf_token %}
+              <div class="row">
+                <div class="box-header with-border">
+                  <h3 class="box-title"> Personal Details </h3>
+                </div>
+                    {% for field in personal_details %}
+                        <div class="col-md-4">
+                            <div class="form-group">
+                              <label>{{ field.label }}  </label>
+                                {{ field }}
+                           </div>   
+                        </div>
+                    {% endfor %}
+              </div>
+              <div class="row">
+                <div class="box-header with-border">
+                  <h3 class="box-title"> Family Details  </h3>
+                </div>
+                <div class="with-border">
+                    <h4 class="box-title color-famly"> Mother   </h4>
+                      {% for field in family_detail_mother %}
+                          <div class="col-md-6">
+                              <div class="form-group">
+                                <label>{{ field.label }}  </label>
+                                  {{ field }}
+                             </div>   
+                          </div>
+                      {% endfor %}
+
+                    <div class="with-border">
+                    <h4 class="box-title color-famly"> Father   </h4>
+                    </div>
+
+                      {% for field in family_detail_father %}
+                          <div class="col-md-6">
+                              <div class="form-group">
+                                <label>{{ field.label }}  </label>
+                                  {{ field }}
+                             </div>   
+                          </div>
+                      {% endfor %}
+                    <div class="with-border">
+                    <h4 class="box-title color-famly"> Spouse   </h4>
+                    </div>
+
+                      {% for field in family_detail_spouse %}
+                          <div class="col-md-6">
+                              <div class="form-group">
+                                <label>{{ field.label }}  </label>
+                                  {{ field }}
+                             </div>   
+                          </div>
+                      {% endfor %}
+
+              <div class="with-border">
+                    <h4 class="box-title color-famly"> Children   </h4>
+                    </div>
+                    <div id="family_detail_children">
+                      {% for field in family_detail_children %}
+                          <div class="col-md-6">
+                              <div class="form-group">
+                                <label>{{ field.label }}  </label>
+                                  {{ field }}
+                             </div>   
+                          </div>
+                      {% endfor %}
+                    </div>
+                   <a href="javascript:void(0)" id="add_more_family_children" style="color: red"  class="ad_more">Add More </a>
+
+                     <div class="with-border">
+                    <h4 class="box-title color-famly"> Others       Relationship   </h4>
+                    </div>
+                    <div id="other_family_relation">
+                      {% for field in other_family_relationship %}
+                          <div class="col-md-6">
+                              <div class="form-group">
+                                <label>{{ field.label }}  </label>
+                                  {{ field }}
+                             </div>   
+                          </div>
+                      {% endfor %}
+                    </div>
+                    <a href="javascript:void(0)" id="add_more_other_relationship" style="color: red"  class="ad_more">Add More </a>
+                </div>
+              </div>
+              <div>
+
+              <div class="row">
+                  <div class="box-header with-border">
+                    <h3 class="box-title"> Medical History  </h3>
+                  </div>
+                  <div id="append_medical_history">
+                    {% for field in medical_history %}
+                        <div class="col-md-6">
+                            <div class="form-group">
+                              <label>{{ field.label }}  </label>
+                                {{ field }}
+                           </div>   
+                        </div>
+                    {% endfor %}
+                    </div>
+                    <a href="javascript:void(0)" id="append_add_more_sub_field" style="color: red"  class="ad_more">Add Medical </a>
+              </div>
+
+              <div class="row">
+                <div class="box-header with-border">
+                  <h3 class="box-title"> Correspondance Address   </h3>
+                </div>
+
+                    {% for field in correspondence_address %}
+                        <div class="col-md-4">
+                            <div class="form-group">
+                              <label>{{ field.label }}  </label>
+                                {{ field }}
+                           </div>   
+                        </div>
+                    {% endfor %}
+              </div>
+
+              
+              <div class="row">
+                <div class="box-header with-border">
+                  <h3 class="box-title"> Permanent Address    </h3>
+                </div>
+                    {% for field in permanent_address %}
+                        <div class="col-md-4">
+                            <div class="form-group">
+                              <label>{{ field.label }}  </label>
+                                {{ field }}
+                           </div>   
+                        </div>
+                    {% endfor %}
+              </div>
+
+
+              <div class="row">
+                <div class="box-header with-border">
+                  <h3 class="box-title"> Joining Details    </h3>
+                </div>
+                  {% for field in joining_detail %}
+                      <div class="col-md-4">
+                          <div class="form-group">
+                            <label>{{ field.label }}  </label>
+                              {{ field }}
+                         </div>   
+                      </div>
+                  {% endfor %}
+              </div>
+
+
+              <div class="row">
+                <div class="box-header with-border">
+                  <h3 class="box-title"> Educational Qualification </h3>
+                </div>
+                <div id="append_educationale_qualification">
+                    {% for field in qualification %}
+                        <div class="col-md-4">
+                            <div class="form-group">
+                              <label>{{ field.label }}  </label>
+                                {{ field }}
+                           </div>   
+                        </div>
+                    {% endfor %}
+                </div>
+                  <a href="javascript:void(0)" id="append_add_more_qualification" class="ad_more" style="color: red" >Add Qualification</a>
+              </div>
+
+              <div class="row">
+                <div class="box-header with-border">
+                  <h3 class="box-title"> Professional Journey   </h3>
+                </div>
+                <div id="append_professional_journey">
+                    {% for field in professional_journey %}
+                        <div class="col-md-12">
+                            <div class="form-group">
+                              <label>{{ field.label }}  </label>
+                                {{ field }}
+                           </div>   
+                        </div>
+                    {% endfor %}
+                </div>
+                <a href="javascript:void(0)" id="append_add_more_professional_journey" class="ad_more" style="color: red" >Add Professional </a>
+              </div>
+
+             
+              <div class="row">
+                <div class="box-header with-border">
+                  <h3 class="box-title"> Salary Structutre   </h3>
+                </div>
+                <div id="append_salary_structure">
+                    {% for field in salary_structutre %}
+                        <div class="col-md-4">
+                            <div class="form-group">
+                              <label>
+                                {{ field.label }}  </label>
+                                {{ field }}
+                           </div>   
+                        </div>
+                    {% endfor %}
+                    <div class="form-group">
+                      <label>Total </label><span id="total_1"></span>           
+                       <label>Monthly </label><span id="monthly_1"></span>        
+                       <label>Annually </label><span id="annually_1"></span>
+                    </div> 
+                </div>
+
+                <a href="javascript:void(0)" id="append_add_more_sal_stru" class="ad_more" style="color: red" >Add Salary </a>
+              </div>
+                <div class="row">
+                <div class="box-header with-border">
+                  <h3 class="box-title">   Perquisites </h3>
+                </div>
+                <div id="append_Deduction">
+                    {% for field in deduction_perquisites %}
+                        <div class="col-md-4 {% if not field.label == 'Applicablitity' %} deduction_perquisites_yes_no_1 {% endif %}">
+                            <div class="form-group">
+                                  <label>
+                                    {{ field.label }}  </label>
+                                    {{ field }}
+                            </div>
+
+                        </div>
+                    {% endfor %}
+                     <div class="form-group">
+                      <label>Total </label><span id="total1_1"></span>           
+                       <label>Monthly </label><span id="monthly1_1"></span>        
+                       <label>Annually </label><span id="annually1_1"></span>
+                    </div>
+                </div>
+                    <a href="javascript:void(0)" id="append_add_deduction" class="ad_more" style="color: red" >Add More </a>
+              </div>
+            <div class="row">
+                <div class="box-header with-border">
+                  <h3 class="box-title">  Deduction </h3>
+                </div>
+                <div id="append_Deduction">
+                    {% for field in deduction %}
+                        <div class="col-md-4 {% if not field.label == 'Applicablitity' %} deduction_perquisites_yes_no_1 {% endif %}">
+                            <div class="form-group">
+                                  <label>
+                                    {{ field.label }}  </label>
+                                    {{ field }}
+                            </div>
+
+                        </div>
+                      
+                    {% endfor %}
+                     <div class="form-group">
+                      <label>Total </label><span id="total1_1"></span>           
+                       <label>Monthly </label><span id="monthly1_1"></span>        
+                       <label>Annually </label><span id="annually1_1"></span>
+                    </div>
+                </div>
+                    <a href="javascript:void(0)" id="append_add_deduction_1" class="ad_more" style="color: red" >Add More </a>
+              </div>
+
+
+
+              <div class="row">
+                <div class="box-header with-border">
+                  <h3 class="box-title"> Bank Details    </h3>
+                </div>
+                    {% for field in bank_detail %}
+                        <div class="col-md-4">
+                            <div class="form-group">
+                              <label>{{ field.label }}  </label>
+                                {{ field }}
+                           </div>   
+                        </div>
+                    {% endfor %}
+              </div>
+
+              <div class="row">
+                <div class="box-header with-border">
+                  <h3 class="box-title"> References </h3>
+                </div>
+                 <div id="append_references">
+                    {% for field in references %}
+                        <div class="col-md-4">
+                            <div class="form-group">
+                              <label>{{ field.label }}  </label>
+                                {{ field }}
+                           </div>   
+                        </div>
+                    {% endfor %}  
+                  </div>
+                  <a href="javascript:void(0)" id="append_add_references" class="ad_more" style="color: red" > Add References </a>
+              </div> 
+
+         <div class="row">
+                <div class="box-header with-border">
+                  <h3 class="box-title"> Asset Allocated </h3>
+                </div>
+                <div id="asset_allocated_id">
+                    {% for field in asset_allocated %}
+                        <div class="col-md-6">
+                            <div class="form-group">
+                              <label>{{ field.label }}  </label>
+                                {{ field }}
+                           </div>   
+                        </div>
+                    {% endfor %}
+                </div>
+                <a href="javascript:void(0)" id="add_more_asset_allocated" class="ad_more" style="color: red" >Add More </a>
+              </div>
+              <div class="row">
+                <div class="box-header with-border">
+                  <h3 class="box-title"> Access Controls </h3>
+                </div>
+                <div id="append_document">
+                    {% for field in access_control %}
+                        <div class="col-md-6">
+                            <div class="form-group">
+                              <label>{{ field.label }}  </label>
+                                {{ field }}
+                           </div>   
+                        </div>
+                    {% endfor %}
+                </div>
+              </div>
+        <div class="form-group">
+        <input type="hidden" name="one_form" value="one_form">
+        <input name="" type="submit" value="Submit" class="btn btn-primary" id="submitbtn"></div>
+      </div>
+          </form>
+  </section>
+</div>
+{% endblock %}

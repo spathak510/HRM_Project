@@ -1,0 +1,186 @@
+{% extends "layout/admin_layout.html" %}
+{% load static %}
+{% load staticfiles %}
+
+{% block content %}
+
+<div class="content-wrapper" style="min-height: 946px;">
+  <section class="content">
+    <div class="box box-default">
+
+      <div class="box-body">
+      <form action="" method="post" id="lead_allocation_matrix">
+        <div class="row">
+
+          {% csrf_token %}
+
+            <input type="hidden" name="allocationsetuid" value="{{allocationsetuid}}">
+            <div class="col-md-4">
+                  <div class="form-group">
+                       <label> User </label>
+                       <select name="user" class="form-control" id="user_id" required="">
+                            <option value="" selected="">Select User </option>
+                            {% for im in user_set_up %}
+                                <option value="{{im.id}}" {% if im.id == data.user_id %} selected="" {% endif %}>{{im.name}}</option>
+                            {% endfor %}
+                      </select> 
+                  </div>
+
+            </div>
+
+            <div class="col-md-4">
+                  <div class="form-group">
+                       <label> Department </label>
+                        <input type="text" class="form-control" id="Department"   maxlength="200" disabled="" value="{{data.user.department.department}}">
+                  </div>
+
+            </div>
+
+            <div class="col-md-4">
+                  <div class="form-group">
+                       <label> Designation </label>
+                        <input type="text" class="form-control" id="Designation"  maxlength="200" disabled="" value="{{data.user.designation.designation}}">
+                  </div>
+
+            </div>
+
+            <div class="col-md-4">
+                  <div class="form-group">
+                       <label> Responsibilities </label>
+                        <input type="text" class="form-control" id="Responsibilities" maxlength="200" disabled="" value="{{data.user.responsibilities.responsibilities}}">
+                  </div>
+
+            </div>
+
+             <div class="col-md-4">
+                  <div class="form-group">
+                       <label> Branches Id </label>
+                        <select name="bind_branches_name" class="form-control" id="bind_branches_name" multiple="" disabled="">
+                        {% for p in data.user.usermultiplebranch_set.all %}
+                          <option>{{p.branch_allocated}}</option>
+                        {% endfor %}
+                        </select>
+                  </div>
+
+            </div>
+
+            <div class="col-md-4">
+                  <div class="form-group">
+                       <label> Product Category </label>
+                       <select name="product_category" class="multiselect form-control" required="" multiple="" id="product_category">
+                            <option value="" >Select Product Category </option>
+                            {% for im in product_category %}
+                                <option value="{{im.id}}" 
+                                {% for p in get_product_category %}
+                                  {% if p.product_category_id == im.id %} selected="" 
+                                {% endif %}
+                                {% endfor %}>{{im.product_category}}</option>
+                            {% endfor %}
+                      </select> 
+                  </div>
+            </div>
+
+            <div class="col-md-4">
+                  <div class="form-group">
+                       <label> Product Type </label>
+                       <select name="product" class="multiselect form-control" required="" multiple="" id="product">
+                            <option value="" >Select Product Type </option>
+                            {% for im in product_set_up %}
+                                <option value="{{im.id}}" 
+                                {% for p in get_product_type %}
+                                  {% if p.product_type_id == im.id %} selected="" 
+                                {% endif %}
+                                {% endfor %}
+                                >{{im.product_type}}</option>
+                            {% endfor %}
+                      </select> 
+                  </div>
+            </div>
+            <div class="col-md-4">
+                  <div class="form-group">
+                       <label> Product Name </label>
+                       <select name="product_name" class="multiselect form-control" required="" multiple="" id="product_name">
+                            <option value="" >Select Product Name </option>
+                            {% for im in product_name %}
+                                <option value="{{im.id}}" 
+                                {% for p in get_product_name %}
+                                  {% if p.product_name_id == im.id %} selected="" 
+                                {% endif %}
+                                {% endfor %}>{{im.product_name}}</option>
+                            {% endfor %}
+                      </select> 
+                  </div>
+            </div>
+
+            <div class="col-md-4">
+                  <div class="form-group">
+                       <label> Client Type </label>
+                       <select name="client_type" class="multiselect form-control" required="" multiple="" id="client_type">
+                            <option value="" >Select Client Type </option>
+                            {% for im in client_type %}
+                                testing{{im.client_type}}
+                                <option value="{{im.id}}" 
+                                {% for p in  get_client_type %}
+                                  {% if p.client_type_id == im.id %} selected="" 
+                                {% endif %}
+                                {% endfor %}>{{im}}</option>
+                            {% endfor %}
+                      </select> 
+                  </div>
+            </div>
+
+
+            <div class="col-md-4">
+                  <div class="form-group">
+                       <label> Client Category </label>
+                       <select name="client_category" class="multiselect form-control" required="" multiple="" id="client_category">
+                            <option value="" >Select Client Category </option>
+                            {% for im in client_category %}
+                                <option value="{{im.id}}" 
+                                  {% for p in get_client_category  %}
+                                    {% if p.client_category_id == im.id %} selected="" 
+                                  {% endif %}
+                                  {% endfor %}
+                                >{{im.client_category}}</option>
+                            {% endfor %}
+                      </select> 
+                  </div>
+            </div>
+              <div class="col-md-4">
+                  <div class="form-group">
+                       <label> City </label>
+                        {% if  allocationsetuid %}
+                           <select name="city" class="multiselect form-control" multiple="" required="" id="city_ids">
+                                <option value="" selected="">Select City </option>
+                                  {% for im in city %}
+                                    <option value="{{im.city.id}}" 
+                                        {% for p in get_all_cities %}
+                                          {% if p.city_id == im.city.id %} 
+                                              selected="" 
+                                          {% endif %}
+                                        {% endfor %}
+                                        >
+                                      {{im.city.name}}
+                                    </option>
+                                  {% endfor %}
+                          </select> 
+                        {% else %}
+                         <select name="city" class="form-control" multiple="" required="" id="city_ids">
+                        </select>
+                        {% endif %}
+                  </div>
+            </div>
+        </div>
+       <div class="form-group">
+              {% if allocationsetuid %}
+                <input name="" type="submit" value="Update" class="btn btn-primary" id="allow_cation_set_up_btn"> 
+              {% else %}
+                <input name="" type="submit" value="Update" class="btn btn-primary" id="allow_cation_set_up_btn"> 
+              {% endif %}
+              </div>
+          </form>
+      </div>
+  </section>
+</div>
+
+{% endblock %}

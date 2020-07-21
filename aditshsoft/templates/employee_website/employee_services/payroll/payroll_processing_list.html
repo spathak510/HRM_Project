@@ -1,0 +1,214 @@
+{% extends "layout/website_layout.html" %}
+{% load templatetag %}
+{% block content %}
+
+<div class="content-wrapper" style="min-height: 916px;">
+    <section class="content-header">
+      <h1>
+        Payroll Processing 
+        <small></small>
+      </h1>
+      <ol class="breadcrumb">
+        <li>
+          <a href="{% url 'admindashboard' %}"><i class="fa fa-dashboard"></i> Home </a>
+        </li>
+        <li> <a href="#"> Payroll Processing </a> </li>
+        <li class="active"> </li>
+      </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="box">
+            
+                <div class="box-body">
+
+                        <div class="row">
+                                <div class="row">
+                    <form method="get" id="customersearch" action="">
+                                <div class="col-md-3">
+                                <label> Month And Year </label>
+                                <div class="form-group">
+                                    <select name="month_and_year" class="form-control" id="">
+                                     <option value="">Select Month And Year</option>
+                                    {% for user in responselistquery %}
+                                        <option value="login_time">{{user.login_time|date:"M Y"}}
+                                        </option>
+                                    {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                               {% csrf_token %}
+                            <div class="col-md-3">
+                                <label> Location </label>
+                                <div class="form-group">
+                                    <select name="location" class="form-control" id="">
+                                     <option value="">Select Location</option>
+                                    {% for user in responselistquery %}
+                                        <option value="{{user.location}}">{{user.location}}
+                                        </option>
+                                    {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                            <div class="col-md-6">
+                                <button type="submit" class="btn btn-primary" style="margin-top: 22px;"> Submit </button>
+                                
+                                </div>
+                            </div>
+                        </form>
+                </div>
+
+                     
+              </div>
+                       <div class="box-body">
+            <div class='table-responsive'> <div style="overflow-x:auto;">
+              <table id="example2" class="table table-bordered table-hover">
+                  <thead>
+                      <tr>
+                        {% comment %} <th> <input type="checkbox" name="select_all" id="select_all"> Select All </th>              {% endcomment %}
+                        {% comment %} <th>  </th>              {% endcomment %}
+                      <th> Sr.No </th>
+                       <th> Location </th>
+                       <th> Department </th>
+                       <th> Month And Year </th>
+                        <th>Employee ID</th>
+                        <th>Employee Names</th>
+                       <th> Days In Month</th> 
+                       <th> Monthly Off</th>
+                       <th> Working Days</th>
+                      <th>  Holidays</th>
+                      <th> Leaves  </th>
+                       <th> Leave Type</th> 
+                       <th> Leave WithOut Pay</th> 
+                      <th>  Basic Pay</th>
+                       <th> HRA  </th>
+                       <th>  Allowances </th>
+                       <th> Conveyance </th>
+                       <th> Claims</th> 
+                        <th>Reimbursement </th>
+                      <th>  Incentive </th>
+                       <th> Performance Bonus </th>
+                       <th> Total </th>
+                      <th>  Basic Pay </th>
+                      <th>  HRA   </th>
+                      <th>  Allowances  </th>
+                      <th>  conveyance </th>
+                      <th>  claims  </th>
+                      <th>  Reimbursement </th>
+                       <th> Incentive </th>
+                       <th> Performance Bonus </th>
+                       <th> Total </th>
+                       <th> PF </th>
+                       <th> ESIC </th>
+                        <th>Absent </th>
+                       <th> Income Tax</th>
+                      <th>  Loan Recovery </th>
+                      <th>  Total </th> 
+                      <th>  Net Salary Payable </th>
+                      <th>  Bank Account No</th>
+                      <th> Bank Name  </th>
+                      <th> Branch </th>
+                      <th>   IFSC Code </th>
+                      <th>  Mode Of Payment </th>
+                    
+                       
+                       <th> Status </th>
+                     <th> Action  </th>
+                  </tr> 
+            </thead>
+                <tbody>
+                    {% if responselistquery %}
+                         {% for data in responselistquery %}  
+                          <tr>
+                          {% comment %} <td>
+                              <input type="checkbox" name="check_box_select[]" class="checkboxes" value="{{data.id}}"></td>
+                            <td> {% endcomment %}
+                              <td>
+                                  <strong>
+                                  {{ responselistquery.start_index|add:forloop.counter0 }}
+                                </strong> </td> 
+
+                                <td> {{ data.location }} </td>
+                              <td>{{ data.department }}</td>
+                              <td>  
+                               {{data.login_time|date:"M Y"}}
+                              
+                              {{ data.month_and_year.month_and_year }} </td>
+                              <td>{{ data.employee_id }}</td>
+                              <td> {{ data.employee_names }} </td>
+                              <td>
+                                     {% get_number_of_days_month as total_days %}
+                                          {{total_days}}
+                              {{ data.days_in_month}}</td> 
+                            
+                               {% get_monthly_off_days as monthly_off %} 
+                            <td> {{monthly_off}} </td>
+                                
+                              <td> 6 {{ data.working_days }}</td>
+                      <td>  Holidays</td>
+                      <td> Leaves  </td>
+                       <td> Leave Type</td> 
+                       <td> 0</td> 
+                      <td>  5000 </td>
+                       <td> 2000  </td>
+                       <td>  1500 </td>
+                       <td> 1000 </td>
+                       <td> Claims</td> 
+                        <td>Reimbursement </td>
+                      <td>  400 </td>
+                       <td> 3500 </td>
+                       <td> 13400 </td>
+                      <td>  5000 </td>
+                      <td>  2000   </td>
+                      <td>  Allowances  </td>
+                      <td>  1500 </td>
+                      <td>  claims  </td>
+                      <td>  Reimbursement </td>
+                       <td> 400 </td>
+                       <td> 3500 </td>
+                       <td> 12400 </td>
+                       <td> 1000 </td>
+                       <td> 300 </td>
+                        <td>500 </td>
+                       <td> 1500</td>
+                      <td>  200 </td>
+                      <td>  3500 </td> 
+                      <td>  29300 </td>
+                      {% for d in get_bank %}
+                      <td> {{d.bank_account_number}} </td>
+                      <td> {{d.bank_name}}  </td>
+                      <td> {{d.branch}} </td>
+                      <td>   {{d.ifscc_code}}</td>
+                      {% endfor %}
+                      <td>  2 </td>
+                    
+                       
+                       <td> {{data.get_attendance_status_display}} </td>
+                              <td> <a href="{% url 'crm_employee_services_attendance_update' data.id %}"> Update </a></td>
+ 
+                          </tr>
+                        {% endfor %}  
+                        
+                    {% else %}
+                    <tr><td></td></tr>
+                    {% endif %}
+                </tfoot>
+              </table>
+            </div>
+          </div>
+          <!-- /.box -->
+        </div>
+                <div class="row">
+            {% include "layout/manage_pagination.html" %}
+        </div>
+      </div>
+      <!-- /.row -->
+    </section>
+    <!-- /.content -->
+</div>
+{% endblock %}
+

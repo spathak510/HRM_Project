@@ -1,0 +1,118 @@
+{% extends "layout/admin_layout.html" %}
+{% load static %}
+{% load staticfiles %}
+
+{% block content %}
+
+<div class="content-wrapper" style="min-height: 946px;">
+  <section class="content">
+    <div class="box box-default">
+      <div class="box-header with-border">
+          
+          {% if id %}
+            <h3 class="box-title"> Update Report Template </h3>
+          {% else %}
+            <h3 class="box-title"> Add Report Template </h3>
+          {% endif %}
+        
+      </div>
+      <div class="box-body">
+          <form action="" method="post" id="financial_form">
+        <div class="row">
+
+          {% csrf_token %}
+
+            <input type="hidden" name="id" value="{{id}}">
+            <div class="col-md-4">
+                  <div class="form-group">
+                      <label> Activity Level  </label>
+                      <select name="action_level" class="form-control multiselect" multiple="">
+
+                            <option value="" > Action Level </option>
+                            {% for moth in action_level %}
+                                <option value="{{moth.0}}">{{moth.1}}</option>
+                            {% endfor %}
+                      </select> 
+                  </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label> User  </label>
+                        <select name="user_id" class="form-control multiselect" multiple="">
+                            <option value="" >Select User </option>
+                            {% for u in user_list %}
+                                <option value="{{ u.id }}" >{{ u.name }}</option>
+                            {% endfor %}
+                        </select>
+                </div>
+              
+                
+            </div>
+
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label> Company  </label>
+                        <select name="parent_company" class="form-control" id="id_parent_com" >
+                            <option value="" > Select Company </option>
+                            {% for u in company_list %}
+                                <option value="{{ u.id }}" >{{ u.name }}</option>
+                            {% endfor %}
+                        </select>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label> Head Office  </label>
+                        <select name="head_offce" class="form-control " id="id_head_office">
+                            <option value="" > Select Head Office </option>
+                            {% for u in head_off_list %}
+                                <option value="{{ u.id }}" >{{ u.hod_id }}</option>
+                            {% endfor %}
+                        </select>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label> Branches  </label>
+                        <select name="branch_name" class="form-control multiselect" id="id_brach" multiple="">
+                            <option value="" > Select Branches </option>
+                            {% for u in branch_list %}
+                                <option value="{{ u.id }}" >{{ u.branch_id }}</option>
+                            {% endfor %}
+                        </select>
+                </div>
+            </div>
+
+              <div class="col-md-4">
+
+                <div class="form-group">
+                    <label> Periodic Level  </label>
+                     <input type="text" name="periodic_level" class="form-control date_range_picker">
+                </div>
+              </div>
+              <div class="col-md-4">
+                  <div class="form-group">
+                        <label> Is Active  </label>
+                        {% if data.is_active %}
+                            <input type="checkbox"   name="is_active" checked="">
+                        {% else %}
+                            <input type="checkbox"   name="is_active" >
+                        {% endif %}
+                  </div>
+              </div>
+        </div>
+        <div class="form-group">
+                  {% if id %}
+                        <input type="submit" value="Update" class="btn btn-primary" id="financial_form_btn"> 
+                        {% else %}
+                        <input  type="submit" value="Submit" class="btn btn-primary" id="financial_form_btn"> 
+                  {% endif %}
+                </div>
+          </form>
+      </div>
+  </section>
+</div>
+
+{% endblock %}
