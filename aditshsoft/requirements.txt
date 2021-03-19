@@ -16,7 +16,7 @@ django-dynamic-model==0.1.0
 django-formtools==2.1
 django-mathfilters==0.4.0
 django-timezone-field==3.0
-djangorestframework==3.9.4
+djangorestframework==3.11.2
 idna==2.8
 importlib-metadata==0.23
 jsonfield==2.0.2
